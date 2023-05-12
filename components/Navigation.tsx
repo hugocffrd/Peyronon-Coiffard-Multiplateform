@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function CustomHeader({ title, logo }) {
+function CustomHeader({ title, logo, navigation }) {
   const showArrow = title !== "Home";
   return (
     <View style={styles.customHeader}>
@@ -40,6 +40,7 @@ function CustomHeader({ title, logo }) {
           right: 20,
         }}
         name="arrow-back"
+        onPress={() => navigation.navigate("Home")}
       />
     </View>
   );
@@ -70,10 +71,11 @@ export default function Navigation() {
           name="Favoris"
           component={Favorite}
           options={{
-            header: () => (
+            header: ({ navigation }) => (
               <CustomHeader
                 title="Favoris"
                 logo={require("../assets/favicon.png")}
+                navigation={navigation}
               />
             ),
           }}
@@ -82,10 +84,11 @@ export default function Navigation() {
           name="Home"
           component={Home}
           options={{
-            header: () => (
+            header: ({ navigation }) => (
               <CustomHeader
                 title="Home"
                 logo={require("../assets/favicon.png")}
+                navigation={navigation}
               />
             ),
           }}
@@ -94,10 +97,11 @@ export default function Navigation() {
           name="Settings"
           component={Settings}
           options={{
-            header: () => (
+            header: ({ navigation }) => (
               <CustomHeader
                 title="Settings"
                 logo={require("../assets/favicon.png")}
+                navigation={navigation}
               />
             ),
           }}
