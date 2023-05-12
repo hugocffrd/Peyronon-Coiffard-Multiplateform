@@ -8,28 +8,16 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-const styles = StyleSheet.create({
-  boutton: {
-    alignItems: "center",
-    justifyContent: "center",
-    width: "150px",
-    height: "50px",
-    alignContent: "center",
-    position: "absolute",
-    right: "0px",
-    bottom: "0px",
-  },
-});
-
 export default function FooterNavigationNavigation() {
   const Tab = createBottomTabNavigator();
 
   return (
-    <NavigationContainer>
+    <NavigationContainer style={{ height: "100%" }}>
       <Tab.Navigator
+        initialRouteName="Home"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
-            if (route.name === "Accueil") {
+            if (route.name === "Home") {
               return <Ionicons name={"home"} size={size} color={color} />;
             } else if (route.name === "Favoris") {
               return <Ionicons name={"star"} size={size} color={color} />;
@@ -44,7 +32,7 @@ export default function FooterNavigationNavigation() {
         }}
       >
         <Tab.Screen name="Favoris" component={Favorite} />
-        <Tab.Screen name="Accueil" component={Home} />
+        <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Settings" component={Settings} />
       </Tab.Navigator>
       {/* <TouchableOpacity
