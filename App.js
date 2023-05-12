@@ -1,5 +1,5 @@
-import FooterNavigation from "./components/FooterNavigation";
+import Navigation from "./components/Navigation";
 
 export default function App() {
-  return <FooterNavigation />;
+  return <Navigation />;
 }
