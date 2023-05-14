@@ -1,28 +1,17 @@
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-const rows = 3;
-const cols = 2;
 const marginHorizontal = 4;
 const marginVertical = 4;
-const width =
-  Dimensions.get("window").width / cols - marginHorizontal * (cols + 1);
-const height =
-  Dimensions.get("window").height / rows - marginVertical * (rows + 25);
 
 const styles = StyleSheet.create({
   boxContainer: {
+    width:"100%",
     textAlign: "center",
-    marginTop: marginVertical,
-    marginBottom: marginVertical,
-    marginLeft: marginHorizontal,
-    marginRight: marginHorizontal,
-    width: width,
-    height: height,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20,
-    backgroundColor: "grey",
+    backgroundColor: "#e7e7e7",
     flexDirection: "row",
   },
   boxContentContainerStyle: {
@@ -34,8 +23,8 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 50,
+    height: 50,
     marginLeft: 10,
   },
   title: {
