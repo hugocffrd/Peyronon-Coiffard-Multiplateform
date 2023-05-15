@@ -1,12 +1,18 @@
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-const marginHorizontal = 4;
-const marginVertical = 4;
+const rows = 3;
+const cols = 2;
+const marginHorizontal = 10;
+const marginVertical = 6;
+const width =
+  Dimensions.get("window").width / cols - marginHorizontal * (cols + 1);
+const height =
+  Dimensions.get("window").height / rows - marginVertical * (rows + 25);
 
 const styles = StyleSheet.create({
   boxContainer: {
-    width:"100%",
+    width: "100%",
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   title: {
-    fontSize: 25,
+    fontSize: 40,
   },
   description: {
     width: "100%",
@@ -36,6 +42,9 @@ const styles = StyleSheet.create({
   },
   underDescription: {
     paddingTop: 10,
+  },
+  underDescrptionText: {
+    fontSize: 25,
   },
 });
 
@@ -47,10 +56,10 @@ export default function AnimalCard() {
         <Text style={styles.title}>Girafe</Text>
         <View style={styles.description}>
           <View style={styles.underDescription}>
-            <Text>20 ans</Text>
+            <Text style={styles.underDescrptionText}>20 ans</Text>
           </View>
           <View style={styles.underDescription}>
-            <Text>Afrique</Text>
+            <Text style={styles.underDescrptionText}>Afrique</Text>
           </View>
         </View>
       </View>

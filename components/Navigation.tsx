@@ -7,6 +7,7 @@ import Favorite from "./Favorite";
 import { NavigationContainer } from "@react-navigation/native";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import AnimalDetails from "./AnimalDetails";
 
 const styles = StyleSheet.create({
   customHeader: {
@@ -106,13 +107,27 @@ export default function Navigation() {
             ),
           }}
         />
+        <Tab.Screen
+          name="Animal Details"
+          component={AnimalDetails}
+          options={{
+            tabBarButton: () => null,
+            header: ({ navigation }) => (
+              <CustomHeader
+                title="Animal Details"
+                logo={require("../assets/favicon.png")}
+                navigation={navigation}
+              />
+            ),
+          }}
+        />
       </Tab.Navigator>
       {/* <TouchableOpacity
-        onPress={() => this.props.navigation.navigate("Settings")}
-        style={styles.boutton}
-      >
-        <Text>Paramètres</Text>
-      </TouchableOpacity> */}
+    onPress={() => this.props.navigation.navigate("Settings")}
+    style={styles.boutton}
+  >
+    <Text>Paramètres</Text>
+  </TouchableOpacity> */}
     </NavigationContainer>
   );
 }
