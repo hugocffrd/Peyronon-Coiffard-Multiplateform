@@ -1,6 +1,5 @@
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import AnimalDetailCaroussel from "./AnimalDetailCaroussel";
 
 const styles = StyleSheet.create({
@@ -10,7 +9,6 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   caroussel: {
-    width: "55rem",
     borderColor: "grey",
     borderRadius: 20,
     borderWidth: 2,

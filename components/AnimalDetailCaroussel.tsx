@@ -1,7 +1,4 @@
-import Carousel from "react-bootstrap/Carousel";
-import { StyleSheet } from "react-native";
-
-import "bootstrap/dist/css/bootstrap.min.css";
+import { StyleSheet, View, Text } from "react-native";
 
 const styles = StyleSheet.create({
   carousselImg: {
@@ -21,6 +18,7 @@ const styles = StyleSheet.create({
 
 export default function AnimalDetailCaroussel(props) {
   return (
+    <Text>coucou</Text>
     // <Carousel fade variant="dark">
     //   <SectionList
     //     sections={[{ title: "Images", data: props.images }]}
@@ -41,28 +39,28 @@ export default function AnimalDetailCaroussel(props) {
     //     )}
     //   />
     // </Carousel>
-    <Carousel fade variant="dark">
-      <Carousel.Item interval={2000}>
-        <img
-          style={styles.carousselImg}
-          className="d-block w-100"
-          src={require("../assets/icon.png")}
-        />
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          style={styles.carousselImg}
-          src={require("../assets/favicon.png")}
-        />
-      </Carousel.Item>
-      <Carousel.Item interval={2000}>
-        <img
-          style={styles.carousselImg}
-          className="d-block w-100"
-          src={require("../assets/favicon.png")}
-        />
-      </Carousel.Item>
-    </Carousel>
+    // <Carousel fade variant="dark">
+    //   <Carousel.Item interval={2000}>
+    //     <img
+    //       style={styles.carousselImg}
+    //       className="d-block w-100"
+    //       src={require("../assets/icon.png")}
+    //     />
+    //   </Carousel.Item>
+    //   <Carousel.Item>
+    //     <img
+    //       className="d-block w-100"
+    //       style={styles.carousselImg}
+    //       src={require("../assets/favicon.png")}
+    //     />
+    //   </Carousel.Item>
+    //   <Carousel.Item interval={2000}>
+    //     <img
+    //       style={styles.carousselImg}
+    //       className="d-block w-100"
+    //       src={require("../assets/favicon.png")}
+    //     />
+    //   </Carousel.Item>
+    // </Carousel>
   );
 }
