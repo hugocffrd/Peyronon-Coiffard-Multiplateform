@@ -1,3 +1,4 @@
+import React from "react";
 import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
 
 import AnimalDetailCaroussel from "./AnimalDetailCaroussel";

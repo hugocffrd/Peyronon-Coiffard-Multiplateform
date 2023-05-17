@@ -1,62 +1,33 @@
-import Home from "./Home";
-import React from "react";
+import Home from "../screens/Home";
+import React, { useEffect, useState } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import Settings from "./Settings";
-import Favorite from "./Favorite";
+import Favorite from "../screens/Favorite";
 import { NavigationContainer } from "@react-navigation/native";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { Dimensions } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AnimalDetails from "./AnimalDetails";
-
-const styles = StyleSheet.create({
-  customHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 60,
-  },
-  customHeaderImage: {
-    width: 40,
-    height: 40,
-    marginRight: 10,
-  },
-  customHeaderTitle: {
-    fontWeight: "bold",
-    fontSize: 20,
-  },
-});
-
-function CustomHeader({ title, logo, navigation }) {
-  const showArrow = title !== "Home";
-  return (
-    <View style={styles.customHeader}>
-      <Image source={logo} style={styles.customHeaderImage} />
-      <Text style={styles.customHeaderTitle}>{title}</Text>
-      <Ionicons
-        style={{
-          display: showArrow ? "flex" : "none",
-          fontSize: 25,
-          position: "absolute",
-          right: 20,
-        }}
-        name="arrow-back"
-        onPress={() => navigation.navigate("Home")}
-      />
-    </View>
-  );
-}
+import AnimalDetails from "../components/animal/AnimalDetails";
+import Settings from "../screens/Settings";
+import { darkTheme, lightTheme } from "../theme/theme";
+import HeaderNavigation from "../components/navigation/HeaderNavigation";
 
 export default function Navigation() {
   const Tab = createBottomTabNavigator();
+  const [fontSize, setFontSize] = useState(15);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const theme = isDarkMode ? darkTheme : lightTheme;
+  const windowWidth = Dimensions.get("window").width;
+  useEffect(() => {
+    const calculatedFontSize = Math.round((windowWidth * 15) / 375);
+    setFontSize(calculatedFontSize);
+  }, []);
 
   return (
     <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
-          // activeTintColor: "tomato",
-          // inactiveTintColor: "gray",
           tabBarIcon: ({ color, size }) => {
             if (route.name === "Home") {
               return <Ionicons name={"home"} size={size} color={color} />;
@@ -70,64 +41,75 @@ export default function Navigation() {
       >
         <Tab.Screen
           name="Favoris"
-          component={Favorite}
           options={{
             header: ({ navigation }) => (
-              <CustomHeader
+              <HeaderNavigation
                 title="Favoris"
                 logo={require("../assets/favicon.png")}
                 navigation={navigation}
+                windowWidth={windowWidth}
               />
             ),
           }}
-        />
+        >
+          {() => <Favorite fontSize={fontSize} />}
+        </Tab.Screen>
         <Tab.Screen
           name="Home"
-          component={Home}
           options={{
             header: ({ navigation }) => (
-              <CustomHeader
+              <HeaderNavigation
                 title="Home"
                 logo={require("../assets/favicon.png")}
                 navigation={navigation}
+                windowWidth={windowWidth}
               />
             ),
           }}
-        />
+        >
+          {(navigation) => <Home fontSize={fontSize} navigation={navigation} />}
+        </Tab.Screen>
         <Tab.Screen
           name="Settings"
-          component={Settings}
           options={{
             header: ({ navigation }) => (
-              <CustomHeader
+              <HeaderNavigation
                 title="Settings"
                 logo={require("../assets/favicon.png")}
                 navigation={navigation}
+                windowWidth={windowWidth}
               />
             ),
           }}
-        />
+        >
+          {() => (
+            <Settings
+              modalVisible={modalVisible}
+              setModalVisible={setModalVisible}
+              fontSize={fontSize}
+              isDarkMode={isDarkMode}
+              setIsDarkMode={setIsDarkMode}
+              theme={theme}
+            />
+          )}
+        </Tab.Screen>
         <Tab.Screen
           name="Animal Details"
-          component={AnimalDetails}
           options={{
             tabBarButton: () => null,
             header: ({ navigation }) => (
-              <CustomHeader
+              <HeaderNavigation
                 title="Animal Details"
                 logo={require("../assets/favicon.png")}
                 navigation={navigation}
+                windowWidth={windowWidth}
               />
             ),
           }}
-        />
+        >
+          {() => <AnimalDetails />}
+        </Tab.Screen>
       </Tab.Navigator>
-      {/* <TouchableOpacity
-    onPress={() => this.props.navigation.navigate("Settings")}
-    style={styles.boutton}
-  >
-    <Text>Paramètres</Text>
-  </TouchableOpacity> */}
     </NavigationContainer>
   );
 }

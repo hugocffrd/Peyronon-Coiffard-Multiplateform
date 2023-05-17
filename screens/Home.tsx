@@ -1,4 +1,3 @@
-import AnimalCard from "./AnimalCard";
 import { FlatList } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,6 +6,8 @@ import {
   TouchableOpacity,
   useWindowDimensions,
 } from "react-native";
+import AnimalCard from "./AnimalCard";
+import React from "react";
 
 const minCols = 1;
 
@@ -54,7 +55,7 @@ export default function Home(props) {
   ];
 
   const handlePress = () => {
-    props.navigation.navigate("Animal Details");
+    props.navigation.navigation.navigate("Animal Details");
     // props.navigation.navigate("Animal Details", {animalProps: props.animalDetails});
   };
 
