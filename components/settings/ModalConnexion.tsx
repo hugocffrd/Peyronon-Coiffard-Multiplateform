@@ -8,26 +8,37 @@ import {
   View,
   Dimensions,
 } from "react-native";
+import { useDispatch } from "react-redux";
+import {
+  submitForm,
+  updatePassword,
+  updateUsername,
+} from "../../redux/actions/modal-connexion.actions";
 
 export default function ModalConnexion(props) {
   const { fontSize } = props;
   const { modalVisible } = props;
   const { setModalVisible } = props;
 
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onChangeUsername = (event): void => {
-    setUsername(event);
+  const dispatch = useDispatch();
+
+  const onChangeUsername = (newEmail: string): void => {
+    setEmail(newEmail);
+    dispatch(updateUsername(newEmail));
   };
 
-  const onChangePassword = (event): void => {
-    setPassword(event);
+  const onChangePassword = (newPassword: string): void => {
+    setPassword(newPassword);
+    dispatch(updatePassword(newPassword));
   };
 
   const submit = (): void => {
-    setUsername("");
+    setEmail("");
     setPassword("");
+    dispatch(submitForm({ email, password }));
   };
 
   return (
@@ -48,11 +59,11 @@ export default function ModalConnexion(props) {
               </Text>
             </View>
             <View>
-              <Text style={styles.modalLabelText}>Username : </Text>
+              <Text style={styles.modalLabelText}>Email : </Text>
               <TextInput
                 style={styles.modalTextInput}
-                value={username}
-                placeholder="Username"
+                value={email}
+                placeholder="Email"
                 onChangeText={onChangeUsername}
               />
               <Text style={styles.modalLabelText}>Password : </Text>

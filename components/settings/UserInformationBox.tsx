@@ -10,17 +10,17 @@ export default function UserInformationBox(props) {
         <View style={styles.informationBox}>
           <View style={styles.informations}>
             <Text style={[styles.informationsText, { fontSize }]}>
-              Nom: Jean {user?.name}
+              Nom: {user?.name} {user.surname}
             </Text>
           </View>
           <View style={styles.informations}>
             <Text style={[styles.informationsText, { fontSize }]}>
-              Prenom: Jean {user?.surname}
+              Prenom: {user?.surname}
             </Text>
           </View>
           <View style={styles.informations}>
             <Text style={[styles.informationsText, { fontSize }]}>
-              Email: jean.jean@gmail.com {user?.email}
+              Email: {user?.email}
             </Text>
           </View>
         </View>

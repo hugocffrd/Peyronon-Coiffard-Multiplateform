@@ -10,6 +10,8 @@ import AnimalDetails from "../components/animal/AnimalDetails";
 import Settings from "../screens/Settings";
 import { darkTheme, lightTheme } from "../theme/theme";
 import HeaderNavigation from "../components/navigation/HeaderNavigation";
+import { Provider } from "react-redux";
+import store from "../redux/store";
 
 export default function Navigation() {
   const Tab = createBottomTabNavigator();
@@ -24,92 +26,96 @@ export default function Navigation() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Home"
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ color, size }) => {
-            if (route.name === "Home") {
-              return <Ionicons name={"home"} size={size} color={color} />;
-            } else if (route.name === "Favoris") {
-              return <Ionicons name={"star"} size={size} color={color} />;
-            } else if (route.name === "Settings") {
-              return <Ionicons name={"settings"} size={size} color={color} />;
-            }
-          },
-        })}
-      >
-        <Tab.Screen
-          name="Favoris"
-          options={{
-            header: ({ navigation }) => (
-              <HeaderNavigation
-                title="Favoris"
-                logo={require("../assets/favicon.png")}
-                navigation={navigation}
-                windowWidth={windowWidth}
-              />
-            ),
-          }}
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator
+          initialRouteName="Home"
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ color, size }) => {
+              if (route.name === "Home") {
+                return <Ionicons name={"home"} size={size} color={color} />;
+              } else if (route.name === "Favoris") {
+                return <Ionicons name={"star"} size={size} color={color} />;
+              } else if (route.name === "Settings") {
+                return <Ionicons name={"settings"} size={size} color={color} />;
+              }
+            },
+          })}
         >
-          {() => <Favorite fontSize={fontSize} />}
-        </Tab.Screen>
-        <Tab.Screen
-          name="Home"
-          options={{
-            header: ({ navigation }) => (
-              <HeaderNavigation
-                title="Home"
-                logo={require("../assets/favicon.png")}
-                navigation={navigation}
-                windowWidth={windowWidth}
+          <Tab.Screen
+            name="Favoris"
+            options={{
+              header: ({ navigation }) => (
+                <HeaderNavigation
+                  title="Favoris"
+                  logo={require("../assets/favicon.png")}
+                  navigation={navigation}
+                  windowWidth={windowWidth}
+                />
+              ),
+            }}
+          >
+            {() => <Favorite fontSize={fontSize} />}
+          </Tab.Screen>
+          <Tab.Screen
+            name="Home"
+            options={{
+              header: ({ navigation }) => (
+                <HeaderNavigation
+                  title="Home"
+                  logo={require("../assets/favicon.png")}
+                  navigation={navigation}
+                  windowWidth={windowWidth}
+                />
+              ),
+            }}
+          >
+            {(navigation) => (
+              <Home fontSize={fontSize} navigation={navigation} />
+            )}
+          </Tab.Screen>
+          <Tab.Screen
+            name="Settings"
+            options={{
+              header: ({ navigation }) => (
+                <HeaderNavigation
+                  title="Settings"
+                  logo={require("../assets/favicon.png")}
+                  navigation={navigation}
+                  windowWidth={windowWidth}
+                />
+              ),
+            }}
+          >
+            {() => (
+              <Settings
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                fontSize={fontSize}
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+                theme={theme}
               />
-            ),
-          }}
-        >
-          {(navigation) => <Home fontSize={fontSize} navigation={navigation} />}
-        </Tab.Screen>
-        <Tab.Screen
-          name="Settings"
-          options={{
-            header: ({ navigation }) => (
-              <HeaderNavigation
-                title="Settings"
-                logo={require("../assets/favicon.png")}
-                navigation={navigation}
-                windowWidth={windowWidth}
-              />
-            ),
-          }}
-        >
-          {() => (
-            <Settings
-              modalVisible={modalVisible}
-              setModalVisible={setModalVisible}
-              fontSize={fontSize}
-              isDarkMode={isDarkMode}
-              setIsDarkMode={setIsDarkMode}
-              theme={theme}
-            />
-          )}
-        </Tab.Screen>
-        <Tab.Screen
-          name="Animal Details"
-          options={{
-            tabBarButton: () => null,
-            header: ({ navigation }) => (
-              <HeaderNavigation
-                title="Animal Details"
-                logo={require("../assets/favicon.png")}
-                navigation={navigation}
-                windowWidth={windowWidth}
-              />
-            ),
-          }}
-        >
-          {() => <AnimalDetails />}
-        </Tab.Screen>
-      </Tab.Navigator>
-    </NavigationContainer>
+            )}
+          </Tab.Screen>
+          <Tab.Screen
+            name="Animal Details"
+            options={{
+              tabBarButton: () => null,
+              header: ({ navigation }) => (
+                <HeaderNavigation
+                  title="Animal Details"
+                  logo={require("../assets/favicon.png")}
+                  navigation={navigation}
+                  windowWidth={windowWidth}
+                />
+              ),
+            }}
+          >
+            {() => <AnimalDetails />}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
