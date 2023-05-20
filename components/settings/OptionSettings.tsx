@@ -1,16 +1,22 @@
-import React, { useState } from "react";
-import { StyleSheet, Dimensions, View, Text, Switch } from "react-native";
+import React, { useEffect, useState } from "react";
 import { darkTheme, lightTheme } from "../../theme/theme";
-
+import { StyleSheet, Text, View, Dimensions, Switch } from "react-native";
+import ModalChangePassword from "./ModalChangePassword";
 export default function OptionSettings(props) {
-  const { fontSize, isDarkMode, setIsDarkMode } = props;
+  const { fontSize, isDarkMode, setIsDarkMode, user } = props;
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
   const theme = isDarkMode ? darkTheme : lightTheme;
+  const [passwordLength, setPasswordLength] = useState(0);
 
-  const toggleSwitch = () => {
+  const toggleSwitch = (): void => {
     setIsEnabled(!isEnabled);
     setIsDarkMode(!isDarkMode);
   };
+
+  useEffect((): void => {
+    setPasswordLength(user.password.length);
+  }, [user.password]);
+
   return (
     <View style={[styles.container]}>
       <Text style={[styles.heading, { fontSize }]}>Options</Text>
@@ -30,6 +36,11 @@ export default function OptionSettings(props) {
             value={isEnabled}
             style={styles.switch}
           />
+        </View>
+        <View style={styles.option}>
+          <Text style={[styles.optionText, { fontSize }]}>Mot de passe </Text>
+          <Text>{"*".repeat(passwordLength)}</Text>
+          <ModalChangePassword fontSize={fontSize} user={user} />
         </View>
       </View>
     </View>

@@ -6,14 +6,7 @@ import UserInformationBox from "../components/settings/UserInformationBox";
 import { useSelector } from "react-redux";
 
 export default function Settings(props) {
-  const {
-    fontSize,
-    modalVisible,
-    setModalVisible,
-    isDarkMode,
-    setIsDarkMode,
-    theme,
-  } = props;
+  const { fontSize, isDarkMode, setIsDarkMode, theme } = props;
 
   const user = useSelector((state: any) => state.modalConnexion);
   return (
@@ -22,16 +15,13 @@ export default function Settings(props) {
       <UserInformationBox user={user} fontSize={fontSize} />
       <View style={styles.spacing} />
       <OptionSettings
+        user={user}
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
         fontSize={fontSize}
       />
       <View style={styles.spacing} />
-      <ModalConnexion
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        fontSize={fontSize}
-      />
+      <ModalConnexion fontSize={fontSize} />
     </View>
   );
 }

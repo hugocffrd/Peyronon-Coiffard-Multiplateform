@@ -16,7 +16,6 @@ import store from "../redux/store";
 export default function Navigation() {
   const Tab = createBottomTabNavigator();
   const [fontSize, setFontSize] = useState(15);
-  const [modalVisible, setModalVisible] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const windowWidth = Dimensions.get("window").width;
@@ -89,8 +88,6 @@ export default function Navigation() {
           >
             {() => (
               <Settings
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
                 fontSize={fontSize}
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}

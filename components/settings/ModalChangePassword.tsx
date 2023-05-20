@@ -8,36 +8,18 @@ import {
   View,
   Dimensions,
 } from "react-native";
-import { useDispatch } from "react-redux";
-import {
-  submitForm,
-  updatePassword,
-  updateUsername,
-} from "../../redux/actions/modal-connexion.actions";
-
-export default function ModalConnexion(props) {
-  const { fontSize } = props;
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [modalConnexionVisible, setModalConnexionVisible] = useState(false);
-
-  const dispatch = useDispatch();
-
-  const onChangeUsername = (newEmail: string): void => {
-    setEmail(newEmail);
-    dispatch(updateUsername(newEmail));
-  };
+export default function ModalChangePassword(props) {
+  const { user, fontSize } = props;
+  const [userPassword, setUserPassword] = useState(user.password);
+  const [modalChangePasswordVisible, setModalChangePasswordVisible] =
+    useState(false);
 
   const onChangePassword = (newPassword: string): void => {
-    setPassword(newPassword);
-    dispatch(updatePassword(newPassword));
+    setUserPassword(newPassword);
   };
 
   const submit = (): void => {
-    setEmail("");
-    setPassword("");
-    dispatch(submitForm({ email, password }));
+    console.log("change password");
   };
 
   return (
@@ -45,46 +27,41 @@ export default function ModalConnexion(props) {
       <Modal
         animationType="slide"
         transparent={true}
-        visible={modalConnexionVisible}
+        visible={modalChangePasswordVisible}
         onRequestClose={() => {
-          setModalConnexionVisible(!modalConnexionVisible);
+          setModalChangePasswordVisible(!modalChangePasswordVisible);
         }}
       >
         <View style={styles.modalCenteredView}>
           <View style={styles.modalContent}>
             <View>
               <Text style={[styles.modalHeaderTitle, { fontSize }]}>
-                Connexion
+                Changement de mot de passe
               </Text>
             </View>
             <View>
-              <Text style={styles.modalLabelText}>Email : </Text>
+              <Text style={styles.modalLabelText}>Nouveau mot de passe : </Text>
               <TextInput
                 style={styles.modalTextInput}
-                value={email}
-                placeholder="Email"
-                onChangeText={onChangeUsername}
-              />
-              <Text style={styles.modalLabelText}>Password : </Text>
-              <TextInput
-                style={styles.modalTextInput}
-                value={password}
+                value={userPassword}
                 secureTextEntry={true}
-                placeholder="Password"
+                placeholder="Nouveau mot de passe"
                 onChangeText={onChangePassword}
               />
             </View>
             <View style={styles.modalBtnContainer}>
               <Pressable
-                style={styles.buttonModal}
-                onPress={() => setModalConnexionVisible(!modalConnexionVisible)}
+                style={styles.modal}
+                onPress={() =>
+                  setModalChangePasswordVisible(!modalChangePasswordVisible)
+                }
               >
                 <Text style={styles.modalBtnText}>Close</Text>
               </Pressable>
               <Pressable
-                style={styles.buttonModal}
+                style={styles.modal}
                 onPress={() => {
-                  setModalConnexionVisible(!modalConnexionVisible);
+                  setModalChangePasswordVisible(!modalChangePasswordVisible);
                   submit();
                 }}
               >
@@ -95,10 +72,10 @@ export default function ModalConnexion(props) {
         </View>
       </Modal>
       <Pressable
-        style={styles.buttonModal}
-        onPress={() => setModalConnexionVisible(true)}
+        style={styles.modal}
+        onPress={() => setModalChangePasswordVisible(true)}
       >
-        <Text style={styles.modalBtnText}>Connexion</Text>
+        <Text style={styles.modalBtnText}>Changer de mot de passe</Text>
       </Pressable>
     </View>
   );
@@ -144,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-evenly",
     width: "100%",
   },
-  buttonModal: {
+  modal: {
     backgroundColor: "#007bfe",
     borderRadius: 20,
     padding: 10,
