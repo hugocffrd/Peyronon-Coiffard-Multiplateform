@@ -1,48 +1,51 @@
 import { FlatList } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  useWindowDimensions,
-} from "react-native";
+import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import AnimalCard from "./AnimalCard";
 import React from "react";
 
-const minCols = 1;
-
-const calcNumColumns = (width) => {
-  const cols = width / styles.item.width;
-  const colsFloor = Math.floor(cols) > minCols ? Math.floor(cols) : minCols;
-  const colsMinusMargin = cols - 2 * colsFloor * styles.item.margin;
-
-  if (colsMinusMargin < colsFloor && colsFloor > minCols) {
-    return colsFloor - 1;
-  } else return colsFloor;
-};
-
 const styles = StyleSheet.create({
-  scrollContainer: {
+  container: {
     flex: 1,
   },
-  flatList: {},
+  flatListContainer: {
+    flex: 1,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    justifyContent: "space-between",
+  },
   item: {
+    width: "100%",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
     height: 120,
-    width: 250,
   },
 });
 
 export default function Home(props) {
-  const { width } = useWindowDimensions();
-  const [numColumns, setNumColumns] = useState(calcNumColumns(width));
+  const getNumberOfColumns = () => {
+    const { width } = Dimensions.get("window");
+    const itemWidth = 200;
+    const minItemMargin = 100;
+    const availableWidth = width - minItemMargin;
+    const maxColumns = 2;
+    const minColumns = 1;
+    const numColumns = Math.floor(availableWidth / itemWidth);
+    console.log(numColumns);
+    console.log(Math.max(minColumns, Math.min(numColumns, maxColumns)));
+    return Math.max(minColumns, Math.min(numColumns, maxColumns));
+  };
+
+  const [numColumns, setNumColumns] = useState(getNumberOfColumns());
 
   useEffect(() => {
-    setNumColumns(calcNumColumns(width));
-  }, [width]);
+    Dimensions.addEventListener("change", () => {
+      setNumColumns(getNumberOfColumns());
+    });
+  }, []);
 
   const animalCards = [
     AnimalCard,
@@ -61,21 +64,24 @@ export default function Home(props) {
 
   const Items = ({ item }) => {
     return (
-      <TouchableOpacity activeOpacity={0.9} onPress={() => handlePress()}>
+      <TouchableOpacity
+        style={styles.flatListContainer}
+        activeOpacity={0.9}
+        onPress={() => handlePress()}
+      >
         <AnimalCard />
       </TouchableOpacity>
     );
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <FlatList
-        style={styles.flatList}
         showsVerticalScrollIndicator={false}
-        key={numColumns}
         data={animalCards}
-        renderItem={Items}
         numColumns={numColumns}
+        renderItem={Items}
+        key={numColumns}
       />
     </SafeAreaView>
   );
