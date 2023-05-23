@@ -1,14 +1,15 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { AnimalModel } from "../../models/animal.model";
+import { View, StyleSheet, Image, FlatList } from "react-native";
 import WrapperText from "../wrappers/WrapperText";
-
-import AnimalDetailCaroussel from "./AnimalDetailCaroussel";
+import Slider from "./Slider";
 
 const styles = StyleSheet.create({
   detailsView: {
     display: "flex",
     alignItems: "center",
+
+    justifyContent: "center",
     paddingTop: 30,
   },
   caroussel: {
@@ -26,9 +27,7 @@ export default function AnimalDetails(props) {
       <View>
         <WrapperText text={animal.name + " " + animal.typeAnimal} />
       </View>
-      <View style={styles.caroussel}>
-        <AnimalDetailCaroussel images={animal.images} />
-      </View>
+      <Slider />
 
       <View>
         <WrapperText text={"Characteristics"} />
