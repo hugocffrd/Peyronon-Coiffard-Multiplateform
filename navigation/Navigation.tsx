@@ -19,9 +19,14 @@ export default function Navigation() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const windowWidth = Dimensions.get("window").width;
+
   useEffect(() => {
-    const calculatedFontSize = Math.round((windowWidth * 15) / 375);
-    setFontSize(calculatedFontSize);
+    Dimensions.addEventListener("change", () => {
+      const calculatedFontSize = Math.round(
+        (Dimensions.get("window").width * 15) / 375
+      );
+      setFontSize(calculatedFontSize);
+    });
   }, []);
 
   return (
@@ -70,7 +75,11 @@ export default function Navigation() {
             }}
           >
             {(navigation) => (
-              <Home fontSize={fontSize} navigation={navigation} />
+              <Home
+                fontSize={fontSize}
+                navigation={navigation}
+                windowWidth={windowWidth}
+              />
             )}
           </Tab.Screen>
           <Tab.Screen
@@ -88,10 +97,10 @@ export default function Navigation() {
           >
             {() => (
               <Settings
-                fontSize={fontSize}
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
                 theme={theme}
+                windowWidth={windowWidth}
               />
             )}
           </Tab.Screen>

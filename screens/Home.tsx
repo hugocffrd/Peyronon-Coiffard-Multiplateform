@@ -26,16 +26,14 @@ const styles = StyleSheet.create({
 });
 
 export default function Home(props) {
+  const { windowWidth } = props;
   const getNumberOfColumns = () => {
-    const { width } = Dimensions.get("window");
     const itemWidth = 200;
     const minItemMargin = 100;
-    const availableWidth = width - minItemMargin;
+    const availableWidth = windowWidth - minItemMargin;
     const maxColumns = 2;
     const minColumns = 1;
     const numColumns = Math.floor(availableWidth / itemWidth);
-    console.log(numColumns);
-    console.log(Math.max(minColumns, Math.min(numColumns, maxColumns)));
     return Math.max(minColumns, Math.min(numColumns, maxColumns));
   };
 
@@ -66,7 +64,7 @@ export default function Home(props) {
     return (
       <TouchableOpacity
         style={styles.flatListContainer}
-        activeOpacity={0.9}
+        activeOpacity={0.5}
         onPress={() => handlePress()}
       >
         <AnimalCard />

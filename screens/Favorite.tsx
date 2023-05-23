@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import WrapperText from "../components/wrappers/WrapperText";
 
 export default function Favorite(props) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Favoris</Text>
+      <WrapperText text={"Favoris"} />
     </View>
   );
 }

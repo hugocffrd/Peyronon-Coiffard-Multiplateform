@@ -1,27 +1,36 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { UserModel } from "../../models/user.model";
+import WrapperText from "../wrappers/WrapperText";
 
-export default function UserInformationBox(props) {
-  const { fontSize, user } = props;
+interface UserInformationBoxProps {
+  user: UserModel;
+}
+
+export default function UserInformationBox(props: UserInformationBoxProps) {
+  const { user } = props;
   return (
     <View>
-      <Text style={[{ textAlign: "center" }, { fontSize }]}>Informations</Text>
+      <WrapperText customStyle={styles.headerCard} text="Informations" />
       <View style={styles.mainContainerInfoBox}>
         <View style={styles.informationBox}>
           <View style={styles.informations}>
-            <Text style={[styles.informationsText, { fontSize }]}>
-              Nom: {user.name}
-            </Text>
+            <WrapperText
+              customStyle={styles.informationsText}
+              text={"Nom:" + user.name}
+            />
           </View>
           <View style={styles.informations}>
-            <Text style={[styles.informationsText, { fontSize }]}>
-              Prenom: {user.surname}
-            </Text>
+            <WrapperText
+              customStyle={styles.informationsText}
+              text={"Prenom:" + user.surname}
+            />
           </View>
           <View style={styles.informations}>
-            <Text style={[styles.informationsText, { fontSize }]}>
-              Email: {user.email}
-            </Text>
+            <WrapperText
+              customStyle={styles.informationsText}
+              text={"Email:" + user.email}
+            />
           </View>
         </View>
       </View>
@@ -51,7 +60,9 @@ const styles = StyleSheet.create({
     height: 50,
   },
   informationsText: {
-    fontSize: 15,
     paddingLeft: 10,
+  },
+  headerCard: {
+    textAlign: "center",
   },
 });

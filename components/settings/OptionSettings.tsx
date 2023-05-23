@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { darkTheme, lightTheme } from "../../theme/theme";
-import { StyleSheet, Text, View, Dimensions, Switch } from "react-native";
-import ModalChangePassword from "./ModalChangePassword";
-export default function OptionSettings(props) {
-  const { fontSize, isDarkMode, setIsDarkMode, user } = props;
+import { StyleSheet, View, Switch } from "react-native";
+import ModalGeneric from "./ModalGeneric";
+import { ItemInputModalsModel } from "../../models/input-modals.model";
+import WrapperText from "../wrappers/WrapperText";
+import { UserModel } from "../../models/user.model";
+
+interface OptionsSettingsProps {
+  isDarkMode: boolean;
+  setIsDarkMode: Function;
+  user: UserModel;
+  windowWidth: number;
+}
+
+export default function OptionSettings(props: OptionsSettingsProps) {
+  const { isDarkMode, setIsDarkMode, user, windowWidth } = props;
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const [passwordLength, setPasswordLength] = useState(0);
+
+  const [modalChangePasswordVisible, setModalChangePasswordVisible] =
+    useState(false);
 
   const toggleSwitch = (): void => {
     setIsEnabled(!isEnabled);
@@ -17,16 +31,32 @@ export default function OptionSettings(props) {
     setPasswordLength(user.password.length);
   }, [user.password]);
 
+  const submit = (): void => {
+    console.log("change password");
+  };
+
+  const [userPassword, setUserPassword] = useState(user.password);
+
+  const inputModals: ItemInputModalsModel[] = [
+    {
+      headerInput: "Nouveau mot de passe : ",
+      value: userPassword,
+      changeValue: setUserPassword,
+      placeholder: "Mot de passe",
+    },
+  ];
+
   return (
     <View style={[styles.container]}>
-      <Text style={[styles.heading, { fontSize }]}>Options</Text>
-      <View style={styles.optionContainer}>
+      <WrapperText customStyle={styles.optionText} text={"Options"} />
+      <View style={[styles.optionContainer, { width: windowWidth * 0.8 }]}>
         <View style={styles.option}>
-          <Text style={[styles.optionText, { fontSize }]}>
-            Theme {isDarkMode ? "Dark" : "Light"}
-          </Text>
+          <WrapperText
+            customStyle={styles.optionText}
+            text={"Theme:" + isDarkMode ? "Dark" : "Light"}
+          />
           <View>
-            <Text style={theme.test}>Test</Text>
+            <WrapperText customStyle={theme.test} text={"Test"} />
           </View>
           <Switch
             trackColor={{ false: "black", true: "white" }}
@@ -38,16 +68,22 @@ export default function OptionSettings(props) {
           />
         </View>
         <View style={styles.option}>
-          <Text style={[styles.optionText, { fontSize }]}>Mot de passe </Text>
-          <Text>{"*".repeat(passwordLength)}</Text>
-          <ModalChangePassword fontSize={fontSize} user={user} />
+          <WrapperText customStyle={styles.optionText} text={"Mot de passe"} />
+          <WrapperText text={"*".repeat(passwordLength)} />
+          <ModalGeneric
+            isVisible={modalChangePasswordVisible}
+            setIsVisible={setModalChangePasswordVisible}
+            submit={submit}
+            header="Changement de mot de passe"
+            btnContent="Changer de mot de passe"
+            inputModals={inputModals}
+            windowWidth={windowWidth}
+          />
         </View>
       </View>
     </View>
   );
 }
-
-const screenWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -59,7 +95,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   optionContainer: {
-    width: screenWidth * 0.8,
     backgroundColor: "#B3B3B3",
     alignItems: "center",
     borderRadius: 20,

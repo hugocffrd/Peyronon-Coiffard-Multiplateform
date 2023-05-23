@@ -1,15 +1,7 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import { View, Image, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
-
-const rows = 3;
-const cols = 2;
-const marginHorizontal = 10;
-const marginVertical = 6;
-const width =
-  Dimensions.get("window").width / cols - marginHorizontal * (cols + 1);
-const height =
-  Dimensions.get("window").height / rows - marginVertical * (rows + 25);
+import WrapperText from "../components/wrappers/WrapperText";
 
 const styles = StyleSheet.create({
   boxContainer: {
@@ -34,9 +26,6 @@ const styles = StyleSheet.create({
     height: 50,
     marginLeft: 10,
   },
-  title: {
-    fontSize: 40,
-  },
   description: {
     width: "100%",
     padding: 10,
@@ -54,13 +43,13 @@ export default function AnimalCard() {
     <View style={styles.boxContainer}>
       <Image source={require("../assets/favicon.png")} style={styles.image} />
       <View style={styles.boxContentContainerStyle}>
-        <Text style={styles.title}>Girafe</Text>
+        <WrapperText text={"Girafe"} size={40} />
         <View style={styles.description}>
           <View style={styles.underDescription}>
-            <Text style={styles.underDescrptionText}>20 ans</Text>
+            <WrapperText text="20 ans" size={25} />
           </View>
           <View style={styles.underDescription}>
-            <Text style={styles.underDescrptionText}>Afrique</Text>
+            <WrapperText text="Afrique" size={25} />
           </View>
         </View>
       </View>

@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, Image, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet } from "react-native";
+import WrapperText from "../wrappers/WrapperText";
 
 import AnimalDetailCaroussel from "./AnimalDetailCaroussel";
 
@@ -30,14 +31,14 @@ export default function AnimalDetails() {
       </View>
 
       <View>
-        <Text>Characteristics</Text>
+        <WrapperText text={"Characteristics"} />
         <View>
-          <Text>Longévité: 15 ans</Text>
-          <Text>Habitat: Afrique</Text>
-          <Text>Alimentation : </Text>
-          <Text>Status de conservation : Menacé</Text>
-          <Text>Gestation: 10 mois</Text>
-          <Text>Nombre de petits: 1</Text>
+          <WrapperText text={"Longévité: 15 ans"} />
+          <WrapperText text={"Habitat: Afrique"} />
+          <WrapperText text={"Alimentation :"} />
+          <WrapperText text={"Status de conservation : Menacé"} />
+          <WrapperText text={"Gestation: 10 mois"} />
+          <WrapperText text={"Nombre de petits: 1"} />
         </View>
       </View>
     </View>
