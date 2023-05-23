@@ -1,6 +1,13 @@
 import { FlatList } from "react-native";
 import React from "react";
-import { Modal, StyleSheet, Pressable, View } from "react-native";
+import {
+  Modal,
+  StyleSheet,
+  Pressable,
+  View,
+  Dimensions,
+  Platform,
+} from "react-native";
 import WrapperText from "../wrappers/WrapperText";
 import { ItemInputModalsModel } from "../../models/input-modals.model";
 import InputModalSettings from "./InputModalSettings";
@@ -10,7 +17,6 @@ interface ModalGenericProps {
   setIsVisible: Function;
   submit: Function;
   inputModals: ItemInputModalsModel[];
-  header: string;
   windowWidth: number;
   btnContent: string;
 }
@@ -21,11 +27,15 @@ export default function ModalGeneric(props: ModalGenericProps) {
     setIsVisible,
     submit,
     inputModals,
-    header,
     windowWidth,
     btnContent,
   } = props;
 
+  const isOnPhone =
+    Platform.OS === "android" ||
+    Platform.OS === "ios" ||
+    Platform.OS === "macos";
+  const fontSize = Dimensions.get("window").width;
   return (
     <View style={styles.modalCenteredView}>
       <Modal
@@ -38,12 +48,6 @@ export default function ModalGeneric(props: ModalGenericProps) {
       >
         <View style={styles.modalCenteredView}>
           <View style={[styles.modalContent, { width: windowWidth * 0.8 }]}>
-            <View>
-              <WrapperText
-                customStyle={styles.modalHeaderTitle}
-                text={header}
-              />
-            </View>
             <FlatList
               keyExtractor={(item) => item.headerInput}
               data={inputModals}
@@ -60,7 +64,15 @@ export default function ModalGeneric(props: ModalGenericProps) {
                 style={styles.modal}
                 onPress={() => setIsVisible(!isVisible)}
               >
-                <WrapperText customStyle={styles.modalBtnText} text="Close" />
+                <WrapperText
+                  customStyle={[
+                    styles.modalBtnText,
+                    {
+                      fontSize: isOnPhone ? fontSize * 0.05 : fontSize * 0.02,
+                    },
+                  ]}
+                  text="Close"
+                />
               </Pressable>
               <Pressable
                 style={styles.modal}
@@ -70,7 +82,12 @@ export default function ModalGeneric(props: ModalGenericProps) {
                 }}
               >
                 <WrapperText
-                  customStyle={styles.modalBtnText}
+                  customStyle={[
+                    styles.modalBtnText,
+                    {
+                      fontSize: isOnPhone ? fontSize * 0.05 : fontSize * 0.02,
+                    },
+                  ]}
                   text="Validate"
                 />
               </Pressable>
@@ -78,9 +95,24 @@ export default function ModalGeneric(props: ModalGenericProps) {
           </View>
         </View>
       </Modal>
-      <Pressable style={styles.modal} onPress={() => setIsVisible(true)}>
-        <WrapperText customStyle={styles.modalBtnText} text={btnContent} />
+      <Pressable
+        style={[
+          styles.modal,
+          { alignSelf: btnContent === "Connexion" ? "center" : "flex-end" },
+        ]}
+        onPress={() => setIsVisible(true)}
+      >
+        <WrapperText
+          customStyle={[
+            styles.modalBtnText,
+            {
+              fontSize: isOnPhone ? fontSize * 0.02 : fontSize * 0.01,
+            },
+          ]}
+          text={btnContent}
+        />
       </Pressable>
+      {isOnPhone}
     </View>
   );
 }
@@ -113,24 +145,15 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   modal: {
+    width: 150,
     backgroundColor: "#007bfe",
     borderRadius: 20,
-    padding: 10,
-    elevation: 2,
+    padding: 5,
     color: "white",
+    width: "auto",
   },
   modalBtnText: {
     color: "black",
-    fontWeight: "bold",
     textAlign: "center",
-    paddingHorizontal: 10,
-    fontSize: 15,
-  },
-  modalHeaderTitle: {
-    marginBottom: 20,
-    textAlign: "center",
-    borderColor: "black",
-    borderRadius: 20,
-    height: 40,
   },
 });

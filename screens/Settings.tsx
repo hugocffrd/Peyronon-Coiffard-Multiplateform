@@ -60,22 +60,19 @@ export default function Settings(props: SettingsProps) {
   ];
 
   return (
-    <View style={[styles.container, theme.test]}>
+    <View style={styles.container}>
       <View style={styles.spacing} />
       <UserInformationBox user={user} />
-      <View style={styles.spacing} />
       <OptionSettings
         user={user}
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
         windowWidth={windowWidth}
       />
-      <View style={styles.spacing} />
       <ModalGeneric
         isVisible={modalConnexionVisible}
         setIsVisible={setModalConnexionVisible}
         submit={submit}
-        header="Connexion"
         inputModals={inputModals}
         btnContent="Connexion"
         windowWidth={windowWidth}
@@ -89,6 +86,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   spacing: {
-    height: 50,
+    height: "8%",
   },
 });

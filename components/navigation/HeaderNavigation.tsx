@@ -12,10 +12,14 @@ export default function HeaderNavigation(props) {
         style={[
           styles.navigationBackBtn,
           { display: props.title !== "Home" ? "flex" : "none" },
-          { fontSize: props.windowWidth * 0.02 },
+          { fontSize: 30 },
         ]}
       />
-      <WrapperText customStyle={styles.navigationTitle} text={props.title} />
+      <WrapperText
+        customStyle={styles.navigationTitle}
+        text={props.title}
+        size={30}
+      />
     </View>
   );
 }

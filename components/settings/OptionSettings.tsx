@@ -49,11 +49,11 @@ export default function OptionSettings(props: OptionsSettingsProps) {
   return (
     <View style={[styles.container]}>
       <WrapperText customStyle={styles.optionText} text={"Options"} />
-      <View style={[styles.optionContainer, { width: windowWidth * 0.8 }]}>
+      <View style={styles.optionContainer}>
         <View style={styles.option}>
           <WrapperText
             customStyle={styles.optionText}
-            text={"Theme:" + isDarkMode ? "Dark" : "Light"}
+            text={"Theme: " + (isDarkMode ? "Dark" : "Light")}
           />
           <View>
             <WrapperText customStyle={theme.test} text={"Test"} />
@@ -74,7 +74,6 @@ export default function OptionSettings(props: OptionsSettingsProps) {
             isVisible={modalChangePasswordVisible}
             setIsVisible={setModalChangePasswordVisible}
             submit={submit}
-            header="Changement de mot de passe"
             btnContent="Changer de mot de passe"
             inputModals={inputModals}
             windowWidth={windowWidth}
@@ -98,13 +97,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#B3B3B3",
     alignItems: "center",
     borderRadius: 20,
+    paddingHorizontal: 10,
+    width: "100%",
   },
   option: {
-    flexDirection: "row",
     justifyContent: "space-between",
+    backgroundColor: "#D9D9D9",
+    flexDirection: "row",
+    width: "100%",
     alignItems: "center",
-    width: "80%",
-    marginVertical: 10,
+    borderRadius: 20,
+    margin: 10,
     height: 50,
   },
   optionText: {
@@ -115,6 +118,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   switch: {
+    marginRight: 15,
     transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
   },
 });
