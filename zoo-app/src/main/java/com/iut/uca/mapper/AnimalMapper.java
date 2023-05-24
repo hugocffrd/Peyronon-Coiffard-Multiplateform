@@ -3,10 +3,10 @@ package com.iut.uca.mapper;
 import com.iut.uca.api.dto.Animal;
 import com.iut.uca.repositories.entity.AnimalEntity;
 
-public class AnimalMapper {
+public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
 
-  public Animal map(AnimalEntity animalEntity) {
-    Animal animal = newInstance();
+  public Animal mapDto(AnimalEntity animalEntity) {
+    Animal animal = newDtoInstance();
     animal.setId(animalEntity.getId());
     animal.setName(animalEntity.getName());
     animal.setTypeAnimal(animalEntity.getTypeAnimal());
@@ -18,7 +18,13 @@ public class AnimalMapper {
     return animal;
   }
 
-  protected Animal newInstance() {
+  public AnimalEntity mapEntity(Animal animal) {
+    AnimalEntity entity = newEntityInstance();
+    return entity;
+  }
+
+  protected Animal newDtoInstance() {
     return new Animal();
   }
+  protected AnimalEntity newEntityInstance() {return new AnimalEntity();}
 }

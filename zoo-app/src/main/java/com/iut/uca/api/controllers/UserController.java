@@ -1,6 +1,6 @@
 package com.iut.uca.api.controllers;
 
-import com.iut.uca.api.services.UserService;
+import com.iut.uca.services.UserService;
 import com.iut.uca.api.dto.User;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;

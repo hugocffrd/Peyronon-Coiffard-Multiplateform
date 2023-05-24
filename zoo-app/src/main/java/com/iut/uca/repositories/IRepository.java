@@ -1,15 +1,17 @@
 package com.iut.uca.repositories;
 
-import com.iut.uca.repositories.entity.UserEntity;
+import com.mongodb.client.MongoCollection;
 import java.util.List;
-import org.bson.types.ObjectId;
 
+/**
+ * @param <T> Entity used
+ */
 public interface IRepository<T> {
 
+  MongoCollection<T> getCollection();
   T insert(T entity);
-
-
+  T get(long id);
   List<T> list();
-  T update(ObjectId id);
-  void delete(ObjectId id);
+  void update(long id, T entity);
+  void delete(long id);
 }

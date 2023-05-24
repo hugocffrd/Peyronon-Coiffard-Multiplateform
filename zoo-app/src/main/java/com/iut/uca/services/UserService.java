@@ -1,4 +1,4 @@
-package com.iut.uca.api.services;
+package com.iut.uca.services;
 
 import com.iut.uca.api.dto.User;
 import jakarta.enterprise.context.ApplicationScoped;
