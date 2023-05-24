@@ -50,28 +50,4 @@ public class UserResource {
   public void deleteUser(long id) {
     userService.deleteUser(id);
   }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    UserResource that = (UserResource) o;
-    return Objects.equals(userService, that.userService);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(userService);
-  }
-
-  @Override
-  public String toString() {
-    return "UserResource{" +
-        "userService=" + userService +
-        '}';
-  }
 }
