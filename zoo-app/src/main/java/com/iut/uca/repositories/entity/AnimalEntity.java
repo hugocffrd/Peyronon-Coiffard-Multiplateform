@@ -9,7 +9,7 @@ import org.bson.types.ObjectId;
 public class AnimalEntity  {
 
   @BsonId
-  private ObjectId id;
+  private ObjectId _id;
   private String name;
   private String typeAnimal;
   private int longevity;
@@ -22,13 +22,12 @@ public class AnimalEntity  {
 
   public AnimalEntity() {}
 
-
   public ObjectId getId() {
-    return id;
+    return _id;
   }
 
   public void setId(ObjectId id) {
-    this.id = id;
+    this._id = id;
   }
 
   public String getName() {

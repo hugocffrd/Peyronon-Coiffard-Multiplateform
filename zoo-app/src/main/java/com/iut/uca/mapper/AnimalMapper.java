@@ -1,22 +1,31 @@
 package com.iut.uca.mapper;
 
 import com.iut.uca.api.dto.Animal;
+import com.iut.uca.enums.GeoLocation;
+import com.iut.uca.enums.Status;
 import com.iut.uca.repositories.entity.AnimalEntity;
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 
 @Singleton
 public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
-
+  @Inject
+  DietMapper dietMapper;
+  @Inject
+  StatusMapper statusMapper;
+  @Inject
+  GeoLocationMapper geoLocationMapper;
   public Animal mapDto(AnimalEntity animalEntity) {
     Animal animal = newDtoInstance();
     animal.setId(animalEntity.getId());
     animal.setName(animalEntity.getName());
     animal.setTypeAnimal(animalEntity.getTypeAnimal());
-    animal.setDiet(animalEntity.getDiet());
+    animal.setDiet(dietMapper.map(animalEntity.getDiet()));
     animal.setGestation(animalEntity.getGestation());
     animal.setLongevity(animalEntity.getLongevity());
     animal.setImages(animalEntity.getImages());
-    animal.setStatus(animal.getStatus());
+    animal.setGeoLocation(geoLocationMapper.map(animalEntity.getGeoLocation()));
+    animal.setStatus(statusMapper.map(animalEntity.getStatus()));
     return animal;
   }
   public AnimalEntity updateEntity(AnimalEntity animalEntity, Animal animal) {
@@ -24,9 +33,9 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
     animalEntity.setName(animal.getName());
     animalEntity.setTypeAnimal(animal.getTypeAnimal());
     animalEntity.setLongevity(animal.getLongevity());
-    animalEntity.setGeoLocation(animal.getGeoLocation());
-    animalEntity.setDiet(animal.getDiet());
-    animalEntity.setStatus(animal.getStatus());
+    animalEntity.setGeoLocation(geoLocationMapper.map(animal.getGeoLocation()));
+    animalEntity.setDiet(dietMapper.map(animal.getDiet()));
+    animalEntity.setStatus(statusMapper.map(animal.getStatus()));
     animalEntity.setGestation(animal.getGestation());
     animalEntity.setNbKid(animal.getNbKid());
     animalEntity.setImages(animal.getImages());
@@ -38,10 +47,10 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
     entity.setName(animal.getName());
     entity.setTypeAnimal(animal.getTypeAnimal());
     entity.setLongevity(animal.getLongevity());
-    entity.setGeoLocation(animal.getGeoLocation());
+    entity.setGeoLocation(geoLocationMapper.map(animal.getGeoLocation()));
     entity.setGestation(animal.getGestation());
-    entity.setDiet(animal.getDiet());
-    entity.setStatus(animal.getStatus());
+    entity.setDiet(dietMapper.map(animal.getDiet()));
+    entity.setStatus(statusMapper.map(animal.getStatus()));
     animal.setNbKid(animal.getNbKid());
     animal.setImages(animal.getImages());
     return entity;

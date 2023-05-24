@@ -1,26 +1,30 @@
 package com.iut.uca.repositories;
 
+import com.iut.uca.Configuration;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import io.quarkus.mongodb.MongoClientName;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.types.ObjectId;
 @Singleton
 public class AnimalRepository implements IRepository<AnimalEntity> {
   @Inject
   MongoClient mongoClient;
 
-  public AnimalRepository( ) {
-  }
+  @Inject
+  Configuration configuration;
+
+  public AnimalRepository() {}
   @Override
   public MongoCollection<AnimalEntity> getCollection() {
+    CodecRegistry codecRegistry = configuration.registerCodecs();
     return mongoClient.getDatabase("AnimalAppli").getCollection("Animal", AnimalEntity.class);
   }
   @Override
@@ -30,9 +34,9 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
     entity.setId(id);
     Document document = new Document("_id", entity.getId())
         .append("name", entity.getName())
-        .append("surname", entity.getTypeAnimal())
-        .append("email", entity.getLongevity())
-        .append("password", entity.getGeoLocation())
+        .append("typeAnimal", entity.getTypeAnimal())
+        .append("longevity", entity.getLongevity())
+        .append("geolocation", entity.getGeoLocation())
         .append("diet", entity.getDiet())
         .append("status", entity.getStatus())
         .append("gestation", entity.getGestation())
@@ -51,11 +55,11 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
   @Override
   public List<AnimalEntity> list() {
     FindIterable<AnimalEntity> results = getCollection().find();
-    List<AnimalEntity> userList = new ArrayList<>();
-    for (AnimalEntity userEntity : results) {
-      userList.add(userEntity);
+    List<AnimalEntity> animalEntityList = new ArrayList<>();
+    for (AnimalEntity animalEntity : results) {
+      animalEntityList.add(animalEntity);
     }
-    return userList;
+    return animalEntityList;
   }
 
   @Override

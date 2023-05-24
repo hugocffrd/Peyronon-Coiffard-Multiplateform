@@ -1,0 +1,16 @@
+[
+  {
+    "_id": {
+      "$oid": "123456789012"
+    },
+    "name": "Toto",
+    "typeAnimal": "Asticot",
+    "longevity": 15,
+    "geolocation": "Oceania",
+    "diet": "Herbivore",
+    "status": "Préocupation mineure",
+    "gestation": 2,
+    "nbKid": 20,
+    "images": []
+  }
+]
