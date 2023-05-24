@@ -27,11 +27,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   image: {
-    width: 120,
-    height: 120 ,
+    width: 90,
+    height: 90,
     marginLeft: 10,
     marginRight:10,
-    borderRadius: 40,
+    borderRadius: 50,
   },
   description: {
     width: "100%",
@@ -39,11 +39,13 @@ const styles = StyleSheet.create({
   },
   underDescription: {
     paddingTop: 10,
+    marginRight:10,
   },
   underDescriptionText: {
     fontSize: 15,
     marginRight:10,
   },
+
 });
 
 export default function AnimalCard() {
@@ -51,17 +53,28 @@ export default function AnimalCard() {
     <View style={styles.boxContainer}>
       <Image source={require("../assets/favicon.png")} style={styles.image} />
       <View style={styles.boxContentContainerStyle}>
-        <WrapperText text={"Girafe"} size={40} />
-        <View style={styles.description}>
+        <View style={styles.boxHorizontalContainerStyle}>
+          <WrapperText text={"Sophie"} size={35} />
+          <View style={styles.boxIconContainerStyle}>
+          {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
+              color=animal.isFavoris ? yellow: white
+          */}
+          <Ionicons name={"star"} size={30} color={"white"} />
+          </View>
+        </View>
+        <View style={styles.boxHorizontalContainerStyle}>
+        <WrapperText text={"Girafe"} size={25} />
+        </View>
+        <View style={styles.boxHorizontalContainerStyle}>
           <View style={styles.underDescription}>
-            <WrapperText text="20 ans" size={25} />
+            <WrapperText text="20 ans" size={15} />
           </View>
           <View style={styles.underDescription}>
-            <WrapperText text="Afrique" size={25} />
+            <WrapperText text="Afrique" size={15} />
           </View>
         </View>
       </View>
-      
+ 
     </View>
   );
 }
