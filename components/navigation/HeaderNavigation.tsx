@@ -1,44 +1,40 @@
 import React from "react";
 import { View, Text, Platform, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-export default function HeaderNavigation(props) {
+export default function HeaderNavigation(props){
   return (
-    <View style={styles.headerNavigationContainer}>
+    <SafeAreaView style={styles.headerNavigationContainer}>
       <Ionicons
-        style={[
-          styles.navigationBackBtn,
-          { display: props.title !== "Home" ? "flex" : "none" },
-          { fontSize: props.windowWidth * 0.05 },
-        ]}
+        style={[styles.navigationBackBtn,{ display: props.title !== "Home" ? "flex" : "none" }]}
         name="arrow-back"
-        onPress={() => props.navigation.navigate("Home")}
-      />
+        onPress={() => props.navigation.navigate("Home")}/>
       <Text
-        style={[styles.navigationTitle, { fontSize: props.windowWidth * 0.05 }]}
-      >
+        style={[styles.navigationTitle]}>
         {props.title}
       </Text>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   headerNavigationContainer: {
+    top:20,
+    left:20,
+    verticalAlign:"middle",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    height: 60,
+    height: 100,
   },
   navigationTitle: {
-    position: "absolute",
-    left: 70,
+    fontSize : 30,
     fontWeight: "bold",
     top: Platform.OS === "ios" ? 70 : 0,
   },
   navigationBackBtn: {
-    position: "absolute",
-    left: 20,
-    top: Platform.OS === "ios" ? 70 : 10,
+    marginRight:10,
+    fontSize : 30,
+    top: Platform.OS === "ios" ? 70 : 0,
   },
 });

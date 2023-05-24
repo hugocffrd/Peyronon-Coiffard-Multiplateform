@@ -15,14 +15,14 @@ import store from "../redux/store";
 
 export default function Navigation() {
   const Tab = createBottomTabNavigator();
-  const [fontSize, setFontSize] = useState(15);
+  const [fontSize, setFontSize] = useState(20);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme;
   const windowWidth = Dimensions.get("window").width;
-  useEffect(() => {
+  /*useEffect(() => {
     const calculatedFontSize = Math.round((windowWidth * 15) / 375);
     setFontSize(calculatedFontSize);
-  }, []);
+  }, []);*/
 
   return (
     <Provider store={store}>
@@ -47,7 +47,6 @@ export default function Navigation() {
               header: ({ navigation }) => (
                 <HeaderNavigation
                   title="Favoris"
-                  logo={require("../assets/favicon.png")}
                   navigation={navigation}
                   windowWidth={windowWidth}
                 />
@@ -62,7 +61,6 @@ export default function Navigation() {
               header: ({ navigation }) => (
                 <HeaderNavigation
                   title="Home"
-                  logo={require("../assets/favicon.png")}
                   navigation={navigation}
                   windowWidth={windowWidth}
                 />
@@ -79,7 +77,6 @@ export default function Navigation() {
               header: ({ navigation }) => (
                 <HeaderNavigation
                   title="Settings"
-                  logo={require("../assets/favicon.png")}
                   navigation={navigation}
                   windowWidth={windowWidth}
                 />
@@ -101,8 +98,7 @@ export default function Navigation() {
               tabBarButton: () => null,
               header: ({ navigation }) => (
                 <HeaderNavigation
-                  title="Animal Details"
-                  logo={require("../assets/favicon.png")}
+                  title="Details"
                   navigation={navigation}
                   windowWidth={windowWidth}
                 />

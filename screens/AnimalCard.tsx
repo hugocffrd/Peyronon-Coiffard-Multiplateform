@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
+    borderRadius: 15,
     backgroundColor: "#e7e7e7",
     flexDirection: "row",
   },
@@ -25,27 +25,34 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
   },
+  boxHorizontalContainerStyle: {
+    flex: 1,
+    flexDirection: "row"
+  },
   boxIconContainerStyle: {
     marginLeft: "auto",
     marginRight: 10,
+    marginTop: 10,
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 120,
+    height: 120 ,
     marginLeft: 10,
+    marginRight:10,
+    borderRadius: 40,
   },
   title: {
-    fontSize: 40,
+    fontSize: 35,
   },
-  description: {
-    width: "100%",
-    padding: 10,
+  subtitle: {
+    fontSize: 25,
   },
   underDescription: {
     paddingTop: 10,
   },
-  underDescrptionText: {
-    fontSize: 25,
+  underDescriptionText: {
+    fontSize: 15,
+    marginRight:10,
   },
 });
 
@@ -54,22 +61,28 @@ export default function AnimalCard() {
     <View style={styles.boxContainer}>
       <Image source={require("../assets/favicon.png")} style={styles.image} />
       <View style={styles.boxContentContainerStyle}>
-        <Text style={styles.title}>Girafe</Text>
-        <View style={styles.description}>
+        <View style={styles.boxHorizontalContainerStyle}>
+          <Text style={styles.title}>Sophie</Text>
+          <View style={styles.boxIconContainerStyle}>
+          {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
+              color=animal.isFavoris ? yellow: white
+          */}
+          <Ionicons name={"star"} size={30} color={"white"} />
+          </View>
+        </View>
+        <View style={styles.boxHorizontalContainerStyle}>
+          <Text style={styles.subtitle}>Girafe</Text>
+        </View>
+        <View style={styles.boxHorizontalContainerStyle}>
           <View style={styles.underDescription}>
-            <Text style={styles.underDescrptionText}>20 ans</Text>
+            <Text style={styles.underDescriptionText}>20 ans</Text>
           </View>
           <View style={styles.underDescription}>
-            <Text style={styles.underDescrptionText}>Afrique</Text>
+            <Text style={styles.underDescriptionText}>Afrique</Text>
           </View>
         </View>
       </View>
-      <View style={styles.boxIconContainerStyle}>
-        {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
-            color=animal.isFavoris ? yellow: white
-        */}
-        <Ionicons name={"star"} size={30} color={"white"} />
-      </View>
+      
     </View>
   );
 }
