@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Platform, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import WrapperText from "../wrappers/WrapperText";
 
-export default function HeaderNavigation(props) {
+export default function HeaderNavigation(props){
   return (
-    <View style={styles.headerNavigationContainer}>
+    <SafeAreaView style={styles.headerNavigationContainer}>
       <Ionicons
         name="arrow-back"
         onPress={() => props.navigation.navigate("Home")}
@@ -20,26 +21,27 @@ export default function HeaderNavigation(props) {
         text={props.title}
         size={30}
       />
-    </View>
+   </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   headerNavigationContainer: {
+    top:20,
+    left:20,
+    verticalAlign:"middle",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
-    height: 60,
+    height: 100,
   },
   navigationTitle: {
-    position: "absolute",
-    left: 70,
+    fontSize : 30,
     fontWeight: "bold",
     top: Platform.OS === "ios" ? 70 : 0,
   },
   navigationBackBtn: {
-    position: "absolute",
-    left: 20,
-    top: Platform.OS === "ios" ? 70 : 10,
+    marginRight:10,
+    fontSize : 30,
+    top: Platform.OS === "ios" ? 70 : 0,
   },
 });

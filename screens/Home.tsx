@@ -1,7 +1,8 @@
-import { FlatList } from "react-native-gesture-handler";
-import { useState, useEffect } from "react";
+import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
+import { useState, useEffect, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
+import { Animated, Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 import AnimalCard from "./AnimalCard";
 import React from "react";
 
@@ -22,6 +23,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     margin: 5,
     height: 120,
+  },
+  leftAction: {
+    borderRadius:15,
+    backgroundColor: '#BBA700',
+    justifyContent: 'center',
+    margin: 5,
+  },
+  actionText: {
+    color: '#fff',
+    fontWeight: '600',
+    padding: 20,
   },
 });
 
@@ -55,32 +67,70 @@ export default function Home(props) {
     AnimalCard,
   ];
 
+
   const handlePress = () => {
     props.navigation.navigation.navigate("Animal Details");
     // props.navigation.navigate("Animal Details", {animalProps: props.animalDetails});
   };
 
+  const handleAddFavoritePress = () => {
+    //Handle add to favorite
+  }
+  
+  let swipeableRef = null;
+
+
+  //Action when swiping left the item 
+  const LeftActions = (progress, dragX) => {
+    const scale = dragX.interpolate({
+      inputRange: [0, 100],
+      outputRange: [0, 1],
+      extrapolate: 'clamp',
+    });
+    return (
+         <TouchableOpacity
+            style={styles.leftAction}
+            activeOpacity={0.9}
+            onPress={() => handleAddFavoritePress()}>
+          <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
+            Add to Favorite
+          </Animated.Text>
+        </TouchableOpacity>
+    );
+  };
+  
+
   const Items = ({ item }) => {
     return (
-      <TouchableOpacity
-        style={styles.flatListContainer}
-        activeOpacity={0.5}
-        onPress={() => handlePress()}
-      >
-        <AnimalCard />
-      </TouchableOpacity>
+      <View style={styles.flatListContainer}>
+      <Swipeable 
+        ref={(swipe) => swipeableRef = swipe}
+        renderLeftActions={LeftActions}
+        >
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => handlePress()}>
+            <AnimalCard />
+          </TouchableOpacity>
+      </Swipeable>
+      </View>
+       
     );
   };
 
   return (
+
     <SafeAreaView style={styles.container}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        data={animalCards}
-        numColumns={numColumns}
-        renderItem={Items}
-        key={numColumns}
-      />
+      <GestureHandlerRootView>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={animalCards}
+          numColumns={numColumns}
+          renderItem={Items}
+          key={numColumns}
+        />
+      </GestureHandlerRootView>
     </SafeAreaView>
+    
   );
 }

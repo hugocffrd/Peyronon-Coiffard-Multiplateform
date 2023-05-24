@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 20,
+    borderRadius: 15,
     backgroundColor: "#e7e7e7",
     flexDirection: "row",
   },
@@ -17,14 +17,21 @@ const styles = StyleSheet.create({
     flex: 1,
     marginLeft: 10,
   },
+  boxHorizontalContainerStyle: {
+    flex: 1,
+    flexDirection: "row"
+  },
   boxIconContainerStyle: {
     marginLeft: "auto",
     marginRight: 10,
+    marginTop: 10,
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 120,
+    height: 120 ,
     marginLeft: 10,
+    marginRight:10,
+    borderRadius: 40,
   },
   description: {
     width: "100%",
@@ -33,8 +40,9 @@ const styles = StyleSheet.create({
   underDescription: {
     paddingTop: 10,
   },
-  underDescrptionText: {
-    fontSize: 25,
+  underDescriptionText: {
+    fontSize: 15,
+    marginRight:10,
   },
 });
 
@@ -53,12 +61,7 @@ export default function AnimalCard() {
           </View>
         </View>
       </View>
-      <View style={styles.boxIconContainerStyle}>
-        {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
-            color=animal.isFavoris ? yellow: white
-        */}
-        <Ionicons name={"star"} size={30} color={"white"} />
-      </View>
+      
     </View>
   );
 }
