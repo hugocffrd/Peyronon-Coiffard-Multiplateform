@@ -8,6 +8,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import java.util.List;
 
 @Path("/api/animal")
@@ -18,7 +19,7 @@ public class AnimalController {
 
   @GET
   @Path("/{id}")
-  public Animal getOneAnimal(long id) {
+  public Animal getOneAnimal( long id) {
     return animalService.getOneAnimal(id);
   }
 
@@ -36,13 +37,13 @@ public class AnimalController {
 
   @PUT
   @Path("/{id}")
-  public void updateAnimal(long id) {
+  public void updateAnimal(@PathParam("id")long id) {
     animalService.updateAnimal(id);
   }
 
   @DELETE
   @Path("/{id}")
-  public void deleteAnimal(long id) {
+  public void deleteAnimal(@PathParam("id")long id) {
     animalService.deleteAnimal(id);
   }
 }

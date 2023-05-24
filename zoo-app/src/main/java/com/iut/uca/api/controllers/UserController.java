@@ -8,6 +8,7 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
@@ -21,7 +22,7 @@ public class UserController {
   @GET
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/{id}")
-  public User getOneUser(long id) {
+  public User getOneUser(@PathParam("id") long id) {
     return userService.getOneUser(id);
   }
 
@@ -40,13 +41,13 @@ public class UserController {
 
   @PUT
   @Path("/{id}")
-  public void updateUser(long id) {
+  public void updateUser(@PathParam("id") long id) {
     userService.updateUser(id);
   }
 
   @DELETE
   @Path("/{id}")
-  public void deleteUser(long id) {
+  public void deleteUser(@PathParam("id") long id) {
     userService.deleteUser(id);
   }
 }
