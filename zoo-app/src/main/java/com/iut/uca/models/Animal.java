@@ -5,6 +5,7 @@ import com.iut.uca.models.enums.GeoLocation;
 import com.iut.uca.models.enums.Status;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Animal {
   private long id;
@@ -17,6 +18,8 @@ public class Animal {
   private int gestation;
   private int nbKid;
   private List<String> images;
+
+  public Animal() {}
 
   public Animal(long id, String name, String typeAnimal, int longevity, GeoLocation geoLocation,
       Diet diet, Status status, int gestation, int nbKid, List<String> images) {
@@ -115,5 +118,44 @@ public class Animal {
 
   public void addImageToList(String image) {
     this.images.add(image);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Animal animal = (Animal) o;
+    return id == animal.id && longevity == animal.longevity && gestation == animal.gestation
+        && nbKid == animal.nbKid && Objects.equals(name, animal.name)
+        && Objects.equals(typeAnimal, animal.typeAnimal)
+        && geoLocation == animal.geoLocation && diet == animal.diet && status == animal.status
+        && Objects.equals(images, animal.images);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, name, typeAnimal, longevity, geoLocation, diet, status, gestation,
+        nbKid,
+        images);
+  }
+
+  @Override
+  public String toString() {
+    return "Animal{" +
+        "id=" + id +
+        ", name='" + name + '\'' +
+        ", typeAnimal='" + typeAnimal + '\'' +
+        ", longevity=" + longevity +
+        ", geoLocation=" + geoLocation +
+        ", diet=" + diet +
+        ", status=" + status +
+        ", gestation=" + gestation +
+        ", nbKid=" + nbKid +
+        ", images=" + images +
+        '}';
   }
 }

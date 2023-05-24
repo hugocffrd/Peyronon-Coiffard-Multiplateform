@@ -2,8 +2,6 @@ package com.iut.uca;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
-
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import io.quarkus.test.junit.QuarkusTest;
 
@@ -12,13 +10,13 @@ public class UserResourceTest {
 
     @Test
     public void testGetUserByName() {
-        String uuid = UUID.randomUUID().toString();
+        long id = 100;
         given()
-                .pathParam("name", uuid)
-                .when().get("/api/user/getByName/{name}")
+                .pathParam("id", id)
+                .when().get("/api/user/{id}")
                 .then()
                 .statusCode(200)
-                .body(is("Hello " + uuid));
+                .body(is("Hello " + id));
     }
 
 }
