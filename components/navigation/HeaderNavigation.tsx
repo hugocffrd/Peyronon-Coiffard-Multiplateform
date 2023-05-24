@@ -6,7 +6,7 @@ import WrapperText from "../wrappers/WrapperText";
 
 export default function HeaderNavigation(props){
   return (
-    <SafeAreaView style={styles.headerNavigationContainer}>
+    <View style={styles.headerNavigationContainer}>
       <Ionicons
         name="arrow-back"
         onPress={() => props.navigation.navigate("Home")}
@@ -21,18 +21,17 @@ export default function HeaderNavigation(props){
         text={props.title}
         size={30}
       />
-   </SafeAreaView>
+   </View>
   );
 }
 
 const styles = StyleSheet.create({
   headerNavigationContainer: {
-    top:20,
+    top:10,
     left:20,
-    verticalAlign:"middle",
     flexDirection: "row",
     alignItems: "center",
-    height: 100,
+    height: 60,
   },
   navigationTitle: {
     fontSize : 30,

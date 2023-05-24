@@ -41,11 +41,12 @@ export default function Home(props) {
   const { windowWidth } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
-    const minItemMargin = 100;
+    const minItemMargin = 50;
     const availableWidth = windowWidth - minItemMargin;
     const maxColumns = 2;
     const minColumns = 1;
     const numColumns = Math.floor(availableWidth / itemWidth);
+    console.log(numColumns);
     return Math.max(minColumns, Math.min(numColumns, maxColumns));
   };
 
@@ -65,6 +66,10 @@ export default function Home(props) {
     AnimalCard,
     AnimalCard,
     AnimalCard,
+    AnimalCard,
+    AnimalCard,
+    AnimalCard,
+    AnimalCard,
   ];
 
 
@@ -76,8 +81,6 @@ export default function Home(props) {
   const handleAddFavoritePress = () => {
     //Handle add to favorite
   }
-  
-  let swipeableRef = null;
 
 
   //Action when swiping left the item 
@@ -90,7 +93,7 @@ export default function Home(props) {
     return (
          <TouchableOpacity
             style={styles.leftAction}
-            activeOpacity={0.9}
+            activeOpacity={0.5}
             onPress={() => handleAddFavoritePress()}>
           <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
             Add to Favorite
@@ -104,7 +107,6 @@ export default function Home(props) {
     return (
       <View style={styles.flatListContainer}>
       <Swipeable 
-        ref={(swipe) => swipeableRef = swipe}
         renderLeftActions={LeftActions}
         >
           <TouchableOpacity
@@ -118,16 +120,16 @@ export default function Home(props) {
     );
   };
 
+  //The parent node of FlatList need to have flex:1 for scroll on web
   return (
-
     <SafeAreaView style={styles.container}>
-      <GestureHandlerRootView>
+      <GestureHandlerRootView style={{ flex: 1}}> 
         <FlatList
           showsVerticalScrollIndicator={false}
           data={animalCards}
+          key={numColumns}
           numColumns={numColumns}
           renderItem={Items}
-          key={numColumns}
         />
       </GestureHandlerRootView>
     </SafeAreaView>
