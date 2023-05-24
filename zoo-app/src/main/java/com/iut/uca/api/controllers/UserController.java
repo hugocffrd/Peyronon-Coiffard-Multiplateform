@@ -21,7 +21,7 @@ public class UserController {
   @GET
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/{id}")
-  public String getOneUser(long id) {
+  public User getOneUser(long id) {
     return userService.getOneUser(id);
   }
 

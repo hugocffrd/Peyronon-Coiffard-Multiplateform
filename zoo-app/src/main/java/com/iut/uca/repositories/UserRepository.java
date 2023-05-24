@@ -2,25 +2,34 @@ package com.iut.uca.repositories;
 
 import com.iut.uca.repositories.entity.UserEntity;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import io.quarkus.mongodb.MongoClientName;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
+@Singleton
 public class UserRepository implements IRepository<UserEntity>{
 
   @Inject
-  MongoDatabase mongoDatabase;
+  MongoClient mongoClient;
+
+//  private MongoDatabase mongoDatabase;
+
+  public UserRepository() {
+  //  this.mongoDatabase = mongoDatabase;
+  }
   @Override
   public MongoCollection<UserEntity> getCollection() {
-    return mongoDatabase.getCollection("user", UserEntity.class);
+    return mongoClient.getDatabase("AnimalAppli").getCollection("User", UserEntity.class);
   }
   @Override
   public UserEntity insert(UserEntity entity) {
-    MongoCollection<Document> collection= mongoDatabase.getCollection("user");
+    MongoCollection<Document> collection= mongoClient.getDatabase("AnimalAppli").getCollection("User");
     ObjectId id = new ObjectId();
     entity.setId(id);
     Document document = new Document("_id", entity.getId())

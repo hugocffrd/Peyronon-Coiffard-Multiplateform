@@ -5,9 +5,11 @@ import com.iut.uca.api.dto.User;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import com.iut.uca.repositories.entity.UserEntity;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class UserMapper implements IMapper<User, UserEntity> {
 
   @Inject
@@ -28,13 +30,32 @@ public class UserMapper implements IMapper<User, UserEntity> {
     return u;
   }
 
-  public UserEntity mapEntity(User u) {
-    UserEntity entity = newEntityInstance();
-    return entity;
+  public UserEntity updateEntity(UserEntity userEntity,User user) {
+    userEntity.setId(user.getId());
+    userEntity.setName(user.getName());
+    userEntity.setSurname(user.getSurname());
+    userEntity.setEmail(user.getEmail());
+    userEntity.setPassword(user.getPassword());
+    List<AnimalEntity> animalEntityList = new ArrayList<>();
+    for (Animal animal : user.getAnimals()) {
+      animalEntityList.add(animalMapper.mapEntity(animal));
+    }
+    userEntity.setAnimals(animalEntityList);
+    return userEntity;
   }
 
-  public User update() {
-    return new User();
+  public UserEntity mapEntity(User u) {
+    UserEntity entity = newEntityInstance();
+    entity.setName(u.getName());
+    entity.setSurname(u.getSurname());
+    entity.setEmail(u.getEmail());
+    entity.setPassword(u.getPassword());
+    List<AnimalEntity> animalEntityList = new ArrayList<>();
+    for(Animal animal : u.getAnimals() ) {
+      animalEntityList.add(animalMapper.mapEntity(animal));
+    }
+    entity.setAnimals(animalEntityList);
+    return entity;
   }
 
   public User newDtoInstance() {

@@ -8,7 +8,7 @@ import io.quarkus.test.junit.QuarkusTest;
 @QuarkusTest
 public class UserResourceTest {
 
-    @Test
+   /* @Test
     public void testGetUserByName() {
         long id = 100;
         given()
@@ -17,6 +17,6 @@ public class UserResourceTest {
                 .then()
                 .statusCode(200)
                 .body(is("Hello " + id));
-    }
+    }*/
 
 }

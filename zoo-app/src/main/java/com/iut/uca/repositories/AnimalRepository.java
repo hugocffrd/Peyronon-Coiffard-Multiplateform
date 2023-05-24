@@ -2,25 +2,30 @@ package com.iut.uca.repositories;
 
 import com.iut.uca.repositories.entity.AnimalEntity;
 import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import io.quarkus.mongodb.MongoClientName;
 import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-
+@Singleton
 public class AnimalRepository implements IRepository<AnimalEntity> {
-
   @Inject
-  MongoDatabase mongoDatabase;
+  MongoClient mongoClient;
+
+  public AnimalRepository( ) {
+  }
   @Override
   public MongoCollection<AnimalEntity> getCollection() {
-    return mongoDatabase.getCollection("animal", AnimalEntity.class);
+    return mongoClient.getDatabase("AnimalAppli").getCollection("Animal", AnimalEntity.class);
   }
   @Override
   public AnimalEntity insert(AnimalEntity entity) {
-    MongoCollection<Document> collection= mongoDatabase.getCollection("animal");
+    MongoCollection<Document> collection= mongoClient.getDatabase("AnimalAppli").getCollection("Animal");
     ObjectId id = new ObjectId();
     entity.setId(id);
     Document document = new Document("_id", entity.getId())
@@ -54,8 +59,17 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
   }
 
   @Override
-  public void update(long id, AnimalEntity entity) {
-
+  public void update(long id, AnimalEntity updatedAnimal) {
+    Document query = new Document("_id", new ObjectId(String.valueOf(id)));
+    Document updatedDocument = new Document("$set", new Document()
+        .append("name", updatedAnimal.getName())
+        .append("typeAnimal", updatedAnimal.getTypeAnimal())
+        .append("longevity", updatedAnimal.getLongevity())
+        .append("gestation", updatedAnimal.getGestation())
+        .append("status", updatedAnimal.getStatus())
+        .append("nbKid", updatedAnimal.getNbKid())
+        .append("images", updatedAnimal.getImages()));
+    getCollection().updateOne(query, updatedDocument);
   }
 
   @Override
