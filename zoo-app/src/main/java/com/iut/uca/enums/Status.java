@@ -1,4 +1,4 @@
-package com.iut.uca.models.enums;
+package com.iut.uca.enums;
 
 public enum Status {
   ETEINT,

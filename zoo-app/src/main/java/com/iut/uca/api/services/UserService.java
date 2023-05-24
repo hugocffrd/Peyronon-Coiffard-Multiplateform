@@ -1,6 +1,6 @@
-package com.iut.uca.services;
+package com.iut.uca.api.services;
 
-import com.iut.uca.models.User;
+import com.iut.uca.api.dto.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;

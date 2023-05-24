@@ -1,9 +1,9 @@
-package com.iut.uca.services;
+package com.iut.uca.api.services;
 
-import com.iut.uca.models.Animal;
-import com.iut.uca.models.enums.Diet;
-import com.iut.uca.models.enums.GeoLocation;
-import com.iut.uca.models.enums.Status;
+import com.iut.uca.api.dto.Animal;
+import com.iut.uca.enums.Diet;
+import com.iut.uca.enums.GeoLocation;
+import com.iut.uca.enums.Status;
 import jakarta.enterprise.context.ApplicationScoped;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,7 @@ import java.util.List;
 public class AnimalService {
 
   public Animal getOneAnimal(long id) {
+
     return new Animal(id, "Jean", "Elephant", 10, GeoLocation.AFRICA,   Diet.CARNIVORE, Status.ETEINT, 10, 15, new ArrayList<>());
   }
 

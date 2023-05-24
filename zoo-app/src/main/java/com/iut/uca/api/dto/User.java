@@ -1,18 +1,20 @@
-package com.iut.uca.models;
+package com.iut.uca.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.bson.types.ObjectId;
 
 public class User {
-  private long id;
+  private ObjectId id;
   private String name;
   private String surname;
   private String email;
   private String password;
   private List<Animal> animals;
 
-  public User(long id, String name, String surname, String email, String password,
+  public User() {}
+  public User(ObjectId id, String name, String surname, String email, String password,
       List<Animal> animals) {
     this.id = id;
     this.name = name;
@@ -22,11 +24,11 @@ public class User {
     this.animals = animals.isEmpty() ? new ArrayList<>() : animals;
   }
 
-  public long getId() {
+  public ObjectId getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(ObjectId id) {
     this.id = id;
   }
 

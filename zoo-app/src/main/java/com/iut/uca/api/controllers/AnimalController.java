@@ -1,7 +1,7 @@
-package com.iut.uca.resources;
+package com.iut.uca.api.controllers;
 
-import com.iut.uca.models.Animal;
-import com.iut.uca.services.AnimalService;
+import com.iut.uca.api.services.AnimalService;
+import com.iut.uca.api.dto.Animal;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -11,7 +11,7 @@ import jakarta.ws.rs.Path;
 import java.util.List;
 
 @Path("/api/animal")
-public class AnimalResource {
+public class AnimalController {
 
   @Inject
   AnimalService animalService;

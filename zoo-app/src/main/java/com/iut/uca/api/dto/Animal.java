@@ -1,14 +1,15 @@
-package com.iut.uca.models;
+package com.iut.uca.api.dto;
 
-import com.iut.uca.models.enums.Diet;
-import com.iut.uca.models.enums.GeoLocation;
-import com.iut.uca.models.enums.Status;
+import com.iut.uca.enums.Diet;
+import com.iut.uca.enums.GeoLocation;
+import com.iut.uca.enums.Status;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.bson.types.ObjectId;
 
 public class Animal {
-  private long id;
+  private ObjectId id;
   private String name;
   private String typeAnimal;
   private int longevity;
@@ -21,7 +22,7 @@ public class Animal {
 
   public Animal() {}
 
-  public Animal(long id, String name, String typeAnimal, int longevity, GeoLocation geoLocation,
+  public Animal(ObjectId id, String name, String typeAnimal, int longevity, GeoLocation geoLocation,
       Diet diet, Status status, int gestation, int nbKid, List<String> images) {
     this.id = id;
     this.name = name;
@@ -36,11 +37,11 @@ public class Animal {
   }
 
 
-  public long getId() {
+  public ObjectId getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(ObjectId id) {
     this.id = id;
   }
 
