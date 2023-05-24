@@ -9,6 +9,10 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+.idea
+.mvn
+zoo-app/target/
+zoo-app/target/*
 
 # macOS
 .DS_Store
