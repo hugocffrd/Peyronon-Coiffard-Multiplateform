@@ -20,6 +20,8 @@ public class StatusMapper {
         return Status.MENACE;
       case "PREO_MINEURE" :
         return Status.PREO_MINEURE;
+      case "VIVANR" :
+        return Status.VIVANT;
       default:
         return Status.INCONNU;
     }

@@ -20,13 +20,28 @@
     "animals": []
   },
   {
-    "_id": {
-      "$oid": "6470870a3a417729010cf106"
-    },
-    "name": "Bernard",
-    "surname": "Le fort",
-    "email": "bernard@gmail.com",
-    "password": "test",
+    "_id": { "$oid": "6470826ccd3eafd17c12c3fb" },
+    "name": "Dupont",
+    "surname": "Alice",
+    "email": "alice.dupont@example.com",
+    "password": "password123",
+    "animals": []
+  },
+  {
+    "_id": { "$oid": "6470826ccd3eafd17c12c3fc" },
+    "name": "Martin",
+    "surname": "Lucas",
+    "email": "lucas.martin@example.com",
+    "password": "securepassword",
+    "animals": []
+  },
+  {
+    "_id": { "$oid": "6470826ccd3eafd17c12c3fe" },
+    "name": "Admin",
+    "surname": "Admin",
+    "email": "admin@example.com",
+    "password": "admin123",
+    "isAdmin": true,
     "animals": []
   }
 ]

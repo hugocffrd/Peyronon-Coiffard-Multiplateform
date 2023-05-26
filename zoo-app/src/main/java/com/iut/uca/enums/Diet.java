@@ -4,6 +4,7 @@ public enum Diet {
   CARNIVORE("CARNIVORE"),
   HERBIVORE("HERBIVORE"),
   OMNIVORE("OMNIVORE"),
+  INSECTIVORE("INSECTIVORE"),
   INCONNU("INCONNU");
 
   private String value;

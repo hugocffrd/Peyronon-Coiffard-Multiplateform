@@ -18,6 +18,7 @@ public class DietMapper {
   public Diet getValueFromDietValue(String value) {
     switch(value) {
       case "CARNIVORE": return Diet.CARNIVORE;
+      case "INSECTIVORE": return Diet.INSECTIVORE;
       case "HERBIVORE": return Diet.HERBIVORE;
       case "OMNIVORE": return Diet.OMNIVORE;
       default: return Diet.INCONNU;

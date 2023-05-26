@@ -4,6 +4,7 @@ public enum Status {
   ETEINT("ETEINT"),
   MENACE("MENACE"),
   PREO_MINEURE("PREO_MINEURE"),
+  VIVANT("VIVANT"),
   INCONNU("INCONNU");
 
   private String value;
