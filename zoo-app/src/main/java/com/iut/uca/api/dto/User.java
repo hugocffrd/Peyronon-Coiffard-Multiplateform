@@ -3,10 +3,12 @@ package com.iut.uca.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
 
 public class User {
-  private ObjectId id;
+  @BsonId
+  private String id;
   private String name;
   private String surname;
   private String email;
@@ -14,21 +16,32 @@ public class User {
   private List<Animal> animals;
 
   public User() {}
-  public User(ObjectId id, String name, String surname, String email, String password,
+
+  public User(String id, String name, String surname, String email, String password) {
+    this.id = id;
+    this.name = name;
+    this.surname = surname;
+    this.email = email;
+    this.password = password;
+    this.animals = new ArrayList<>();
+
+  }
+
+  public User(String id, String name, String surname, String email, String password,
       List<Animal> animals) {
     this.id = id;
     this.name = name;
     this.surname = surname;
     this.email = email;
     this.password = password;
-    this.animals = animals.isEmpty() ? new ArrayList<>() : animals;
+    this.animals = animals;
   }
 
-  public ObjectId getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(ObjectId id) {
+  public void setId(String id) {
     this.id = id;
   }
 

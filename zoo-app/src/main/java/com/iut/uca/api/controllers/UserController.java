@@ -1,7 +1,7 @@
 package com.iut.uca.api.controllers;
 
-import com.iut.uca.services.UserService;
 import com.iut.uca.api.dto.User;
+import com.iut.uca.services.UserService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -10,6 +10,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -35,14 +36,24 @@ public class UserController {
 
   @POST
   @Path("/")
-  public void addUser(User user) {
-     userService.addUser(user);
+  public void addUser(
+      @QueryParam("_id") String id,
+      @QueryParam("name") String name,
+      @QueryParam("surname") String surname,
+      @QueryParam("email") String email,
+      @QueryParam("password") String password
+  ) {
+    userService.addUser(id, name, surname, email, password);
   }
 
   @PUT
   @Path("/{id}")
-  public void updateUser(@PathParam("id") long id) {
-    userService.updateUser(id);
+  public void updateUser(@PathParam("id") String id,
+      @QueryParam("name") String name,
+      @QueryParam("surname") String surname,
+      @QueryParam("email") String email,
+      @QueryParam("password") String password) {
+    userService.updateUser(id, name, surname, email, password);
   }
 
   @DELETE

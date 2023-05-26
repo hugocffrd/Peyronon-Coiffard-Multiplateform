@@ -1,6 +1,5 @@
 package com.iut.uca.repositories;
 
-import com.iut.uca.configuration.Configuration;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -10,20 +9,15 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
-import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.types.ObjectId;
 @Singleton
 public class AnimalRepository implements IRepository<AnimalEntity> {
   @Inject
   MongoClient mongoClient;
 
-  @Inject
-  Configuration configuration;
-
   public AnimalRepository() {}
   @Override
   public MongoCollection<AnimalEntity> getCollection() {
-    CodecRegistry codecRegistry = configuration.registerCodecs();
     return mongoClient.getDatabase("AnimalAppli").getCollection("Animal", AnimalEntity.class);
   }
   @Override

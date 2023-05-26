@@ -30,12 +30,27 @@ public class UserService {
     return userList;
   }
 
-  public void addUser(User user) {
-    userRepository.insert(userMapper.mapEntity(user));
+  public void addUser(
+      String id,
+      String name,
+      String surname,
+      String email,
+      String password) {
+
+    User u = createUser(id, name, surname, email, password);
+    userRepository.insert(userMapper.mapEntity(u));
   }
 
-  public void updateUser(long id) {
+  public void updateUser(String id, String name, String surname, String email, String password) {
+    User newUser = createUser(id, name, surname, email, password);
+    UserEntity userEntity = userRepository.get(id);
+  UserEntity userUpdated = userMapper.updateEntity(userEntity, newUser);
+  userRepository.update(id, userUpdated);
+  }
 
+  protected User createUser(String id, String name, String surname, String email,
+      String password) {
+    return  new User(id, name, surname, email, password);
   }
 
   public void deleteUser(String id) {

@@ -1,6 +1,5 @@
 package com.iut.uca.repositories;
 
-import com.iut.uca.configuration.Configuration;
 import com.iut.uca.repositories.entity.UserEntity;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -10,19 +9,15 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.Document;
-import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.types.ObjectId;
 @Singleton
 public class UserRepository implements IRepository<UserEntity>{
   @Inject
   MongoClient mongoClient;
-  @Inject
-  Configuration configuration;
   public UserRepository() {}
   @Override
   public MongoCollection<UserEntity> getCollection() {
-    CodecRegistry codecRegistry = configuration.registerCodecs();
-    return mongoClient.getDatabase("AnimalAppli").getCollection("User", UserEntity.class).withCodecRegistry(codecRegistry);
+    return mongoClient.getDatabase("AnimalAppli").getCollection("User", UserEntity.class);
   }
   @Override
   public UserEntity insert(UserEntity entity) {

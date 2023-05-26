@@ -1,0 +1,32 @@
+[
+  {
+    "_id": {
+      "$oid": "647081ee6ead57d62ef98ab6"
+    },
+    "name": "Coiffard",
+    "surname": "Hugo",
+    "email": "hugo.coiffard@etu.uca.fr",
+    "password": "password",
+    "animals": []
+  },
+  {
+    "_id": {
+      "$oid": "6470826ccd3eafd17c12c3fa"
+    },
+    "name": "Peyronon",
+    "surname": "Arno",
+    "email": "arno.peyronon@etu.uca.fr",
+    "password": "password2",
+    "animals": []
+  },
+  {
+    "_id": {
+      "$oid": "6470870a3a417729010cf106"
+    },
+    "name": "Bernard",
+    "surname": "Le fort",
+    "email": "bernard@gmail.com",
+    "password": "test",
+    "animals": []
+  }
+]

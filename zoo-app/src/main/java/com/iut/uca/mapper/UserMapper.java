@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 @Singleton
 public class UserMapper implements IMapper<User, UserEntity> {
@@ -17,7 +18,7 @@ public class UserMapper implements IMapper<User, UserEntity> {
 
   public User mapDto(UserEntity userEntity) {
     User u = newDtoInstance();
-    u.setId(userEntity.getId());
+    u.setId(userEntity.getId().toHexString());
     u.setName(userEntity.getName());
     u.setSurname(userEntity.getSurname());
     u.setPassword(userEntity.getPassword());
@@ -31,7 +32,7 @@ public class UserMapper implements IMapper<User, UserEntity> {
   }
 
   public UserEntity updateEntity(UserEntity userEntity,User user) {
-    userEntity.setId(user.getId());
+    userEntity.setId(new ObjectId(String.valueOf(user.getId())));
     userEntity.setName(user.getName());
     userEntity.setSurname(user.getSurname());
     userEntity.setEmail(user.getEmail());

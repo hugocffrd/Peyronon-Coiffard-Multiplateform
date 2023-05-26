@@ -32,7 +32,8 @@ public class AnimalController {
 
   @POST
   @Path("/")
-  public void addAnimals(   @QueryParam("_id") String id,
+    public void addAnimals(
+        @QueryParam("_id") String id,
       @QueryParam("name") String name,
       @QueryParam("typeAnimal") String typeAnimal,
       @QueryParam("longevity") int longevity,
