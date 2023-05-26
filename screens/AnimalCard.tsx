@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 15,
-    backgroundColor: "#e7e7e7",
+    borderRadius: 5,
+    backgroundColor: "#FFFFFF",
     flexDirection: "row",
   },
   boxContentContainerStyle: {

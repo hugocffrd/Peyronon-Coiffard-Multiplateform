@@ -9,7 +9,7 @@ export default function HeaderNavigation(props){
     <View style={styles.headerNavigationContainer}>
       <Ionicons
         name="arrow-back"
-        onPress={() => props.navigation.navigate("Home")}
+        onPress={() => props.navigation.goBack()}
         style={[
           styles.navigationBackBtn,
           { display: props.title !== "Home" ? "flex" : "none" },

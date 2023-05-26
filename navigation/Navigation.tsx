@@ -58,7 +58,11 @@ export default function Navigation() {
               ),
             }}
           >
-            {() => <Favorite fontSize={fontSize} />}
+            {(navigation) => <Favorite 
+              fontSize={fontSize}
+              navigation={navigation}
+              windowWidth={windowWidth}
+            />}
           </Tab.Screen>
           <Tab.Screen
             name="Home"
