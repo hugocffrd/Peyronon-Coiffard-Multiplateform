@@ -10,8 +10,8 @@ public interface IRepository<T> {
 
   MongoCollection<T> getCollection();
   T insert(T entity);
-  T get(long id);
+  T get(String id);
   List<T> list();
-  void update(long id, T entity);
-  void delete(long id);
+  void update(String id, T entity);
+  void delete(String id);
 }

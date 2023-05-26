@@ -1,16 +1,31 @@
 [
   {
     "_id": {
-      "$oid": "123456789012"
+      "$oid": "64706cb089afb8dc4f92b67a"
     },
     "name": "Toto",
     "typeAnimal": "Asticot",
     "longevity": 15,
-    "geolocation": "Oceania",
-    "diet": "Herbivore",
-    "status": "Préocupation mineure",
+    "diet": "HERBIVORE",
+    "status": "PREO_MINEURE",
     "gestation": 2,
     "nbKid": 20,
-    "images": []
+    "images": [],
+    "geoLocation": "OCEANIA"
+  },
+
+  {
+    "_id": {
+      "$oid": "64706f3dedf6a4aa8c15bac3"
+    },
+    "name": "Jean",
+    "typeAnimal": "Oiseau",
+    "longevity": 2,
+    "diet": "CARNIVORE",
+    "status": "ETEINT",
+    "gestation": 5,
+    "nbKid": 10,
+    "images": [],
+    "geoLocation": "MIDDLE_EAST"
   }
 ]

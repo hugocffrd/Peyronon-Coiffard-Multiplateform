@@ -1,6 +1,6 @@
 package com.iut.uca.repositories;
 
-import com.iut.uca.Configuration;
+import com.iut.uca.configuration.Configuration;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -9,7 +9,6 @@ import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.types.ObjectId;
@@ -36,7 +35,7 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
         .append("name", entity.getName())
         .append("typeAnimal", entity.getTypeAnimal())
         .append("longevity", entity.getLongevity())
-        .append("geolocation", entity.getGeoLocation())
+        .append("geoLocation", entity.getGeoLocation())
         .append("diet", entity.getDiet())
         .append("status", entity.getStatus())
         .append("gestation", entity.getGestation())
@@ -47,8 +46,8 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
   }
 
   @Override
-  public AnimalEntity get(long id) {
-    Document query = new Document("_id", new ObjectId(String.valueOf(id)));
+  public AnimalEntity get(String id) {
+    Document query = new Document("_id", new ObjectId(id));
     return getCollection().find(query).first();
   }
 
@@ -63,7 +62,7 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
   }
 
   @Override
-  public void update(long id, AnimalEntity updatedAnimal) {
+  public void update(String id, AnimalEntity updatedAnimal) {
     Document query = new Document("_id", new ObjectId(String.valueOf(id)));
     Document updatedDocument = new Document("$set", new Document()
         .append("name", updatedAnimal.getName())
@@ -77,7 +76,8 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
   }
 
   @Override
-  public void delete(long id) {
-    getCollection().deleteOne(new Document("_id", id));
+  public void delete(String id) {
+      Document document = new Document("_id", new ObjectId(id));
+      getCollection().deleteOne(document);
   }
 }

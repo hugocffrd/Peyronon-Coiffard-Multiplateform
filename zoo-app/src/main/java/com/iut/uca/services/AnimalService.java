@@ -1,7 +1,13 @@
 package com.iut.uca.services;
 
 import com.iut.uca.api.dto.Animal;
+import com.iut.uca.enums.Diet;
+import com.iut.uca.enums.GeoLocation;
+import com.iut.uca.enums.Status;
 import com.iut.uca.mapper.AnimalMapper;
+import com.iut.uca.mapper.DietMapper;
+import com.iut.uca.mapper.GeoLocationMapper;
+import com.iut.uca.mapper.StatusMapper;
 import com.iut.uca.repositories.AnimalRepository;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -18,7 +24,16 @@ public class AnimalService {
   @Inject
   AnimalMapper animalMapper;
 
-  public Animal getOneAnimal(long id) {
+  @Inject
+  DietMapper dietMapper;
+
+  @Inject
+  StatusMapper statusMapper;
+
+  @Inject
+  GeoLocationMapper geoLocationMapper;
+
+  public Animal getOneAnimal(String id) {
     return animalMapper.mapDto(animalRepository.get(id)) ;
   }
 
@@ -31,15 +46,52 @@ public class AnimalService {
     return animalList;
   }
 
-  public void addAnimal(Animal animal) {
+  public void addAnimal(
+       String id,
+       String name,
+       String typeAnimal,
+       int longevity,
+       String diet,
+       String status,
+       int gestation,
+       int nbKid,
+       String geoLocation,
+       List<String> images
+  ) {
+    Animal animal = createAnimal(id, name, typeAnimal, longevity, diet, status,
+        gestation, nbKid, geoLocation, images);
     animalRepository.insert(animalMapper.mapEntity(animal));
   }
 
-  public void updateAnimal(long id) {
+  public void updateAnimal( String id,
+      String name,
+      String typeAnimal,
+      int longevity,
+      String diet,
+      String status,
+      int gestation,
+      int nbKid,
+      String geoLocation,
+      List<String> images) {
+    Animal newAnimal = createAnimal(id, name, typeAnimal, longevity, diet, status,
+        gestation, nbKid, geoLocation, images);
+
+    AnimalEntity animalEntity = animalRepository.get(id);
+    AnimalEntity updateAnimal = animalMapper.updateEntity(animalEntity, newAnimal);
+    animalRepository.update(id,updateAnimal);
 
   }
 
-  public void deleteAnimal(long id) {
-  animalRepository.delete(id);
+  protected Animal createAnimal(String id, String name, String typeAnimal, int longevity, String diet,
+      String status, int gestation, int nbKid, String geoLocation, List<String> images) {
+    Diet animalDiet = dietMapper.mapByString(diet);
+    Status animalStatus = statusMapper.mapByString(status);
+    GeoLocation animalGeoLocation = geoLocationMapper.mapByString(geoLocation);
+    return new Animal(id, name, typeAnimal, longevity, animalGeoLocation, animalDiet, animalStatus,
+        gestation, nbKid, images);
+  }
+
+  public void deleteAnimal(String id) {
+    animalRepository.delete(id);
   }
 }

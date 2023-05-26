@@ -17,7 +17,7 @@ public class UserService {
   @Inject
   UserRepository userRepository;
 
-  public User getOneUser(long id) {
+  public User getOneUser(String id) {
     return userMapper.mapDto(userRepository.get(id)) ;
   }
 
@@ -38,7 +38,7 @@ public class UserService {
 
   }
 
-  public void deleteUser(long id) {
+  public void deleteUser(String id) {
     userRepository.delete(id);
   }
 

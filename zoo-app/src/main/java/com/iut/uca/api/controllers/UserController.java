@@ -22,7 +22,7 @@ public class UserController {
   @GET
   @Produces(MediaType.TEXT_PLAIN)
   @Path("/{id}")
-  public User getOneUser(@PathParam("id") long id) {
+  public User getOneUser(@PathParam("id") String id) {
     return userService.getOneUser(id);
   }
 
@@ -47,7 +47,7 @@ public class UserController {
 
   @DELETE
   @Path("/{id}")
-  public void deleteUser(@PathParam("id") long id) {
+  public void deleteUser(@PathParam("id") String id) {
     userService.deleteUser(id);
   }
 }

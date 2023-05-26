@@ -1,4 +1,4 @@
-package com.iut.uca;
+package com.iut.uca.configuration;
 
 import com.mongodb.MongoClient;
 import jakarta.enterprise.context.ApplicationScoped;

@@ -7,13 +7,25 @@ import jakarta.inject.Singleton;
 public class StatusMapper {
 
   public Status map(Status status) {
-    switch(status.getValue()) {
-      case "ETEINT" : return Status.ETEINT;
-      case "MENANCE" : return Status.MENACE;
-      case "PREO_MINEURE" : return Status.PREO_MINEURE;
-      default: return Status.INCONNU;
+    return getValueFromStatusValue(status.getValue());
+  }
+  public Status mapByString(String value) {
+    return getValueFromStatusValue(value);
+  }
+  protected Status getValueFromStatusValue(String value) {
+    switch(value) {
+      case "ETEINT" :
+        return Status.ETEINT;
+      case "MENANCE" :
+        return Status.MENACE;
+      case "PREO_MINEURE" :
+        return Status.PREO_MINEURE;
+      default:
+        return Status.INCONNU;
     }
   }
+
+
 
 
 }

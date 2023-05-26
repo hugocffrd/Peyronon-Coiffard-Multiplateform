@@ -6,6 +6,7 @@ import com.iut.uca.enums.Status;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import org.bson.types.ObjectId;
 
 @Singleton
 public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
@@ -17,7 +18,7 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
   GeoLocationMapper geoLocationMapper;
   public Animal mapDto(AnimalEntity animalEntity) {
     Animal animal = newDtoInstance();
-    animal.setId(animalEntity.getId());
+    animal.setId(animalEntity.getId().toHexString());
     animal.setName(animalEntity.getName());
     animal.setTypeAnimal(animalEntity.getTypeAnimal());
     animal.setDiet(dietMapper.map(animalEntity.getDiet()));
@@ -29,7 +30,7 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
     return animal;
   }
   public AnimalEntity updateEntity(AnimalEntity animalEntity, Animal animal) {
-    animalEntity.setId(animal.getId());
+    animalEntity.setId(new ObjectId(String.valueOf(animal.getId())));
     animalEntity.setName(animal.getName());
     animalEntity.setTypeAnimal(animal.getTypeAnimal());
     animalEntity.setLongevity(animal.getLongevity());

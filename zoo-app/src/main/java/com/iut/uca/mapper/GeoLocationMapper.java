@@ -7,15 +7,29 @@ import jakarta.inject.Singleton;
 public class GeoLocationMapper {
 
   public GeoLocation map(GeoLocation geoLocation) {
-    switch(geoLocation.getValue()) {
-      case "Oceania": return GeoLocation.OCEANIA;
-      case "Middle East": return GeoLocation.MIDDLE_EAST;
-      case "Europe": return GeoLocation.EUROPE;
-      case "Caribbean": return GeoLocation.CARIBBEAN;
-      case "Asia": return GeoLocation.ASIA;
-      case "America": return GeoLocation.AMERICA;
-      case "Africa": return GeoLocation.AFRICA;
-      default: return GeoLocation.INCONNU;
+    return getValueFromGeolocationValue(geoLocation.getValue());
+  }
+  public GeoLocation mapByString(String value) {
+    return getValueFromGeolocationValue(value);
+  }
+  protected GeoLocation getValueFromGeolocationValue(String value) {
+    switch(value.toUpperCase()) {
+      case "OCEANIA":
+        return GeoLocation.OCEANIA;
+      case "MIDDLE_EAST":
+        return GeoLocation.MIDDLE_EAST;
+      case "EUROPE":
+        return GeoLocation.EUROPE;
+      case "CARIBBEAN":
+        return GeoLocation.CARIBBEAN;
+      case "ASIA":
+        return GeoLocation.ASIA;
+      case "AMERICA":
+        return GeoLocation.AMERICA;
+      case "AFRICA":
+        return GeoLocation.AFRICA;
+      default:
+        return GeoLocation.INCONNU;
     }
   }
 }
