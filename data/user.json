@@ -7,7 +7,14 @@
     "surname": "Hugo",
     "email": "hugo.coiffard@etu.uca.fr",
     "password": "password",
-    "animals": []
+    "animalIds": [
+      {
+        "_id": { "$oid": "6470801d70abcc6f9fefdfc5" }
+      },
+      {
+        "_id": { "$oid": "6470801d70abcc6f9fefdfc4" }
+      }
+    ]
   },
   {
     "_id": {
@@ -17,7 +24,14 @@
     "surname": "Arno",
     "email": "arno.peyronon@etu.uca.fr",
     "password": "password2",
-    "animals": []
+    "animalIds": [
+      {
+        "_id": { "$oid": "6470801d70abcc6f9fefdfc2" }
+      },
+      {
+        "_id": { "$oid": "6470801d70abcc6f9fefdfc3" }
+      }
+    ]
   },
   {
     "_id": { "$oid": "6470826ccd3eafd17c12c3fb" },
@@ -25,7 +39,7 @@
     "surname": "Alice",
     "email": "alice.dupont@example.com",
     "password": "password123",
-    "animals": []
+    "animalIds": []
   },
   {
     "_id": { "$oid": "6470826ccd3eafd17c12c3fc" },
@@ -33,7 +47,7 @@
     "surname": "Lucas",
     "email": "lucas.martin@example.com",
     "password": "securepassword",
-    "animals": []
+    "animalIds": []
   },
   {
     "_id": { "$oid": "6470826ccd3eafd17c12c3fe" },
@@ -42,6 +56,6 @@
     "email": "admin@example.com",
     "password": "admin123",
     "isAdmin": true,
-    "animals": []
+    "animalIds": []
   }
 ]

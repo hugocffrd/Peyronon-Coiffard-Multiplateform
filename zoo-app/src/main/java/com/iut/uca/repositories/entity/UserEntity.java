@@ -12,7 +12,7 @@ public class UserEntity  {
     private String surname;
     private String email;
     private String password;
-    private List<AnimalEntity> animals;
+    private List<AnimalId> animalIds;
 
     public UserEntity() {}
 
@@ -56,11 +56,11 @@ public class UserEntity  {
         this.password = password;
     }
 
-    public List<AnimalEntity> getAnimals() {
-        return animals;
+    public List<AnimalId> getAnimalIds() {
+        return animalIds;
     }
 
-    public void setAnimals(List<AnimalEntity> animals) {
-        this.animals = animals;
+    public void setAnimalIds(List<AnimalId> animalIds) {
+        this.animalIds = animalIds;
     }
 }

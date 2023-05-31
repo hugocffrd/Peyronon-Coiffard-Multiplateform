@@ -34,7 +34,7 @@ public class UserRepository implements IRepository<UserEntity>{
         .append("surname", entity.getSurname())
         .append("email", entity.getEmail())
         .append("password", entity.getPassword())
-        .append("animals", entity.getAnimals());
+        .append("animals", entity.getAnimalIds());
     collection.insertOne(document);
     return entity;
   }
@@ -63,7 +63,7 @@ public class UserRepository implements IRepository<UserEntity>{
         .append("surname", updatedUser.getSurname())
         .append("email", updatedUser.getEmail())
         .append("password", updatedUser.getPassword())
-        .append("animals", updatedUser.getAnimals()));
+        .append("animals", updatedUser.getAnimalIds()));
     getCollection().updateOne(query, updatedDocument);
 
   }

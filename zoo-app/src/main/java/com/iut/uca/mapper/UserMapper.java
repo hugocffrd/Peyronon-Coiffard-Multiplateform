@@ -2,8 +2,11 @@ package com.iut.uca.mapper;
 
 import com.iut.uca.api.dto.Animal;
 import com.iut.uca.api.dto.User;
+import com.iut.uca.repositories.AnimalRepository;
 import com.iut.uca.repositories.entity.AnimalEntity;
+import com.iut.uca.repositories.entity.AnimalId;
 import com.iut.uca.repositories.entity.UserEntity;
+import com.iut.uca.repositories.entity.UserId;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.ArrayList;
@@ -16,6 +19,9 @@ public class UserMapper implements IMapper<User, UserEntity> {
   @Inject
   AnimalMapper animalMapper;
 
+  @Inject
+  AnimalRepository animalRepository;
+
   public User mapDto(UserEntity userEntity) {
     User u = newInstanceDto();
     u.setId(userEntity.getId().toHexString());
@@ -24,8 +30,9 @@ public class UserMapper implements IMapper<User, UserEntity> {
     u.setPassword(userEntity.getPassword());
     u.setEmail(userEntity.getEmail());
     List<Animal> animalList = new ArrayList<>();
-    for (AnimalEntity animalEntity : userEntity.getAnimals()) {
-        animalList.add(animalMapper.mapDto(animalEntity));
+    for (AnimalId animalId : userEntity.getAnimalIds()) {
+      Animal animal = animalMapper.mapDto(animalRepository.get(animalId.getId().toHexString()));
+      animalList.add(animal);
     }
     u.setAnimals(animalList);
     return u;
@@ -37,11 +44,11 @@ public class UserMapper implements IMapper<User, UserEntity> {
     userEntity.setSurname(user.getSurname());
     userEntity.setEmail(user.getEmail());
     userEntity.setPassword(user.getPassword());
-    List<AnimalEntity> animalEntityList = new ArrayList<>();
+    List<AnimalId> animalEntityList = new ArrayList<>();
     for (Animal animal : user.getAnimals()) {
-      animalEntityList.add(animalMapper.mapEntity(animal));
+      animalEntityList.add(new AnimalId(new ObjectId(animal.getId())));
     }
-    userEntity.setAnimals(animalEntityList);
+    userEntity.setAnimalIds(animalEntityList);
     return userEntity;
   }
 
@@ -51,11 +58,11 @@ public class UserMapper implements IMapper<User, UserEntity> {
     entity.setSurname(u.getSurname());
     entity.setEmail(u.getEmail());
     entity.setPassword(u.getPassword());
-    List<AnimalEntity> animalEntityList = new ArrayList<>();
+    List<AnimalId> animalEntityList = new ArrayList<>();
     for(Animal animal : u.getAnimals() ) {
-      animalEntityList.add(animalMapper.mapEntity(animal));
+      animalEntityList.add(new AnimalId(new ObjectId(animal.getId())));
     }
-    entity.setAnimals(animalEntityList);
+    entity.setAnimalIds(animalEntityList);
     return entity;
   }
 
