@@ -17,7 +17,7 @@ public class UserMapper implements IMapper<User, UserEntity> {
   AnimalMapper animalMapper;
 
   public User mapDto(UserEntity userEntity) {
-    User u = newDtoInstance();
+    User u = newInstanceDto();
     u.setId(userEntity.getId().toHexString());
     u.setName(userEntity.getName());
     u.setSurname(userEntity.getSurname());
@@ -46,7 +46,7 @@ public class UserMapper implements IMapper<User, UserEntity> {
   }
 
   public UserEntity mapEntity(User u) {
-    UserEntity entity = newEntityInstance();
+    UserEntity entity = newInstanceEntity();
     entity.setName(u.getName());
     entity.setSurname(u.getSurname());
     entity.setEmail(u.getEmail());
@@ -59,11 +59,14 @@ public class UserMapper implements IMapper<User, UserEntity> {
     return entity;
   }
 
-  public User newDtoInstance() {
+  @Override
+  public User newInstanceDto() {
     return new User();
   }
 
-  public UserEntity newEntityInstance() {
+  @Override
+  public UserEntity newInstanceEntity() {
     return new UserEntity();
   }
+
 }

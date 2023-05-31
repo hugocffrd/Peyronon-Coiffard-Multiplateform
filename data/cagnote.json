@@ -1,0 +1,18 @@
+[
+  {
+    "_id": {
+      "$oid": "64773b72bb58c9e405c73e4e"
+    },
+    "amount": 200,
+    "animalId": {
+      "_id": { "$oid": "6470801d70abcc6f9fefdfc2" }
+    },
+    "userIds": [
+      {
+        "_id": {
+          "$oid": "6470826ccd3eafd17c12c3fa"
+        }
+      }
+    ]
+  }
+]

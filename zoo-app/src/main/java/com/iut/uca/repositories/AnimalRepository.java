@@ -1,5 +1,6 @@
 package com.iut.uca.repositories;
 
+import com.iut.uca.configuration.Configuration;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
@@ -15,14 +16,17 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
   @Inject
   MongoClient mongoClient;
 
+  @Inject
+  Configuration configuration;
+
   public AnimalRepository() {}
   @Override
   public MongoCollection<AnimalEntity> getCollection() {
-    return mongoClient.getDatabase("AnimalAppli").getCollection("Animal", AnimalEntity.class);
+    return mongoClient.getDatabase(Configuration.DATABASE_NAME).getCollection(Configuration.ANIMAL_COLLECTION, AnimalEntity.class);
   }
   @Override
   public AnimalEntity insert(AnimalEntity entity) {
-    MongoCollection<Document> collection= mongoClient.getDatabase("AnimalAppli").getCollection("Animal");
+    MongoCollection<Document> collection= mongoClient.getDatabase(Configuration.DATABASE_NAME).getCollection(Configuration.ANIMAL_COLLECTION);
     ObjectId id = new ObjectId();
     entity.setId(id);
     Document document = new Document("_id", entity.getId())

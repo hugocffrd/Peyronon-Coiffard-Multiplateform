@@ -1,25 +1,13 @@
 package com.iut.uca.configuration;
 
-import com.mongodb.MongoClient;
 import jakarta.enterprise.context.ApplicationScoped;
-import org.bson.codecs.configuration.CodecRegistries;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.codecs.pojo.PojoCodecProvider;
 
 @ApplicationScoped
 public class Configuration {
-  public CodecRegistry registerCodecs() {
-    CodecRegistry defaultRegistry = CodecRegistries.fromRegistries(
-        MongoClient.getDefaultCodecRegistry()
-    );
 
-    CodecRegistry pojoRegistry = CodecRegistries.fromProviders(
-        PojoCodecProvider.builder().automatic(true).build()
-    );
+  public static final String DATABASE_NAME = "AnimalAppli";
+  public static final String ANIMAL_COLLECTION = "Animal";
+  public static final String USER_COLLECTION = "User";
+  public static final String CAGNOTE_COLLECTION = "Cagnote";
 
-    return CodecRegistries.fromRegistries(
-        defaultRegistry,
-        pojoRegistry
-    );
-  }
 }

@@ -1,8 +1,6 @@
 package com.iut.uca.mapper;
 
 import com.iut.uca.api.dto.Animal;
-import com.iut.uca.enums.GeoLocation;
-import com.iut.uca.enums.Status;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -17,7 +15,7 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
   @Inject
   GeoLocationMapper geoLocationMapper;
   public Animal mapDto(AnimalEntity animalEntity) {
-    Animal animal = newDtoInstance();
+    Animal animal = newInstanceDto();
     animal.setId(animalEntity.getId().toHexString());
     animal.setName(animalEntity.getName());
     animal.setTypeAnimal(animalEntity.getTypeAnimal());
@@ -44,7 +42,7 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
   }
 
   public AnimalEntity mapEntity(Animal animal) {
-    AnimalEntity entity = newEntityInstance();
+    AnimalEntity entity = newInstanceEntity();
     entity.setName(animal.getName());
     entity.setTypeAnimal(animal.getTypeAnimal());
     entity.setLongevity(animal.getLongevity());
@@ -57,8 +55,15 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
     return entity;
   }
 
-  protected Animal newDtoInstance() {
+  @Override
+  public Animal newInstanceDto() {
     return new Animal();
   }
-  protected AnimalEntity newEntityInstance() {return new AnimalEntity();}
+
+  @Override
+  public AnimalEntity newInstanceEntity() {
+    return new AnimalEntity();
+  }
+
+
 }

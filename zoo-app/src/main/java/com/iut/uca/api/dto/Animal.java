@@ -20,8 +20,6 @@ public class Animal {
   private List<String> images;
 
   public Animal() {}
-
-
   public Animal(String id, String name, String typeAnimal, int longevity, GeoLocation geoLocation,
       Diet diet, Status status, int gestation, int nbKid, List<String> images) {
     this.id = id;

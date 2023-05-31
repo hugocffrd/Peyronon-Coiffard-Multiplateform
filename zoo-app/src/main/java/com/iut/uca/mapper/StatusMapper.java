@@ -26,8 +26,4 @@ public class StatusMapper {
         return Status.INCONNU;
     }
   }
-
-
-
-
 }
