@@ -8,7 +8,7 @@
     "diet": "HERBIVORE",
     "status": "ETEINT",
     "gestation": 5,
-    "nbKit": 0,
+    "nbKid": 0,
     "images": []
   },
   {
@@ -20,7 +20,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 3,
+    "nbKid": 3,
     "images": []
   },
   {
@@ -32,7 +32,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 4,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -44,7 +44,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 15,
-    "nbKit": 1,
+    "nbKid": 1,
     "images": []
   },
   {
@@ -56,7 +56,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 8,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -68,7 +68,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 2,
-    "nbKit": 4,
+    "nbKid": 4,
     "images": []
   },
   {
@@ -80,7 +80,7 @@
     "diet": "OMNIVORE",
     "status": "VIVANT",
     "gestation": 6,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -92,7 +92,7 @@
     "diet": "OMNIVORE",
     "status": "VIVANT",
     "gestation": 8,
-    "nbKit": 3,
+    "nbKid": 3,
     "images": []
   },
   {
@@ -104,7 +104,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 7,
-    "nbKit": 1,
+    "nbKid": 1,
     "images": []
   },
   {
@@ -116,7 +116,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -128,7 +128,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 5,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -140,7 +140,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 2,
-    "nbKit": 4,
+    "nbKid": 4,
     "images": []
   },
   {
@@ -152,7 +152,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 6,
-    "nbKit": 1,
+    "nbKid": 1,
     "images": []
   },
   {
@@ -164,7 +164,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 3,
+    "nbKid": 3,
     "images": []
   },
   {
@@ -176,7 +176,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 9,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -188,7 +188,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 11,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -200,7 +200,7 @@
     "diet": "INSECTIVORE",
     "status": "VIVANT",
     "gestation": 1,
-    "nbKit": 4,
+    "nbKid": 4,
     "images": []
   },
   {
@@ -212,7 +212,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 7,
-    "nbKit": 1,
+    "nbKid": 1,
     "images": []
   },
   {
@@ -224,7 +224,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 3,
+    "nbKid": 3,
     "images": []
   },
   {
@@ -236,7 +236,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -248,7 +248,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 5,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -260,7 +260,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 2,
-    "nbKit": 4,
+    "nbKid": 4,
     "images": []
   },
   {
@@ -272,7 +272,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 2,
-    "nbKit": 4,
+    "nbKid": 4,
     "images": []
   },
   {
@@ -284,7 +284,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 4,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -296,7 +296,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 15,
-    "nbKit": 1,
+    "nbKid": 1,
     "images": []
   },
   {
@@ -308,7 +308,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 8,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -320,7 +320,7 @@
     "diet": "OMNIVORE",
     "status": "VIVANT",
     "gestation": 8,
-    "nbKit": 3,
+    "nbKid": 3,
     "images": []
   },
   {
@@ -332,7 +332,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 6,
-    "nbKit": 1,
+    "nbKid": 1,
     "images": []
   },
   {
@@ -344,7 +344,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 3,
+    "nbKid": 3,
     "images": []
   },
   {
@@ -356,7 +356,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 9,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -368,7 +368,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 11,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -380,7 +380,7 @@
     "diet": "INSECTIVORE",
     "status": "VIVANT",
     "gestation": 1,
-    "nbKit": 4,
+    "nbKid": 4,
     "images": []
   },
   {
@@ -392,7 +392,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 7,
-    "nbKit": 1,
+    "nbKid": 1,
     "images": []
   },
   {
@@ -404,7 +404,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 3,
+    "nbKid": 3,
     "images": []
   },
   {
@@ -416,7 +416,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 3,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -428,7 +428,7 @@
     "diet": "HERBIVORE",
     "status": "VIVANT",
     "gestation": 5,
-    "nbKit": 2,
+    "nbKid": 2,
     "images": []
   },
   {
@@ -440,7 +440,7 @@
     "diet": "CARNIVORE",
     "status": "VIVANT",
     "gestation": 2,
-    "nbKit": 4,
+    "nbKid": 4,
     "images": []
   }
 ]

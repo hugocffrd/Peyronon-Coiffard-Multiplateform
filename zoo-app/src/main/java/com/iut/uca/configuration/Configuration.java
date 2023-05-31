@@ -9,5 +9,6 @@ public class Configuration {
   public static final String ANIMAL_COLLECTION = "Animal";
   public static final String USER_COLLECTION = "User";
   public static final String CAGNOTE_COLLECTION = "Cagnote";
+  public static final String $SET = "$set";
 
 }
