@@ -4,7 +4,7 @@ public class ConfigurationAnimal {
 
   public static final String ID = "_id";
   public static final String NAME = "name";
-  public static final String TYPE_ANIMAL = "animal";
+  public static final String TYPE_ANIMAL = "typeAnimal";
   public static final String LONGEVITY = "longevity";
   public static final String GEOLOCATION = "geoLocation";
   public static final String DIET = "diet";

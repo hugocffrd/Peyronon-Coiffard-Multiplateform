@@ -39,11 +39,7 @@ public class AnimalService {
 
   public List<Animal> getAllAnimals() {
     List<AnimalEntity> animalEntities = animalRepository.list();
-    List<Animal> animalList = new ArrayList<>();
-    for (AnimalEntity animalEntity : animalEntities) {
-      animalList.add(animalMapper.mapDto(animalEntity));
-    }
-    return animalList;
+    return mapAnimals(animalEntities);
   }
 
   public void addAnimal(
@@ -93,5 +89,21 @@ public class AnimalService {
 
   public void deleteAnimal(String id) {
     animalRepository.delete(id);
+  }
+
+  public List<Animal> getAnimalsByName(String name) {
+    return mapAnimals(animalRepository.getAnimalsByName(name));
+  }
+
+  public List<Animal> getAnimalByType(String type) {
+    return mapAnimals(animalRepository.getAnimalByType(type));
+  }
+
+  protected List<Animal> mapAnimals(List<AnimalEntity> animalEntityList) {
+    List<Animal> animalList = new ArrayList<>();
+    for (AnimalEntity animalEntity : animalEntityList) {
+      animalList.add(animalMapper.mapDto(animalEntity));
+    }
+    return animalList;
   }
 }

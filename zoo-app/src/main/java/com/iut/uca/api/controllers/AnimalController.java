@@ -69,4 +69,16 @@ public class AnimalController {
   public void deleteAnimal(@PathParam("id")String id) {
     animalService.deleteAnimal(id);
   }
+
+  @GET
+  @Path("/getByName")
+  public List<Animal> getAnimalsByName(@QueryParam("name") String name) {
+    return animalService.getAnimalsByName(name);
+  }
+
+  @GET
+  @Path("/getByType")
+  public List<Animal> getAnimalsByType(@QueryParam("type") String type) {
+    return animalService.getAnimalByType(type);
+  }
 }
