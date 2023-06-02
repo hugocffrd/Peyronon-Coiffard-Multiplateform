@@ -1,8 +1,18 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { rootReducer } from "./reducers/root.reducer";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { homeReducer } from "./reducers/home.reducer";
+import { modalConnexionReducer } from "./reducers/modal-connexion.reducer";
+
+const reducer = {
+  homeReducer: homeReducer,
+  modalConnexionReducer: modalConnexionReducer,
+};
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: reducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export default store;

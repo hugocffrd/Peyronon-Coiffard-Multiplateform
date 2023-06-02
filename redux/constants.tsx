@@ -3,3 +3,5 @@ export const modalConnexionConsts = {
   UPDATE_PASSWORD: "UPDATE_PASSWORD",
   SUBMIT: "SUBMIT",
 };
+
+export const FETCH_ANIMALS = "FETCH_ANIMALS";

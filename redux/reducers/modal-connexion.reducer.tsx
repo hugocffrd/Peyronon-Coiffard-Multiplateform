@@ -2,10 +2,10 @@ import { UserModel } from "../../models/user.model";
 import { modalConnexionConsts } from "../constants";
 
 const initialState: UserModel = {
-  name: "Test",
-  surname: "Test",
-  password: "Test",
-  email: "test.test@test.test",
+  name: "test",
+  surname: "test",
+  password: "test",
+  email: "test@test.com",
   favorite: [],
 };
 
