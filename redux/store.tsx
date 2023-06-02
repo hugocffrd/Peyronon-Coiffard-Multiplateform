@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { homeReducer } from "./reducers/home.reducer";
 import { modalConnexionReducer } from "./reducers/modal-connexion.reducer";
 

@@ -67,7 +67,7 @@ export default function Home(props) {
   }, []);
 
   //@ts-ignore
-  const list = useSelector((state) => state.homeReducer);
+  const list = useSelector((state) => state.homeReducer.animalList);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -110,7 +110,7 @@ export default function Home(props) {
       <View style={styles.flatListContainer}>
         <Swipeable renderLeftActions={LeftActions}>
           <TouchableOpacity activeOpacity={0.5} onPress={() => handlePress()}>
-            <AnimalCard />
+            <AnimalCard animal={item} />
           </TouchableOpacity>
         </Swipeable>
       </View>

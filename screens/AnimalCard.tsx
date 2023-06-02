@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   boxHorizontalContainerStyle: {
     flex: 1,
-    flexDirection: "row"
+    flexDirection: "row",
   },
   boxIconContainerStyle: {
     marginLeft: "auto",
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     marginLeft: 10,
-    marginRight:10,
+    marginRight: 10,
     borderRadius: 50,
   },
   description: {
@@ -39,42 +39,34 @@ const styles = StyleSheet.create({
   },
   underDescription: {
     paddingTop: 10,
-    marginRight:10,
+    marginRight: 10,
   },
   underDescriptionText: {
     fontSize: 15,
-    marginRight:10,
+    marginRight: 10,
   },
-
 });
 
-export default function AnimalCard() {
+export default function AnimalCard(props) {
+  console.log("animalcard", props);
+  const { animal } = props;
   return (
     <View style={styles.boxContainer}>
       <Image source={require("../assets/favicon.png")} style={styles.image} />
       <View style={styles.boxContentContainerStyle}>
         <View style={styles.boxHorizontalContainerStyle}>
-          <WrapperText text={"Sophie"} size={35} />
+          <WrapperText text={animal.name} size={35} />
           <View style={styles.boxIconContainerStyle}>
-          {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
+            {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
               color=animal.isFavoris ? yellow: white
           */}
-          <Ionicons name={"star"} size={30} color={"white"} />
+            <Ionicons name={"star"} size={30} color={"white"} />
           </View>
         </View>
         <View style={styles.boxHorizontalContainerStyle}>
-        <WrapperText text={"Girafe"} size={25} />
-        </View>
-        <View style={styles.boxHorizontalContainerStyle}>
-          <View style={styles.underDescription}>
-            <WrapperText text="20 ans" size={15} />
-          </View>
-          <View style={styles.underDescription}>
-            <WrapperText text="Afrique" size={15} />
-          </View>
+          <WrapperText text={animal.typeAnimal} size={25} />
         </View>
       </View>
- 
     </View>
   );
 }

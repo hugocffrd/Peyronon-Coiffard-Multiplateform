@@ -11,15 +11,12 @@ export const fetchAnimals = (animalList: AnimalModel[]) => {
 export const getAnimals = () => {
   return async (dispatch) => {
     try {
-      const animalsPromise = await fetch("mon url");
+      const animalsPromise = await fetch("http://localhost:8080/api/animal/");
+      console.log(animalsPromise);
       const animalsJson = await animalsPromise.json();
-      const animalList: AnimalModel[] = animalsJson.map((elt: AnimalModel) => {
-        return {
-          name: elt.name,
-          typeAnimal: elt.animalType,
-        };
-      });
-      dispatch(fetchAnimals(animalList));
+      console.log(animalsJson);
+
+      dispatch(fetchAnimals(animalsJson));
     } catch (error) {
       console.log("Error call API : " + error);
     }
