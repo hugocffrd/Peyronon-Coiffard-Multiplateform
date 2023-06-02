@@ -150,7 +150,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 5,
     color: "white",
-    width: "auto",
   },
   modalBtnText: {
     color: "black",

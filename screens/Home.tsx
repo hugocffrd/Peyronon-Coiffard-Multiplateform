@@ -12,8 +12,8 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
     justifyContent: "space-between",
   },
   item: {
@@ -22,13 +22,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
-    height: 120,
   },
   leftAction: {
-    borderRadius:15,
+    borderRadius:5,
     backgroundColor: '#BBA700',
     justifyContent: 'center',
-    margin: 5,
+    marginBottom:5,
+    marginTop:5,
   },
   actionText: {
     color: '#fff',
@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
 });
 
 export default function Home(props) {
+
   const { windowWidth } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
-    const minItemMargin = 50;
+    const minItemMargin = 100;
     const availableWidth = windowWidth - minItemMargin;
     const maxColumns = 2;
     const minColumns = 1;
@@ -51,6 +52,7 @@ export default function Home(props) {
   };
 
   const [numColumns, setNumColumns] = useState(getNumberOfColumns());
+
 
   useEffect(() => {
     Dimensions.addEventListener("change", () => {
@@ -72,14 +74,13 @@ export default function Home(props) {
     AnimalCard,
   ];
 
-
   const handlePress = () => {
-    props.navigation.navigation.navigate("Animal Details");
+    props.navigation.navigation.navigate("Details");
     // props.navigation.navigate("Animal Details", {animalProps: props.animalDetails});
   };
 
-  const handleAddFavoritePress = () => {
-    //Handle add to favorite
+  const handleAddFavoritePress = (item) => {
+
   }
 
 
@@ -94,7 +95,7 @@ export default function Home(props) {
          <TouchableOpacity
             style={styles.leftAction}
             activeOpacity={0.5}
-            onPress={() => handleAddFavoritePress()}>
+            onPress={(item) => handleAddFavoritePress(item)}>
           <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
             Add to Favorite
           </Animated.Text>
@@ -120,14 +121,14 @@ export default function Home(props) {
     );
   };
 
-  //The parent node of FlatList need to have flex:1 for scroll on web
+  //The parent node of FlatList needs to have flex:1 to enable scroll on web
   return (
     <SafeAreaView style={styles.container}>
       <GestureHandlerRootView style={{ flex: 1}}> 
         <FlatList
           showsVerticalScrollIndicator={false}
           data={animalCards}
-          key={numColumns}
+          
           numColumns={numColumns}
           renderItem={Items}
         />
