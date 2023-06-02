@@ -3,7 +3,6 @@ import React from "react";
 import AnimalDetails from "../components/animal/AnimalDetails";
 import { Dimensions } from "react-native";
 import Home from "../screens/Home";
-import { NavigationContainer } from "@react-navigation/native";
 
 const Stack = createStackNavigator();
 const windowWidth = Dimensions.get("window").width;

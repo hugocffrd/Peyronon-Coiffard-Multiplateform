@@ -1,5 +1,5 @@
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Animated,
@@ -79,9 +79,7 @@ export default function Home(props) {
   }, [dispatch]);
 
   const handlePress = (item: AnimalModel) => {
-    console.log("handlePress", item);
     props.navigation.navigation.navigate("Details", { animal: item });
-    // props.navigation.navigate("Animal Details", {animalProps: props.animalDetails});
   };
 
   const handleAddFavoritePress = (item) => {};

@@ -13,8 +13,6 @@ const { width, height } = Dimensions.get("screen");
 
 const SlideItem = ({ item }) => {
   const translateYImage = new Animated.Value(40);
-
-  console.log(item);
   Animated.timing(translateYImage, {
     toValue: 0,
     duration: 1000,

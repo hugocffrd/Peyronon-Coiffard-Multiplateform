@@ -1,8 +1,8 @@
 import React from "react";
 import { AnimalModel } from "../../models/animal.model";
-import { View, StyleSheet, Image, FlatList } from "react-native";
+import { View, StyleSheet } from "react-native";
 import WrapperText from "../wrappers/WrapperText";
-import Slider from "./Slider";
+import { Slider } from "./slider/Slider";
 
 const styles = StyleSheet.create({
   detailsView: {

@@ -1,22 +1,27 @@
-import { modalConnexionConsts } from "../constants";
+import { SUBMIT_CONNEXION, UPDATE_EMAIL, UPDATE_PASSWORD } from "../constants";
+
+interface UserSubmitCOnnexionProps {
+  email: string;
+  password: string;
+}
 
 export const updateUsername = (email: string) => {
   return {
-    type: modalConnexionConsts.UPDATE_EMAIL,
+    type: UPDATE_EMAIL,
     payload: email,
   };
 };
 
 export const updatePassword = (password: string) => {
   return {
-    type: modalConnexionConsts.UPDATE_PASSWORD,
+    type: UPDATE_PASSWORD,
     payload: password,
   };
 };
 
-export const submitForm = (user: { email: string; password: string }) => {
+export const submitForm = (user: UserSubmitCOnnexionProps) => {
   return {
-    type: modalConnexionConsts.SUBMIT,
+    type: SUBMIT_CONNEXION,
     payload: user,
   };
 };

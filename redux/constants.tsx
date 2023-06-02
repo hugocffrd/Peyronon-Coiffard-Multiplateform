@@ -1,7 +1,5 @@
-export const modalConnexionConsts = {
-  UPDATE_EMAIL: "UPDATE_EMAIL",
-  UPDATE_PASSWORD: "UPDATE_PASSWORD",
-  SUBMIT: "SUBMIT",
-};
+export const UPDATE_EMAIL = "UPDATE_EMAIL";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
+export const SUBMIT_CONNEXION = "SUBMIT_CONNEXION";
 
 export const FETCH_ANIMALS = "FETCH_ANIMALS";

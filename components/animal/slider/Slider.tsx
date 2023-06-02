@@ -1,9 +1,9 @@
-import { Animated, FlatList, StyleSheet, Text, View } from "react-native";
+import { Animated, FlatList, View } from "react-native";
 import React, { useRef, useState } from "react";
 import SlideItem from "./SlideItem";
 import Pagination from "./Pagination";
 
-const Slider = () => {
+export const Slider = () => {
   const [index, setIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
 
@@ -25,7 +25,6 @@ const Slider = () => {
   };
 
   const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
-    // console.log('viewableItems', viewableItems);
     setIndex(viewableItems[0].index);
   }).current;
 
@@ -36,38 +35,23 @@ const Slider = () => {
   const images = [
     {
       id: 1,
-      img: require("../../assets/favicon.png"),
-      title: "Apple Watch Series 7",
-      description: "The future of health is on your wrist",
-      price: "$399",
+      img: require("../../../assets/favicon.png"),
     },
     {
       id: 2,
-      img: require("../../assets/favicon.png"),
-      title: "AirPods Pro",
-      description: "Active noise cancellation for immersive sound",
-      price: "$249",
+      img: require("../../../assets/favicon.png"),
     },
     {
       id: 3,
-      img: require("../../assets/favicon.png"),
-      title: "AirPods Max",
-      description: "Effortless AirPods experience",
-      price: "$549",
+      img: require("../../../assets/favicon.png"),
     },
     {
       id: 4,
-      img: require("../../assets/favicon.png"),
-      title: "Charger",
-      description: "It's not magic, it's just science",
-      price: "$49",
+      img: require("../../../assets/favicon.png"),
     },
     {
       id: 5,
-      img: require("../../assets/favicon.png"),
-      title: "Smart Lock",
-      description: "Unlock your door with your phone",
-      price: "$199",
+      img: require("../../../assets/favicon.png"),
     },
   ];
 
@@ -88,7 +72,3 @@ const Slider = () => {
     </View>
   );
 };
-
-export default Slider;
-
-const styles = StyleSheet.create({});
