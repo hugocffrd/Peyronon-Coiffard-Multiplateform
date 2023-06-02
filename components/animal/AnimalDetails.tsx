@@ -1,5 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
+import { AnimalModel } from "../../models/animal.model";
 import WrapperText from "../wrappers/WrapperText";
 
 import AnimalDetailCaroussel from "./AnimalDetailCaroussel";
@@ -17,28 +18,27 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function AnimalDetails() {
-  const imagesList = [
-    { title: "Section 1", data: { id: 1, image: "../assets/icon.png" } },
-    { title: "Section 2", data: { id: 2, image: "../assets/icon.png" } },
-    { title: "Section 3", data: { id: 3, image: "../assets/icon.png" } },
-  ];
+export default function AnimalDetails(props) {
+  const animal = props.navigation.route.params.animal as AnimalModel;
 
   return (
     <View style={styles.detailsView}>
+      <View>
+        <WrapperText text={animal.name + " " + animal.typeAnimal} />
+      </View>
       <View style={styles.caroussel}>
-        <AnimalDetailCaroussel images={imagesList} />
+        <AnimalDetailCaroussel images={animal.images} />
       </View>
 
       <View>
         <WrapperText text={"Characteristics"} />
         <View>
-          <WrapperText text={"Longévité: 15 ans"} />
-          <WrapperText text={"Habitat: Afrique"} />
-          <WrapperText text={"Alimentation :"} />
-          <WrapperText text={"Status de conservation : Menacé"} />
-          <WrapperText text={"Gestation: 10 mois"} />
-          <WrapperText text={"Nombre de petits: 1"} />
+          <WrapperText text={"Longévité : " + animal.longevity + "ans"} />
+          <WrapperText text={"Habitat : " + animal.geoLocation} />
+          <WrapperText text={"Alimentation :" + animal.diet} />
+          <WrapperText text={"Status de conservation : " + animal.status} />
+          <WrapperText text={"Gestation : " + animal.gestation + "mois"} />
+          <WrapperText text={"Nombre de petits : " + animal.nbKid} />
         </View>
       </View>
     </View>

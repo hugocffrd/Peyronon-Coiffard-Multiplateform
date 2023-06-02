@@ -4,7 +4,7 @@ import { StatusModel } from "./status.model";
 
 export interface AnimalModel {
   name: string;
-  animalType: string;
+  typeAnimal: string;
   longevity: number;
   geoLocation: GeolocationModel;
   diet: DietModel;

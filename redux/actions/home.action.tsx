@@ -12,10 +12,7 @@ export const getAnimals = () => {
   return async (dispatch) => {
     try {
       const animalsPromise = await fetch("http://localhost:8080/api/animal/");
-      console.log(animalsPromise);
       const animalsJson = await animalsPromise.json();
-      console.log(animalsJson);
-
       dispatch(fetchAnimals(animalsJson));
     } catch (error) {
       console.log("Error call API : " + error);

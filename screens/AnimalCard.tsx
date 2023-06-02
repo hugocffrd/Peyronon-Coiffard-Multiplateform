@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
 });
 
 export default function AnimalCard(props) {
-  console.log("animalcard", props);
   const { animal } = props;
   return (
     <View style={styles.boxContainer}>

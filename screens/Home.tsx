@@ -13,6 +13,7 @@ import AnimalCard from "./AnimalCard";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAnimals } from "../redux/actions/home.action";
+import { AnimalModel } from "../models/animal.model";
 
 const styles = StyleSheet.create({
   container: {
@@ -54,7 +55,6 @@ export default function Home(props) {
     const maxColumns = 2;
     const minColumns = 1;
     const numColumns = Math.floor(availableWidth / itemWidth);
-    console.log(numColumns);
     return Math.max(minColumns, Math.min(numColumns, maxColumns));
   };
 
@@ -78,8 +78,9 @@ export default function Home(props) {
     loadAnimal();
   }, [dispatch]);
 
-  const handlePress = () => {
-    props.navigation.navigation.navigate("Details");
+  const handlePress = (item: AnimalModel) => {
+    console.log("handlePress", item);
+    props.navigation.navigation.navigate("Details", { animal: item });
     // props.navigation.navigate("Animal Details", {animalProps: props.animalDetails});
   };
 
@@ -109,7 +110,10 @@ export default function Home(props) {
     return (
       <View style={styles.flatListContainer}>
         <Swipeable renderLeftActions={LeftActions}>
-          <TouchableOpacity activeOpacity={0.5} onPress={() => handlePress()}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => handlePress(item)}
+          >
             <AnimalCard animal={item} />
           </TouchableOpacity>
         </Swipeable>
