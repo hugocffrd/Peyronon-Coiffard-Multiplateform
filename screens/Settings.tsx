@@ -3,13 +3,6 @@ import { StyleSheet, View } from "react-native";
 import OptionSettings from "../components/settings/OptionSettings";
 import UserInformationBox from "../components/settings/UserInformationBox";
 import { useDispatch, useSelector } from "react-redux";
-import ModalGeneric from "../components/settings/ModalGeneric";
-import {
-  submitForm,
-  updatePassword,
-  updateUsername,
-} from "../redux/actions/modal-connexion.actions";
-import { ItemInputModalsModel } from "../models/input-modals.model";
 
 interface SettingsProps {
   isDarkMode: boolean;

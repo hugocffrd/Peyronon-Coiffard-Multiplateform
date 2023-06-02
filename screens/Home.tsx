@@ -75,7 +75,7 @@ export default function Home(props) {
   ];
 
   const handlePress = () => {
-    props.navigation.navigation.navigate("Animal Details");
+    props.navigation.navigation.navigate("Details");
     // props.navigation.navigate("Animal Details", {animalProps: props.animalDetails});
   };
 

@@ -101,7 +101,6 @@ export default function UserInformationBox(props: UserInformationBoxProps) {
               size={12}
             />
           </View>
-          <hr/>
           <View style={styles.informations}>
           <WrapperText customStyle={styles.informationsText} text={"Password: "} size={18} />
           <WrapperText text={"*".repeat(passwordLength)} size={18} />

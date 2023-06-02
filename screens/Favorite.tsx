@@ -11,8 +11,8 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 5,
+    paddingVertical: 5,
     justifyContent: "space-between",
   },
   item: {
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   rightAction: {
     borderRadius:5,
-    backgroundColor: '#BBA700',
+    backgroundColor: '#e06666',
     justifyContent: 'center',
     marginBottom:5,
     marginTop:5,
@@ -69,7 +69,7 @@ export default function Favorite(props) {
 
 
   const handlePress = () => {
-    props.navigation.navigation.navigate("Animal Details");
+    props.navigation.navigation.navigate("Details");
     // props.navigation.navigate("Animal Details", {animalProps: props.animalDetails});
   };
 
@@ -91,7 +91,7 @@ export default function Favorite(props) {
       activeOpacity={0.5}
       onPress={(item) => handleDeleteFavoritePress(item)}>
     <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
-      Add to Favorite
+      Delete From Favorite
     </Animated.Text>
   </TouchableOpacity>
     );
