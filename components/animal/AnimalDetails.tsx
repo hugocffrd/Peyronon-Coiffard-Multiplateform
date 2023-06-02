@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
 });
 
 export default function AnimalDetails(props) {
+  console.log(props);
   const animal = props.navigation.route.params.animal as AnimalModel;
 
   return (

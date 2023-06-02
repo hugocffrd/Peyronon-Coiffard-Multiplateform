@@ -56,5 +56,16 @@ public class UserService {
   public void deleteUser(String id) {
     userRepository.delete(id);
   }
+  public User getUserByEmailAndPassword(String email, String password) {
+    UserEntity userEntity = userRepository.getUserByEmailAndPassword(email, password);
+    return userMapper.mapDto(userEntity);
+  }
+
+  public User changePassword(String email, String password, String newPassword) {
+    UserEntity userEntity = userRepository.getUserByEmailAndPassword(email, password);
+    userEntity.setPassword(newPassword);
+    UserEntity userUpdated = userRepository.update(userEntity.getId().toHexString(), userEntity);
+    return userMapper.mapDto(userUpdated);
+  }
 
 }

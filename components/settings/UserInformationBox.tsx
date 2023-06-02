@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { UserModel } from "../../models/user.model";
 import WrapperText from "../wrappers/WrapperText";
 import ModalGeneric from "./ModalGeneric";
 import { ItemInputModalsModel } from "../../models/input-modals.model";
 import { useDispatch } from "react-redux";
-import { submitForm, updatePassword, updateUsername } from "../../redux/actions/modal-connexion.actions";
+import {
+  changePassword,
+  connectUser,
+} from "../../redux/actions/modal-connexion.actions";
 
 interface UserInformationBoxProps {
   user: UserModel;
@@ -14,56 +17,47 @@ interface UserInformationBoxProps {
 
 export default function UserInformationBox(props: UserInformationBoxProps) {
   const { user, windowWidth } = props;
-  const [passwordLength, setPasswordLength] = useState(0);
   const [modalConnexionVisible, setModalConnexionVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const dispatch = useDispatch();
-
   const [modalChangePasswordVisible, setModalChangePasswordVisible] =
     useState(false);
-
-  useEffect((): void => {
-    setPasswordLength(user.password.length);
-  }, [user.password]);
+  const [userPassword, setUserPassword] = useState(user.password);
+  const dispatch = useDispatch();
 
   const submitPassWord = (): void => {
-    console.log("changing password");
+    setPassword("");
+    //@ts-ignore
+    dispatch(changePassword(user, userPassword));
   };
 
-  const submitUser = (): void => {
+  const submitConnexion = (): void => {
     setEmail("");
     setPassword("");
-    dispatch(submitForm({ email, password }));
+    //@ts-ignore
+    dispatch(connectUser(email, password));
   };
 
-  const onChangeUsername = (newEmail: string): void => {
-    setEmail(newEmail);
-    dispatch(updateUsername(newEmail));
-  };
-
-  const onChangePassword = (newPassword: string): void => {
+  const onChangeUsername = (newEmail: string): void => setEmail(newEmail);
+  const onChangePassword = (newPassword: string): void =>
     setPassword(newPassword);
-    dispatch(updatePassword(newPassword));
-  };
 
-  const inputModalsUser: ItemInputModalsModel[] = [
+  const inputModalsConnexion: ItemInputModalsModel[] = [
     {
       headerInput: "Email : ",
       value: email,
       changeValue: onChangeUsername,
       placeholder: "Email",
+      secureTextEntry: false,
     },
     {
-      headerInput: "Password",
+      headerInput: "Password : ",
       value: password,
       changeValue: onChangePassword,
       placeholder: "Password",
+      secureTextEntry: true,
     },
   ];
-
-  const [userPassword, setUserPassword] = useState(user.password);
 
   const inputModalsPassword: ItemInputModalsModel[] = [
     {
@@ -71,9 +65,9 @@ export default function UserInformationBox(props: UserInformationBoxProps) {
       value: userPassword,
       changeValue: setUserPassword,
       placeholder: "Password",
+      secureTextEntry: true,
     },
   ];
-  
 
   return (
     <View>
@@ -82,17 +76,17 @@ export default function UserInformationBox(props: UserInformationBoxProps) {
           <View style={styles.informations}>
             <WrapperText
               customStyle={styles.informationsText}
-              text={user.name + " " + user.surname }
+              text={user.name + " " + user.surname}
               size={18}
             />
             <ModalGeneric
-            isVisible={modalConnexionVisible}
-            setIsVisible={setModalConnexionVisible}
-            submit={submitUser}
-            inputModals={inputModalsUser}
-            btnContent="Connection"
-            windowWidth={windowWidth}
-          />
+              isVisible={modalConnexionVisible}
+              setIsVisible={setModalConnexionVisible}
+              submit={submitConnexion}
+              inputModals={inputModalsConnexion}
+              btnContent={user === undefined ? "Déconnection" : "Connection"}
+              windowWidth={windowWidth}
+            />
           </View>
           <View style={styles.informations}>
             <WrapperText
@@ -102,17 +96,21 @@ export default function UserInformationBox(props: UserInformationBoxProps) {
             />
           </View>
           <View style={styles.informations}>
-          <WrapperText customStyle={styles.informationsText} text={"Password: "} size={18} />
-          <WrapperText text={"*".repeat(passwordLength)} size={18} />
-          <ModalGeneric
-            isVisible={modalChangePasswordVisible}
-            setIsVisible={setModalChangePasswordVisible}
-            submit={submitPassWord}
-            btnContent="Edit"
-            inputModals={inputModalsPassword}
-            windowWidth={windowWidth}
-          />
-        </View>
+            <WrapperText
+              customStyle={styles.informationsText}
+              text={"Password: "}
+              size={18}
+            />
+            <WrapperText text={"*".repeat(user.password.length)} size={18} />
+            <ModalGeneric
+              isVisible={modalChangePasswordVisible}
+              setIsVisible={setModalChangePasswordVisible}
+              submit={submitPassWord}
+              btnContent="Edit"
+              inputModals={inputModalsPassword}
+              windowWidth={windowWidth}
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -123,8 +121,7 @@ const styles = StyleSheet.create({
   mainContainerInfoBox: {
     alignItems: "center",
     display: "flex",
-    marginHorizontal:5,
-
+    marginHorizontal: 5,
   },
   informationBox: {
     width: "100%",

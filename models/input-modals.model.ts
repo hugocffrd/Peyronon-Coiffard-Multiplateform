@@ -3,6 +3,7 @@ export interface ItemInputModalsModel {
   value: string;
   changeValue: (text: string) => void;
   placeholder: string;
+  secureTextEntry: boolean;
 }
 export interface InputModalsModel {
   item: ItemInputModalsModel;

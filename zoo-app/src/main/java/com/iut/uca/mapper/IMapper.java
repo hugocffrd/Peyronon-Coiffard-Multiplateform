@@ -9,7 +9,5 @@ public interface IMapper<D,E> {
   D mapDto(E entity);
   E mapEntity(D dto);
 
-  D newInstanceDto();
-  E newInstanceEntity();
 
 }

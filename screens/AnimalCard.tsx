@@ -54,7 +54,7 @@ export default function AnimalCard(props) {
       <Image source={require("../assets/favicon.png")} style={styles.image} />
       <View style={styles.boxContentContainerStyle}>
         <View style={styles.boxHorizontalContainerStyle}>
-          <WrapperText text={animal.name} size={35} />
+          <WrapperText text={animal?.name} size={35} />
           <View style={styles.boxIconContainerStyle}>
             {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
               color=animal.isFavoris ? yellow: white
@@ -63,7 +63,7 @@ export default function AnimalCard(props) {
           </View>
         </View>
         <View style={styles.boxHorizontalContainerStyle}>
-          <WrapperText text={animal.typeAnimal} size={25} />
+          <WrapperText text={animal?.typeAnimal} size={25} />
         </View>
       </View>
     </View>

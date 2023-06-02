@@ -49,13 +49,14 @@ public class CagnoteRepository implements IRepository<CagnoteEntity> {
   }
 
   @Override
-  public void update(String id, CagnoteEntity updatedCagnote) {
+  public CagnoteEntity update(String id, CagnoteEntity updatedCagnote) {
     Document query = new Document(ConfigurationCagnote.ID, new ObjectId(String.valueOf(id)));
     Document updatedDocument = new Document(Configuration.$SET, new Document()
         .append(ConfigurationCagnote.ANIMAL_ID, updatedCagnote.getAnimalId())
         .append(ConfigurationCagnote.USER_IDS, updatedCagnote.getUserIds())
         .append(ConfigurationCagnote.AMOUNT, updatedCagnote.getAmount()));
     getCollection().updateOne(query, updatedDocument);
+    return getCollection().find(query).first();
   }
 
   @Override

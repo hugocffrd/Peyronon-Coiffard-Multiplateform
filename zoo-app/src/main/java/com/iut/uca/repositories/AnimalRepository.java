@@ -62,7 +62,7 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
   }
 
   @Override
-  public void update(String id, AnimalEntity updatedAnimal) {
+  public AnimalEntity update(String id, AnimalEntity updatedAnimal) {
     Document query = new Document(ConfigurationAnimal.ID, new ObjectId(String.valueOf(id)));
     Document updatedDocument = new Document(Configuration.$SET, new Document()
         .append(ConfigurationAnimal.NAME, updatedAnimal.getName())
@@ -73,6 +73,7 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
         .append(ConfigurationAnimal.NB_KID, updatedAnimal.getNbKid())
         .append(ConfigurationAnimal.IMAGES, updatedAnimal.getImages()));
     getCollection().updateOne(query, updatedDocument);
+    return getCollection().find(query).first();
   }
 
   @Override

@@ -5,5 +5,5 @@ export interface UserModel {
   surname: string;
   password: string;
   email: string;
-  favorite: AnimalModel[];
+  animals: AnimalModel[];
 }

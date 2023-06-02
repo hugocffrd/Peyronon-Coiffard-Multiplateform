@@ -14,7 +14,8 @@ interface SettingsProps {
 export default function Settings(props: SettingsProps) {
   const { isDarkMode, setIsDarkMode, theme, windowWidth } = props;
 
-  const user = useSelector((state: any) => state.modalConnexionReducer);
+  //@ts-ignore
+  const user = useSelector((state) => state.modalConnexionReducer.user);
 
   return (
     <View style={styles.container}>

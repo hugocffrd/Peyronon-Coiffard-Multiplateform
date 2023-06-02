@@ -55,13 +55,12 @@ public class AnimalMapper implements IMapper<Animal, AnimalEntity> {
     return entity;
   }
 
-  @Override
-  public Animal newInstanceDto() {
+
+  protected Animal newInstanceDto() {
     return new Animal();
   }
 
-  @Override
-  public AnimalEntity newInstanceEntity() {
+  protected AnimalEntity newInstanceEntity() {
     return new AnimalEntity();
   }
 

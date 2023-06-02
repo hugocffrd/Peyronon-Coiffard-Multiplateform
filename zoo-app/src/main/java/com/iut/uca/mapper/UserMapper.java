@@ -66,13 +66,11 @@ public class UserMapper implements IMapper<User, UserEntity> {
     return entity;
   }
 
-  @Override
-  public User newInstanceDto() {
+  protected User newInstanceDto() {
     return new User();
   }
 
-  @Override
-  public UserEntity newInstanceEntity() {
+  protected UserEntity newInstanceEntity() {
     return new UserEntity();
   }
 

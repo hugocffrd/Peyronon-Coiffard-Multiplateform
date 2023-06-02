@@ -12,6 +12,6 @@ public interface IRepository<T> {
   T insert(T entity);
   T get(String id);
   List<T> list();
-  void update(String id, T entity);
+  T update(String id, T entity);
   void delete(String id);
 }

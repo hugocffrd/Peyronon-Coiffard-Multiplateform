@@ -8,6 +8,7 @@ import com.iut.uca.repositories.entity.UserEntity;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class UserRepository implements IRepository<UserEntity>{
   }
 
   @Override
-  public void update(String id, UserEntity updatedUser) {
+  public UserEntity update(String id, UserEntity updatedUser) {
     Document query = new Document(ConfigurationUser.ID, new ObjectId(String.valueOf(id)));
     Document updatedDocument = new Document(Configuration.$SET, new Document()
         .append(ConfigurationUser.NAME, updatedUser.getName())
@@ -64,6 +65,9 @@ public class UserRepository implements IRepository<UserEntity>{
         .append(ConfigurationUser.PASSWORD, updatedUser.getPassword())
         .append(ConfigurationUser.ANIMALIDS, updatedUser.getAnimalIds()));
     getCollection().updateOne(query, updatedDocument);
+
+    return getCollection().find(query).first();
+
 
   }
   @Override
@@ -82,5 +86,12 @@ public class UserRepository implements IRepository<UserEntity>{
       userList.add(userEntity);
     }
     return userList;
+  }
+
+  public UserEntity getUserByEmailAndPassword(String email, String password) {
+    return getCollection().find(Filters.and(
+        Filters.eq(ConfigurationUser.EMAIL, email),
+        Filters.eq(ConfigurationUser.PASSWORD, password)
+    )).first();
   }
 }

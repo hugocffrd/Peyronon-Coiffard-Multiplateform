@@ -19,7 +19,7 @@ export default function InputModalSettings(props: InputModalProps) {
       <TextInput
         style={[styles.modalTextInput, { width: props.windowWidth * 0.5 }]}
         value={props.inputModals.item.value}
-        secureTextEntry={true}
+        secureTextEntry={props.inputModals.item.secureTextEntry}
         placeholder={props.inputModals.item.placeholder}
         onChangeText={props.inputModals.item.changeValue}
       />

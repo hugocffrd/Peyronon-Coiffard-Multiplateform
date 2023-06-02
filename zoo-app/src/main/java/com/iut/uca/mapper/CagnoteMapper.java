@@ -68,13 +68,11 @@ public class CagnoteMapper implements  IMapper<Cagnote, CagnoteEntity>{
     return cagnoteEntity;
   }
 
-  @Override
-  public Cagnote newInstanceDto() {
+  protected Cagnote newInstanceDto() {
     return new Cagnote();
   }
 
-  @Override
-  public CagnoteEntity newInstanceEntity() {
+  protected CagnoteEntity newInstanceEntity() {
     return new CagnoteEntity();
   }
 

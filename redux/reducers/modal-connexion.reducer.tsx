@@ -1,29 +1,26 @@
 import { UserModel } from "../../models/user.model";
-import { SUBMIT_CONNEXION, UPDATE_EMAIL, UPDATE_PASSWORD } from "../constants";
+import { SUBMIT_CONNEXION } from "../constants";
 
-const initialState: UserModel = {
-  name: "test",
-  surname: "test",
-  password: "test",
-  email: "test@test.com",
-  favorite: [],
+interface ModalConnexionInitialProps {
+  user: UserModel;
+}
+
+const initialState: ModalConnexionInitialProps = {
+  user: {
+    name: "",
+    surname: "",
+    password: "",
+    email: "",
+    animals: [],
+  },
 };
 
 export const modalConnexionReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_EMAIL:
-      return {
-        ...state,
-        email: action.payload,
-      };
-    case UPDATE_PASSWORD:
-      return {
-        ...state,
-        password: action.payload,
-      };
     case SUBMIT_CONNEXION:
       return {
         ...state,
+        user: action.payload,
       };
     default:
       return state;
