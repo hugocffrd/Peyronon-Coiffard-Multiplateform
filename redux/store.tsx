@@ -1,10 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { homeReducer } from "./reducers/home.reducer";
-import { modalConnexionReducer } from "./reducers/modal-connexion.reducer";
+import { userReducer } from "./reducers/user.reducer";
+
+export const initialState = {
+  user: {
+    name: "",
+    surname: "",
+    password: "",
+    email: "",
+    animals: [],
+  },
+};
 
 const reducer = {
   homeReducer: homeReducer,
-  modalConnexionReducer: modalConnexionReducer,
+  userReducer: userReducer,
 };
 
 const store = configureStore({

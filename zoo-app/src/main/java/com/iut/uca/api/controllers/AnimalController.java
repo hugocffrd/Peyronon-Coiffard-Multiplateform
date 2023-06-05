@@ -1,6 +1,7 @@
 package com.iut.uca.api.controllers;
 
 import com.iut.uca.api.dto.Animal;
+import com.iut.uca.api.dto.param.AnimalParam;
 import com.iut.uca.services.AnimalService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
@@ -9,7 +10,6 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.QueryParam;
 import java.util.List;
 
 @Path("/api/animal")
@@ -32,36 +32,19 @@ public class AnimalController {
 
   @POST
   @Path("/")
-    public void addAnimals(
-        @QueryParam("_id") String id,
-      @QueryParam("name") String name,
-      @QueryParam("typeAnimal") String typeAnimal,
-      @QueryParam("longevity") int longevity,
-      @QueryParam("diet") String diet,
-      @QueryParam("status") String status,
-      @QueryParam("gestation") int gestation,
-      @QueryParam("nbKid") int nbKid,
-      @QueryParam("geoLocation") String geoLocation,
-      @QueryParam("images") List<String> images
-  ) {
-    animalService.addAnimal(id, name, typeAnimal, longevity, diet, status, gestation, nbKid, geoLocation, images);
+    public void addAnimals(AnimalParam animalParam) {
+    animalService.addAnimal(animalParam.getId(), animalParam.getName(), animalParam.getTypeAnimal(),
+        animalParam.getLongevity(), animalParam.getDiet(), animalParam.getStatus(), animalParam.getGestation(),
+        animalParam.getNbKid(), animalParam.getGeoLocation(), animalParam.getImages());
   }
 
   @PUT
   @Path("/{id}")
-  public void updateAnimal(@PathParam("id") String id,
-      @QueryParam("name") String name,
-      @QueryParam("typeAnimal") String typeAnimal,
-      @QueryParam("longevity") int longevity,
-      @QueryParam("diet") String diet,
-      @QueryParam("status") String status,
-      @QueryParam("gestation") int gestation,
-      @QueryParam("nbKid") int nbKid,
-      @QueryParam("geoLocation") String geoLocation,
-      @QueryParam("images") List<String> images
-
-  ) {
-    animalService.updateAnimal(id, name, typeAnimal, longevity, diet, status, gestation, nbKid, geoLocation, images);
+  public void updateAnimal(@PathParam("id") String id, AnimalParam animalParam) {
+    animalService.updateAnimal(id, animalParam.getName(),animalParam.getTypeAnimal(),
+        animalParam.getLongevity(),animalParam.getDiet(), animalParam.getStatus(),
+        animalParam.getGestation(), animalParam.getNbKid(), animalParam.getGeoLocation(),
+        animalParam.getImages());
   }
 
   @DELETE
@@ -72,13 +55,13 @@ public class AnimalController {
 
   @GET
   @Path("/getByName")
-  public List<Animal> getAnimalsByName(@QueryParam("name") String name) {
-    return animalService.getAnimalsByName(name);
+  public List<Animal> getAnimalsByName(AnimalParam animalParam) {
+    return animalService.getAnimalsByName(animalParam.getName());
   }
 
   @GET
   @Path("/getByType")
-  public List<Animal> getAnimalsByType(@QueryParam("type") String type) {
-    return animalService.getAnimalByType(type);
+  public List<Animal> getAnimalsByType(AnimalParam animalParam) {
+    return animalService.getAnimalByType(animalParam.getTypeAnimal());
   }
 }

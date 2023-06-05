@@ -1,19 +1,19 @@
 package com.iut.uca.api.controllers;
 
 import com.iut.uca.api.dto.User;
+import com.iut.uca.api.dto.param.AnimalParam;
+import com.iut.uca.api.dto.param.UserParam;
 import com.iut.uca.services.UserService;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
-import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Request;
 import java.util.List;
 
 @Path("/api/user")
@@ -38,24 +38,15 @@ public class UserController {
 
   @POST
   @Path("/")
-  public void addUser(
-      @QueryParam("_id") String id,
-      @QueryParam("name") String name,
-      @QueryParam("surname") String surname,
-      @QueryParam("email") String email,
-      @QueryParam("password") String password
-  ) {
-    userService.addUser(id, name, surname, email, password);
+  public void addUser(UserParam userParam) {
+    userService.addUser(userParam.getId(), userParam.getName(), userParam.getSurname(), userParam.getEmail(), userParam.getPassword());
   }
 
   @PUT
   @Path("/{id}")
-  public void updateUser(@PathParam("id") String id,
-      @QueryParam("name") String name,
-      @QueryParam("surname") String surname,
-      @QueryParam("email") String email,
-      @QueryParam("password") String password) {
-    userService.updateUser(id, name, surname, email, password);
+  @Consumes(MediaType.APPLICATION_JSON)
+  public User updateUser(@PathParam("id") String id, UserParam userParam) {
+    return userService.updateUser(id, userParam.getName(), userParam.getSurname(), userParam.getEmail(), userParam.getPassword(), userParam.getAnimalIds(), userParam.getAnimal());
   }
 
   @DELETE
@@ -66,13 +57,13 @@ public class UserController {
 
   @POST
   @Path("/getUserForConnexion")
-  public User getUserByEmailAndPassword(@QueryParam("email") String email, @QueryParam("password") String password) {
-    return userService.getUserByEmailAndPassword(email, password);
+  public User getUserByEmailAndPassword(UserParam userParam) {
+    return userService.getUserByEmailAndPassword(userParam.getEmail(), userParam.getPassword());
   }
 
   @PUT
   @Path("/changePassword")
-  public User getUserByEmailAndPassword(@QueryParam("email") String email, @QueryParam("password") String password, @QueryParam("newPassword")String newPassword) {
-    return userService.changePassword(email, password, newPassword);
+  public User changePassword(UserParam userParam) {
+    return userService.changePassword(userParam.getEmail(), userParam.getPassword(), userParam.getNewPassword());
   }
 }

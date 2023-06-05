@@ -1,6 +1,7 @@
 package com.iut.uca.api.controllers;
 
 import com.iut.uca.api.dto.Cagnote;
+import com.iut.uca.api.dto.param.CagnoteParam;
 import com.iut.uca.services.CagnoteService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
@@ -10,7 +11,6 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -35,22 +35,14 @@ public class CagnoteController {
 
   @POST
   @Path("/")
-  public void addCagnote(
-      @QueryParam("_id") String id,
-      @QueryParam("amount") long amount,
-      @QueryParam("animalId") String animalId,
-      @QueryParam("userIds") List<String> usersIds
-  ) {
-    cagnoteService.addCagnote(id, amount, animalId, usersIds);
+  public void addCagnote(CagnoteParam cagnoteParam) {
+    cagnoteService.addCagnote(cagnoteParam.getId(), cagnoteParam.getAmount(), cagnoteParam.getAnimalId(), cagnoteParam.getUsersId());
   }
 
   @PUT
   @Path("/{id}")
-  public void updateCagnote(@PathParam("id") String id,
-      @QueryParam("amount") long amount,
-      @QueryParam("animalId") String animalId,
-      @QueryParam("userIds") List<String> userIds) {
-    cagnoteService.updateCagnote(id, amount, animalId, userIds);
+  public void updateCagnote(@PathParam("id") String id, CagnoteParam cagnoteParam) {
+    cagnoteService.updateCagnote(id, cagnoteParam.getAmount(), cagnoteParam.getAnimalId(), cagnoteParam.getUsersId());
   }
 
   @DELETE

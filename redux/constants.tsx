@@ -1,3 +1,5 @@
 export const SUBMIT_CONNEXION = "SUBMIT_CONNEXION";
 
 export const FETCH_ANIMALS = "FETCH_ANIMALS";
+
+export const UPDATE_FAVORIS = "UPDATE_FAVORIS";

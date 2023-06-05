@@ -16,20 +16,20 @@ const styles = StyleSheet.create({
 });
 
 export const RightActions = (props) => {
-  console.log(props);
   const scale = props.dragX.interpolate({
-    inputRange: [0, 100],
-    outputRange: [0, 1],
+    inputRange: [-100, 0],
+    outputRange: [1, 0],
     extrapolate: "clamp",
   });
+
   return (
     <TouchableOpacity
       style={styles.rightAction}
       activeOpacity={0.5}
-      onPress={(item) => props.handleDeleteFavoritePress(item)}
+      onPress={() => props.handleDeleteFavoritePress(props.item)}
     >
       <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
-        Delete From Favorite
+        Delete from favorite
       </Animated.Text>
     </TouchableOpacity>
   );

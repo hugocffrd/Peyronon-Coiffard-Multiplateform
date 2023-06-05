@@ -16,22 +16,24 @@ const styles = StyleSheet.create({
 });
 
 export const FavoriteItem = (props) => {
-  console.log(props);
   const handlePress = (item: AnimalModel): void => {
     props.navigation.navigation.navigate("Details", { animal: item });
   };
 
+  const renderRightActions = (progress, dragX) => {
+    return (
+      <RightActions
+        progress={progress}
+        dragX={dragX}
+        handleDeleteFavoritePress={props.handleDeleteFavoritePress}
+        item={props.item}
+      />
+    );
+  };
+
   return (
     <View style={styles.flatListContainer}>
-      <Swipeable
-        renderRightActions={(progress, dragX) => (
-          <RightActions
-            progress={progress}
-            dragX={dragX}
-            handleDeleteFavoritePress={props.handleDeleteFavoritePress}
-          />
-        )}
-      >
+      <Swipeable renderRightActions={renderRightActions}>
         <TouchableOpacity
           activeOpacity={0.5}
           onPress={() => handlePress(props.item)}

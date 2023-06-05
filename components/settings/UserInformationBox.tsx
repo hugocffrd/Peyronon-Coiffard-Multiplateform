@@ -5,10 +5,7 @@ import WrapperText from "../wrappers/WrapperText";
 import ModalGeneric from "./ModalGeneric";
 import { ItemInputModalsModel } from "../../models/input-modals.model";
 import { useDispatch } from "react-redux";
-import {
-  changePassword,
-  connectUser,
-} from "../../redux/actions/modal-connexion.actions";
+import { changePassword, connectUser } from "../../redux/actions/user.action";
 
 interface UserInformationBoxProps {
   user: UserModel;

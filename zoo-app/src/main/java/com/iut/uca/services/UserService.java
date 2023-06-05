@@ -1,13 +1,21 @@
 package com.iut.uca.services;
 
+import com.iut.uca.api.dto.Animal;
 import com.iut.uca.api.dto.User;
+import com.iut.uca.api.dto.param.AnimalParam;
+import com.iut.uca.enums.Diet;
+import com.iut.uca.enums.GeoLocation;
+import com.iut.uca.enums.Status;
+import com.iut.uca.mapper.AnimalMapper;
 import com.iut.uca.mapper.UserMapper;
+import com.iut.uca.repositories.AnimalRepository;
 import com.iut.uca.repositories.UserRepository;
 import com.iut.uca.repositories.entity.UserEntity;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @ApplicationScoped
 public class UserService {
@@ -16,6 +24,10 @@ public class UserService {
   UserMapper userMapper;
   @Inject
   UserRepository userRepository;
+  @Inject
+  AnimalMapper animalMapper;
+  @Inject
+  AnimalRepository animalRepository;
 
   public User getOneUser(String id) {
     return userMapper.mapDto(userRepository.get(id)) ;
@@ -41,18 +53,28 @@ public class UserService {
     userRepository.insert(userMapper.mapEntity(u));
   }
 
-  public void updateUser(String id, String name, String surname, String email, String password) {
+  public User updateUser(String id, String name, String surname, String email, String password, List<String> animalIds, Animal animal) {
     User newUser = createUser(id, name, surname, email, password);
+    setUserAnimalList(animalIds, animal, newUser);
     UserEntity userEntity = userRepository.get(id);
-  UserEntity userUpdated = userMapper.updateEntity(userEntity, newUser);
-  userRepository.update(id, userUpdated);
+    UserEntity userUpdated = userMapper.updateEntity(userEntity, newUser);
+    return userMapper.mapDto(userRepository.update(id, userUpdated));
+  }
+
+  protected void setUserAnimalList(List<String> animalIds, Animal animal, User newUser) {
+    List<Animal> animalList= new ArrayList<>();
+    for (String animalId : animalIds) {
+      if(!Objects.equals(animalId, animal.getId())) {
+        animalList.add(animalMapper.mapDto(animalRepository.get(animalId)));
+      }
+    }
+    newUser.setAnimals(animalList);
   }
 
   protected User createUser(String id, String name, String surname, String email,
       String password) {
     return  new User(id, name, surname, email, password);
   }
-
   public void deleteUser(String id) {
     userRepository.delete(id);
   }

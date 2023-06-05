@@ -3,6 +3,7 @@ import { GeolocationModel } from "./geolocation.model";
 import { StatusModel } from "./status.model";
 
 export interface AnimalModel {
+  id: string;
   name: string;
   typeAnimal: string;
   longevity: number;

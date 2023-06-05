@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Dimensions, SafeAreaView } from "react-native";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FavoriteItem } from "../components/favorite/FavoriteItem";
+import { updateFavorite } from "../redux/actions/user.action";
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +28,8 @@ export default function Favorite(props) {
   const [numColumns, setNumColumns] = useState(getNumberOfColumns());
 
   //@ts-ignore
-  const user = useSelector((state) => state.modalConnexionReducer.user);
+  const user = useSelector((state) => state.userReducer.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     Dimensions.addEventListener("change", () => {
@@ -35,9 +37,9 @@ export default function Favorite(props) {
     });
   }, []);
 
-  const handleDeleteFavoritePress = (item) => {
-    const animalCards = this.state.animalCards.filter(item);
-    this.setState({ animalCards: animalCards });
+  const handleDeleteFavoritePress = (item): void => {
+    //@ts-ignore
+    dispatch(updateFavorite(user, item));
   };
 
   return (
