@@ -57,7 +57,7 @@ export default function AnimalCard(props) {
           <WrapperText text={animal?.name} size={35} />
           <View style={styles.boxIconContainerStyle}>
             {/* Faire une condition sur color en fonction de si l'animal est déjà en favoris
-              color=animal.isFavoris ? yellow: white
+              color=animal?.isFavoris ? yellow: white
           */}
             <Ionicons name={"star"} size={30} color={"white"} />
           </View>

@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   },
   modal: {
     width: 150,
-    backgroundColor: "#007bfe",
+    backgroundColor: "#9fc5e8",
     borderRadius: 20,
     padding: 5,
     color: "white",

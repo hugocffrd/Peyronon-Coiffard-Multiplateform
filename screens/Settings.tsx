@@ -14,8 +14,8 @@ interface SettingsProps {
 export default function Settings(props: SettingsProps) {
   const { isDarkMode, setIsDarkMode, theme, windowWidth } = props;
 
-  //@ts-ignore
-  const user = useSelector((state) => state.modalConnexionReducer.user);
+ //@ts-ignore
+ const user = useSelector((state) => state.modalConnexionReducer.user);
 
   return (
     <View style={styles.container}>
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   spacing: {
-    height: "8%",
+    paddingHorizontal: 5,
+    paddingVertical: 5,
   },
 });

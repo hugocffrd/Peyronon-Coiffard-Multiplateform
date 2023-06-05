@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
 });
 
 export default function Favorite(props) {
-  console.log(props);
   const { windowWidth } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
@@ -40,8 +39,6 @@ export default function Favorite(props) {
     const animalCards = this.state.animalCards.filter(item);
     this.setState({ animalCards: animalCards });
   };
-
-  //Action when swiping left the item
 
   return (
     <SafeAreaView style={styles.container}>

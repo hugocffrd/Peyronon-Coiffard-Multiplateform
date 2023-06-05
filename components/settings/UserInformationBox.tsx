@@ -70,7 +70,6 @@ export default function UserInformationBox(props: UserInformationBoxProps) {
   ];
 
   return (
-    <View>
       <View style={styles.mainContainerInfoBox}>
         <View style={styles.informationBox}>
           <View style={styles.informations}>
@@ -95,6 +94,7 @@ export default function UserInformationBox(props: UserInformationBoxProps) {
               size={12}
             />
           </View>
+          <View style = {styles.lineStyle} />
           <View style={styles.informations}>
             <WrapperText
               customStyle={styles.informationsText}
@@ -113,7 +113,6 @@ export default function UserInformationBox(props: UserInformationBoxProps) {
           </View>
         </View>
       </View>
-    </View>
   );
 }
 
@@ -142,5 +141,11 @@ const styles = StyleSheet.create({
   },
   headerCard: {
     textAlign: "center",
+  },
+  lineStyle:{
+    width: "100%",
+    borderWidth: 0.5,
+    borderColor:'#eeeeee',
+    margin:10,
   },
 });
