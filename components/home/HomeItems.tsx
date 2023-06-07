@@ -16,7 +16,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HomeItems = (props) => {
+interface HomeItemsProps {
+  navigation: any;
+  theme: Record<string, string>;
+  item: {
+    item: AnimalModel;
+  };
+}
+
+export const HomeItems = (props: HomeItemsProps) => {
   const { item } = props.item;
   const { theme } = props;
 
@@ -48,11 +56,20 @@ export const HomeItems = (props) => {
     <View
       style={[styles.flatListContainer, { backgroundColor: theme.background }]}
     >
-      <Swipeable ref={swipeableRef} renderLeftActions={renderLeftActions}>
+      {user.email !== "" ? (
+        <Swipeable ref={swipeableRef} renderLeftActions={renderLeftActions}>
+          <TouchableOpacity
+            activeOpacity={0.5}
+            onPress={() => handlePress(item)}
+          >
+            <AnimalCard theme={theme} animal={item} user={user} />
+          </TouchableOpacity>
+        </Swipeable>
+      ) : (
         <TouchableOpacity activeOpacity={0.5} onPress={() => handlePress(item)}>
           <AnimalCard theme={theme} animal={item} user={user} />
         </TouchableOpacity>
-      </Swipeable>
+      )}
     </View>
   );
 };
