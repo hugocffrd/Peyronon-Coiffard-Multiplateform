@@ -16,6 +16,7 @@ export const getAnimals = () => {
       dispatch(fetchAnimals(animalsJson));
     } catch (error) {
       console.log("Error call API : " + error);
+      alert("Error while getting animal list");
     }
   };
 };

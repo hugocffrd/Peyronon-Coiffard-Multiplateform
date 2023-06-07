@@ -26,6 +26,7 @@ export const connectUser = (email: string, password: string) => {
       dispatch(submitForm(userJson));
     } catch (error) {
       console.log("Error call API : " + error);
+      alert("Error while connection");
     }
   };
 };
@@ -51,6 +52,7 @@ export const changePassword = (user: UserModel, newPassword: string) => {
       dispatch(submitForm(userJson));
     } catch (error) {
       console.log("Error call API : " + error);
+      alert("Error while changing password");
     }
   };
 };

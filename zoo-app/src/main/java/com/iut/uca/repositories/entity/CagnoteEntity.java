@@ -35,6 +35,10 @@ public class CagnoteEntity {
     this.amount = amount;
   }
 
+  public void addAmount(long amountToAdd) {
+    this.amount += amountToAdd;
+  }
+
   public AnimalId getAnimalId() {
     return animalId;
   }
@@ -49,6 +53,9 @@ public class CagnoteEntity {
 
   public void setUserIds(List<UserId> userIds) {
     this.userIds = userIds;
+  }
+  public void addUserId(String id) {
+    this.userIds.add(new UserId(new ObjectId(id)));
   }
 
 

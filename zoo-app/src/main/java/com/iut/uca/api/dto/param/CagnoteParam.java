@@ -9,12 +9,17 @@ public class CagnoteParam {
   private long amount;
   private String animalId;
   private List<String> usersId;
+  private long amountToAdd;
+  private String idUserToAdd;
 
-  public CagnoteParam(String id, long amount, String animalId, List<String> usersId) {
+  public CagnoteParam(String id, long amount, String animalId, List<String> usersId,
+      long amountToAdd, String idUserToAdd) {
     this.id = id;
     this.amount = amount;
     this.animalId = animalId;
     this.usersId = usersId;
+    this.amountToAdd = amountToAdd;
+    this.idUserToAdd = idUserToAdd;
   }
 
   public String getId() {
@@ -49,6 +54,21 @@ public class CagnoteParam {
     this.usersId = usersId;
   }
 
+  public long getAmountToAdd() {
+    return amountToAdd;
+  }
+
+  public void setAmountToAdd(long amountToAdd) {
+    this.amountToAdd = amountToAdd;
+  }
+
+  public String getIdUserToAdd() {
+    return idUserToAdd;
+  }
+
+  public void setIdUserToAdd(String idUserToAdd) {
+    this.idUserToAdd = idUserToAdd;
+  }
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -58,13 +78,14 @@ public class CagnoteParam {
       return false;
     }
     CagnoteParam that = (CagnoteParam) o;
-    return amount == that.amount && Objects.equals(id, that.id) && Objects.equals(
-        animalId, that.animalId) && Objects.equals(usersId, that.usersId);
+    return amount == that.amount && amountToAdd == that.amountToAdd && Objects.equals(id,
+        that.id) && Objects.equals(animalId, that.animalId) && Objects.equals(
+        usersId, that.usersId) && Objects.equals(idUserToAdd, that.idUserToAdd);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, amount, animalId, usersId);
+    return Objects.hash(id, amount, animalId, usersId, amountToAdd, idUserToAdd);
   }
 
   @Override
@@ -74,6 +95,8 @@ public class CagnoteParam {
         ", amount=" + amount +
         ", animalId='" + animalId + '\'' +
         ", usersId=" + usersId +
+        ", amountToAdd=" + amountToAdd +
+        ", idUserToAdd='" + idUserToAdd + '\'' +
         '}';
   }
 }

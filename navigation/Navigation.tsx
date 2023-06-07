@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import store from "../redux/store";
 import HomeStack from "./HomeStack";
 import FavoriteStack from "./FavoriteStack";
+import CagnoteStack from "./CagnoteStack";
 
 export default function Navigation() {
   const Tab = createBottomTabNavigator();
@@ -33,6 +34,8 @@ export default function Navigation() {
               return <Ionicons name={"star"} size={size} color={color} />;
             } else if (route.name === "Settings") {
               return <Ionicons name={"settings"} size={size} color={color} />;
+            } else if (route.name === "Kitty") {
+              return <Ionicons name={"cash"} size={size} color={color} />;
             }
           },
         })}
@@ -47,6 +50,13 @@ export default function Navigation() {
           component={() => (
             <HomeStack windowWidth={windowWidth} theme={theme} />
           )}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name="Kitty"
+          component={() => <CagnoteStack theme={theme} />}
           options={{
             headerShown: false,
           }}

@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { cagnoteReducer } from "./reducers/Cagnote.reducer";
 import { homeReducer } from "./reducers/home.reducer";
 import { userReducer } from "./reducers/user.reducer";
 
@@ -15,6 +16,7 @@ export const initialState = {
 const reducer = {
   homeReducer: homeReducer,
   userReducer: userReducer,
+  cagnoteReducer: cagnoteReducer,
 };
 
 const store = configureStore({

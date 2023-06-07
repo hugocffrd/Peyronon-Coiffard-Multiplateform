@@ -2,6 +2,7 @@ package com.iut.uca.api.controllers;
 
 import com.iut.uca.api.dto.Cagnote;
 import com.iut.uca.api.dto.param.CagnoteParam;
+import com.iut.uca.repositories.entity.CagnoteEntity;
 import com.iut.uca.services.CagnoteService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.DELETE;
@@ -27,7 +28,7 @@ public class CagnoteController {
   }
 
   @GET
-  @Produces(MediaType.TEXT_PLAIN)
+  @Produces(MediaType.APPLICATION_JSON)
   @Path("/")
   public List<Cagnote> getAllCagnote() {
     return cagnoteService.getAllCagnotes();
@@ -41,8 +42,8 @@ public class CagnoteController {
 
   @PUT
   @Path("/{id}")
-  public void updateCagnote(@PathParam("id") String id, CagnoteParam cagnoteParam) {
-    cagnoteService.updateCagnote(id, cagnoteParam.getAmount(), cagnoteParam.getAnimalId(), cagnoteParam.getUsersId());
+  public List<Cagnote> updateCagnote(@PathParam("id") String id, CagnoteParam cagnoteParam) {
+    return cagnoteService.updateCagnote(id, cagnoteParam.getAmountToAdd(), cagnoteParam.getIdUserToAdd());
   }
 
   @DELETE

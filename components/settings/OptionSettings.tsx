@@ -28,12 +28,7 @@ export default function OptionSettings(props: OptionsSettingsProps) {
             text={"Theme: " + (isDarkMode ? "Dark" : "Light")}
             size={18}
           />
-          <View>
-            <WrapperText
-              customStyle={{ color: theme.textPrimary }}
-              text={"Test"}
-            />
-          </View>
+
           <Switch
             trackColor={{ false: "#000", true: "#FFF" }}
             thumbColor={isEnabled ? "#000" : "#FFF"}

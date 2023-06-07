@@ -11,6 +11,7 @@ import com.iut.uca.repositories.CagnoteRepository;
 import com.iut.uca.repositories.UserRepository;
 import com.iut.uca.repositories.entity.CagnoteEntity;
 import com.iut.uca.repositories.entity.UserEntity;
+import com.iut.uca.repositories.entity.UserId;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.util.ArrayList;
@@ -56,18 +57,31 @@ public class CagnoteService {
     cagnoteRepository.insert(cagnoteMapper.mapEntity(cagnote));
   }
 
-  public void updateCagnote(
-      String id,
-      long amount,
-      String animalId,
-      List<String> userIds) {
-    Animal animal = getAnimalById(animalId);
-    List<User> users = getUsersByIds(userIds);
-    Cagnote newCagnote = createCagnote(id, amount, animal, users);
+  public List<Cagnote> updateCagnote(String id, long amountToAdd, String idUserToAdd) {
     CagnoteEntity cagnoteEntity = cagnoteRepository.get(id);
-    CagnoteEntity updatedCagnote = cagnoteMapper.updateEntity(cagnoteEntity, newCagnote);
-    cagnoteRepository.update(id, updatedCagnote);
+    cagnoteEntity.addAmount(amountToAdd);
+
+    boolean isUserAlreadyAdded = false;
+    for (UserId userId : cagnoteEntity.getUserIds()) {
+      if (userId.getId().toHexString().equals(idUserToAdd)) {
+        isUserAlreadyAdded = true;
+        break;
+      }
+    }
+
+    if (!isUserAlreadyAdded) {
+      cagnoteEntity.addUserId(idUserToAdd);
+    }
+
+    cagnoteRepository.update(id, cagnoteEntity);
+    List<CagnoteEntity>  cagnoteEntities= cagnoteRepository.list();
+    List<Cagnote> cagnotes = new ArrayList<>();
+    for (CagnoteEntity entity : cagnoteEntities) {
+        cagnotes.add(cagnoteMapper.mapDto(entity));
+    }
+    return cagnotes;
   }
+
   public void deleteCagnote(String id) {
     cagnoteRepository.delete(id);
   }
