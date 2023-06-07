@@ -2,114 +2,55 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { UserModel } from "../../models/user.model";
 import WrapperText from "../wrappers/WrapperText";
-import ModalGeneric from "./ModalGeneric";
-import { ItemInputModalsModel } from "../../models/input-modals.model";
-import { useDispatch } from "react-redux";
-import { changePassword, connectUser } from "../../redux/actions/user.action";
+import { NameConnexion } from "./information/NameConnexion";
+import { PasswordEdit } from "./information/PasswordEdit";
 
 interface UserInformationBoxProps {
   user: UserModel;
   windowWidth: number;
+  theme: Record<string, string>;
 }
 
 export default function UserInformationBox(props: UserInformationBoxProps) {
-  const { user, windowWidth } = props;
-  const [modalConnexionVisible, setModalConnexionVisible] = useState(false);
-  const [email, setEmail] = useState("");
+  const { user, windowWidth, theme } = props;
   const [password, setPassword] = useState("");
-  const [modalChangePasswordVisible, setModalChangePasswordVisible] =
-    useState(false);
-  const [userPassword, setUserPassword] = useState(user.password);
-  const dispatch = useDispatch();
-
-  const submitPassWord = (): void => {
-    setPassword("");
-    //@ts-ignore
-    dispatch(changePassword(user, userPassword));
-  };
-
-  const submitConnexion = (): void => {
-    setEmail("");
-    setPassword("");
-    //@ts-ignore
-    dispatch(connectUser(email, password));
-  };
-
-  const onChangeUsername = (newEmail: string): void => setEmail(newEmail);
-  const onChangePassword = (newPassword: string): void =>
-    setPassword(newPassword);
-
-  const inputModalsConnexion: ItemInputModalsModel[] = [
-    {
-      headerInput: "Email : ",
-      value: email,
-      changeValue: onChangeUsername,
-      placeholder: "Email",
-      secureTextEntry: false,
-    },
-    {
-      headerInput: "Password : ",
-      value: password,
-      changeValue: onChangePassword,
-      placeholder: "Password",
-      secureTextEntry: true,
-    },
-  ];
-
-  const inputModalsPassword: ItemInputModalsModel[] = [
-    {
-      headerInput: "New Password : ",
-      value: userPassword,
-      changeValue: setUserPassword,
-      placeholder: "Password",
-      secureTextEntry: true,
-    },
-  ];
 
   return (
-      <View style={styles.mainContainerInfoBox}>
-        <View style={styles.informationBox}>
-          <View style={styles.informations}>
-            <WrapperText
-              customStyle={styles.informationsText}
-              text={user.name + " " + user.surname}
-              size={18}
-            />
-            <ModalGeneric
-              isVisible={modalConnexionVisible}
-              setIsVisible={setModalConnexionVisible}
-              submit={submitConnexion}
-              inputModals={inputModalsConnexion}
-              btnContent={user === undefined ? "Déconnection" : "Connection"}
-              windowWidth={windowWidth}
-            />
-          </View>
-          <View style={styles.informations}>
-            <WrapperText
-              customStyle={styles.informationsText}
-              text={user.email}
-              size={12}
-            />
-          </View>
-          <View style = {styles.lineStyle} />
-          <View style={styles.informations}>
-            <WrapperText
-              customStyle={styles.informationsText}
-              text={"Password: "}
-              size={18}
-            />
-            <WrapperText text={"*".repeat(user.password.length)} size={18} />
-            <ModalGeneric
-              isVisible={modalChangePasswordVisible}
-              setIsVisible={setModalChangePasswordVisible}
-              submit={submitPassWord}
-              btnContent="Edit"
-              inputModals={inputModalsPassword}
-              windowWidth={windowWidth}
-            />
-          </View>
+    <View
+      style={[
+        styles.mainContainerInfoBox,
+        { backgroundColor: theme.navigation },
+      ]}
+    >
+      <View
+        style={[styles.informationBox, , { backgroundColor: theme.navigation }]}
+      >
+        <NameConnexion
+          theme={theme}
+          windowWidth={windowWidth}
+          user={user}
+          password={password}
+          setPassword={setPassword}
+        />
+        <View style={styles.informations}>
+          <WrapperText
+            customStyle={[
+              styles.informationsText,
+              { color: theme.textPrimary },
+            ]}
+            text={user?.email}
+            size={18}
+          />
         </View>
+        <View style={styles.lineStyle} />
+        <PasswordEdit
+          theme={theme}
+          setPassword={setPassword}
+          windowWidth={windowWidth}
+          user={user}
+        />
       </View>
+    </View>
   );
 }
 
@@ -121,7 +62,6 @@ const styles = StyleSheet.create({
   },
   informationBox: {
     width: "100%",
-    backgroundColor: "#FFFFFF",
     alignItems: "center",
     textAlign: "center",
     paddingHorizontal: 10,
@@ -136,13 +76,11 @@ const styles = StyleSheet.create({
   informationsText: {
     paddingLeft: 10,
   },
-  headerCard: {
-    textAlign: "center",
-  },
-  lineStyle:{
+
+  lineStyle: {
     width: "100%",
     borderWidth: 0.5,
-    borderColor:'#eeeeee',
-    margin:10,
+    borderColor: "#eeeeee",
+    margin: 10,
   },
 });

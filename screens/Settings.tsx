@@ -18,14 +18,13 @@ export default function Settings(props: SettingsProps) {
   const user = useSelector((state) => state.userReducer.user);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={styles.spacing} />
-      <UserInformationBox user={user} windowWidth={windowWidth} />
+      <UserInformationBox user={user} windowWidth={windowWidth} theme={theme} />
       <OptionSettings
-        user={user}
+        theme={theme}
         isDarkMode={isDarkMode}
         setIsDarkMode={setIsDarkMode}
-        windowWidth={windowWidth}
       />
     </View>
   );

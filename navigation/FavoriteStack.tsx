@@ -7,12 +7,29 @@ import Favorite from "../screens/Favorite";
 const Stack = createStackNavigator();
 const windowWidth = Dimensions.get("window").width;
 
-export default function StackNavigation(props) {
+interface StackNavigationProps {
+  theme: Record<string, string>;
+}
+
+export default function StackNavigation(props: StackNavigationProps) {
+  const { theme } = props;
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Favorite">
+      <Stack.Screen
+        name="Favorite"
+        options={{
+          headerStyle: {
+            backgroundColor: theme.navigation,
+            borderColor: theme.navigation,
+          },
+        }}
+      >
         {(navigation) => (
-          <Favorite navigation={navigation} windowWidth={windowWidth} />
+          <Favorite
+            navigation={navigation}
+            windowWidth={windowWidth}
+            theme={theme}
+          />
         )}
       </Stack.Screen>
       <Stack.Screen

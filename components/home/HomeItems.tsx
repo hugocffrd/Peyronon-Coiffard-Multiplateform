@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
 
 export const HomeItems = (props) => {
   const { item } = props.item;
+  const { theme } = props;
+
   //@ts-ignore
   const user = useSelector((state) => state.userReducer.user);
   const dispatch = useDispatch();
@@ -45,10 +47,12 @@ export const HomeItems = (props) => {
   };
 
   return (
-    <View style={styles.flatListContainer}>
+    <View
+      style={[styles.flatListContainer, { backgroundColor: theme.background }]}
+    >
       <Swipeable ref={swipeableRef} renderLeftActions={renderLeftActions}>
         <TouchableOpacity activeOpacity={0.5} onPress={() => handlePress(item)}>
-          <AnimalCard animal={item} user={user} />
+          <AnimalCard theme={theme} animal={item} user={user} />
         </TouchableOpacity>
       </Swipeable>
     </View>

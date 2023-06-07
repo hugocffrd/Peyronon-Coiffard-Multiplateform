@@ -1,16 +1,10 @@
 import { FlatList } from "react-native";
 import React from "react";
-import {
-  Modal,
-  StyleSheet,
-  Pressable,
-  View,
-  Dimensions,
-  Platform,
-} from "react-native";
-import WrapperText from "../wrappers/WrapperText";
-import { ItemInputModalsModel } from "../../models/input-modals.model";
+import { Modal, StyleSheet, View, Platform } from "react-native";
+import { Button } from "react-native-paper";
+import { ItemInputModalsModel } from "../../../models/input-modals.model";
 import InputModalSettings from "./InputModalSettings";
+import WrapperText from "../../wrappers/WrapperText";
 
 interface ModalGenericProps {
   isVisible: boolean;
@@ -19,6 +13,7 @@ interface ModalGenericProps {
   inputModals: ItemInputModalsModel[];
   windowWidth: number;
   btnContent: string;
+  theme: Record<string, string>;
 }
 
 export default function ModalGeneric(props: ModalGenericProps) {
@@ -29,25 +24,33 @@ export default function ModalGeneric(props: ModalGenericProps) {
     inputModals,
     windowWidth,
     btnContent,
+    theme,
   } = props;
 
   const isOnPhone =
     Platform.OS === "android" ||
     Platform.OS === "ios" ||
     Platform.OS === "macos";
-  const fontSize = Dimensions.get("window").width;
   return (
     <View style={styles.modalCenteredView}>
       <Modal
         animationType="slide"
         transparent={true}
         visible={isVisible}
-        onRequestClose={() => {
+        onRequestClose={(): void => {
           setIsVisible(!isVisible);
         }}
       >
         <View style={styles.modalCenteredView}>
-          <View style={[styles.modalContent, { width: windowWidth * 0.8 }]}>
+          <View
+            style={[
+              styles.modalContent,
+              {
+                width: windowWidth * 0.8,
+                backgroundColor: theme.modalBackground,
+              },
+            ]}
+          >
             <FlatList
               keyExtractor={(item) => item.headerInput}
               data={inputModals}
@@ -60,58 +63,55 @@ export default function ModalGeneric(props: ModalGenericProps) {
             />
 
             <View style={styles.modalBtnContainer}>
-              <Pressable
-                style={styles.modal}
+              <Button
+                style={[styles.modal, { backgroundColor: theme.primary }]}
+                mode="contained"
                 onPress={() => setIsVisible(!isVisible)}
               >
                 <WrapperText
+                  text={"Close"}
+                  size={20}
                   customStyle={[
                     styles.modalBtnText,
-                    {
-                      fontSize: isOnPhone ? fontSize * 0.05 : fontSize * 0.02,
-                    },
+                    { color: theme.textPrimary },
                   ]}
-                  text="Close"
-                />
-              </Pressable>
-              <Pressable
-                style={styles.modal}
+                ></WrapperText>
+              </Button>
+              <Button
+                style={[styles.modal, { backgroundColor: theme.primary }]}
+                mode="contained"
                 onPress={() => {
                   setIsVisible(!isVisible);
                   submit();
                 }}
               >
                 <WrapperText
+                  text={"Validate"}
+                  size={20}
                   customStyle={[
                     styles.modalBtnText,
-                    {
-                      fontSize: isOnPhone ? fontSize * 0.05 : fontSize * 0.02,
-                    },
+                    { color: theme.textPrimary },
                   ]}
-                  text="Validate"
-                />
-              </Pressable>
+                ></WrapperText>
+              </Button>
             </View>
           </View>
         </View>
       </Modal>
-      <Pressable
+      <Button
         style={[
           styles.modal,
+          { backgroundColor: theme.primary },
           { alignSelf: btnContent === "Connexion" ? "center" : "flex-end" },
         ]}
         onPress={() => setIsVisible(true)}
       >
         <WrapperText
-          customStyle={[
-            styles.modalBtnText,
-            {
-              fontSize: isOnPhone ? fontSize * 0.02 : fontSize * 0.01,
-            },
-          ]}
           text={btnContent}
-        />
-      </Pressable>
+          size={20}
+          customStyle={[styles.modalBtnText, { color: theme.textPrimary }]}
+        ></WrapperText>
+      </Button>
       {isOnPhone}
     </View>
   );

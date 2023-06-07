@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { darkTheme, lightTheme } from "../../theme/theme";
+import React, { useState } from "react";
 import { StyleSheet, View, Switch } from "react-native";
-import ModalGeneric from "./ModalGeneric";
-import { ItemInputModalsModel } from "../../models/input-modals.model";
 import WrapperText from "../wrappers/WrapperText";
-import { UserModel } from "../../models/user.model";
 
 interface OptionsSettingsProps {
   isDarkMode: boolean;
   setIsDarkMode: Function;
-  user: UserModel;
-  windowWidth: number;
+  theme: any;
 }
 
 export default function OptionSettings(props: OptionsSettingsProps) {
-  const { isDarkMode, setIsDarkMode, user, windowWidth } = props;
+  const { isDarkMode, setIsDarkMode, theme } = props;
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
-  const theme = isDarkMode ? darkTheme : lightTheme;
 
   const toggleSwitch = (): void => {
     setIsEnabled(!isEnabled);
@@ -24,22 +18,27 @@ export default function OptionSettings(props: OptionsSettingsProps) {
   };
 
   return (
-    <View style={[styles.container]}>
-      <View style={styles.optionContainer}>
-        <View style={styles.option}>
+    <View style={[styles.container, { backgroundColor: theme.navigation }]}>
+      <View
+        style={[styles.optionContainer, { backgroundColor: theme.navigation }]}
+      >
+        <View style={[styles.option, { backgroundColor: theme.navigation }]}>
           <WrapperText
-            customStyle={styles.optionText}
+            customStyle={[styles.optionText, { color: theme.textPrimary }]}
             text={"Theme: " + (isDarkMode ? "Dark" : "Light")}
             size={18}
           />
           <View>
-            <WrapperText customStyle={theme.test} text={"Test"} />
+            <WrapperText
+              customStyle={{ color: theme.textPrimary }}
+              text={"Test"}
+            />
           </View>
           <Switch
-            trackColor={{ false: "black", true: "white" }}
-            thumbColor={isEnabled ? "black" : "white"}
+            trackColor={{ false: "#000", true: "#FFF" }}
+            thumbColor={isEnabled ? "#000" : "#FFF"}
             ios_backgroundColor="#3e3e3e"
-            onValueChange={() => toggleSwitch()}
+            onValueChange={toggleSwitch}
             value={isEnabled}
             style={styles.switch}
           />
@@ -52,8 +51,9 @@ export default function OptionSettings(props: OptionsSettingsProps) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    marginHorizontal:5,
-    marginTop:10,
+    marginHorizontal: 5,
+    marginTop: 10,
+    borderRadius: 10,
   },
   heading: {
     textAlign: "center",

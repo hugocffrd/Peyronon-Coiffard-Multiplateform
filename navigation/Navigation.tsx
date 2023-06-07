@@ -14,6 +14,7 @@ export default function Navigation() {
   const Tab = createBottomTabNavigator();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme;
+
   const windowWidth = Dimensions.get("window").width;
 
   return (
@@ -21,6 +22,10 @@ export default function Navigation() {
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
+          tabBarStyle: {
+            backgroundColor: theme.navigation,
+            color: theme.textPrimary,
+          },
           tabBarIcon: ({ color, size }) => {
             if (route.name === "Home") {
               return <Ionicons name={"home"} size={size} color={color} />;
@@ -34,15 +39,25 @@ export default function Navigation() {
       >
         <Tab.Screen
           name="Favorites"
-          component={FavoriteStack}
+          component={() => <FavoriteStack theme={theme} />}
           options={{ headerShown: false }}
         />
         <Tab.Screen
           name="Home"
-          component={HomeStack}
-          options={{ headerShown: false }}
+          component={() => <HomeStack theme={theme} />}
+          options={{
+            headerShown: false,
+          }}
         />
-        <Tab.Screen name="Settings">
+        <Tab.Screen
+          name="Settings"
+          options={{
+            headerStyle: {
+              backgroundColor: theme.navigation,
+              borderColor: theme.navigation,
+            },
+          }}
+        >
           {() => (
             <Settings
               isDarkMode={isDarkMode}

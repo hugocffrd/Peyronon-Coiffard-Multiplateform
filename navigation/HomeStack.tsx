@@ -6,19 +6,22 @@ import Home from "../screens/Home";
 
 const Stack = createStackNavigator();
 const windowWidth = Dimensions.get("window").width;
-const invisibleHeader = {
-  headerMode: "none",
-  navigationOptions: {
-    headerVisible: false,
-  },
-};
 export default function StackNavigation(props) {
-  const { fontSize } = props;
+  const { fontSize, theme } = props;
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home">
+      <Stack.Screen
+        name="Home"
+        options={{
+          headerStyle: {
+            backgroundColor: theme.navigation,
+            borderColor: theme.navigation,
+          },
+        }}
+      >
         {(navigation) => (
           <Home
+            theme={theme}
             fontSize={fontSize}
             navigation={navigation}
             windowWidth={windowWidth}

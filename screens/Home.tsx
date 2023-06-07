@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Home(props) {
-  const { windowWidth } = props;
+  const { windowWidth, theme } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
     const minItemMargin = 100;
@@ -55,7 +55,7 @@ export default function Home(props) {
 
   //The parent node of FlatList needs to have flex:1 to enable scroll on web
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={[styles.container]}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -63,7 +63,11 @@ export default function Home(props) {
           key={numColumns}
           numColumns={numColumns}
           renderItem={(item) => (
-            <HomeItems item={item} navigation={props.navigation} />
+            <HomeItems
+              theme={theme}
+              item={item}
+              navigation={props.navigation}
+            />
           )}
         />
       </GestureHandlerRootView>

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 });
 
 export default function Favorite(props) {
-  const { windowWidth } = props;
+  const { windowWidth, theme } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
     const minItemMargin = 100;
@@ -43,7 +43,9 @@ export default function Favorite(props) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.background }]}
+    >
       <GestureHandlerRootView style={{ flex: 1 }}>
         <FlatList
           showsVerticalScrollIndicator={false}
@@ -51,6 +53,7 @@ export default function Favorite(props) {
           numColumns={numColumns}
           renderItem={({ item }) => (
             <FavoriteItem
+              theme={theme}
               navigation={props.navigation}
               item={item}
               handleDeleteFavoritePress={handleDeleteFavoritePress}

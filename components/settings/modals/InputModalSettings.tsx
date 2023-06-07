@@ -1,7 +1,7 @@
-import { InputModalsModel } from "../../models/input-modals.model";
 import { TextInput, StyleSheet, View } from "react-native";
-import WrapperText from "../wrappers/WrapperText";
 import React from "react";
+import WrapperText from "../../wrappers/WrapperText";
+import { InputModalsModel } from "../../../models/input-modals.model";
 
 interface InputModalProps {
   inputModals: InputModalsModel;
@@ -14,10 +14,10 @@ export default function InputModalSettings(props: InputModalProps) {
       <WrapperText
         customStyle={styles.modalLabelText}
         text={props.inputModals.item.headerInput}
-        size={props.windowWidth * 0.03}
+        size={props.windowWidth * 0.01}
       />
       <TextInput
-        style={[styles.modalTextInput, { width: props.windowWidth * 0.5 }]}
+        style={[styles.modalTextInput, { width: props.windowWidth * 0.4 }]}
         value={props.inputModals.item.value}
         secureTextEntry={props.inputModals.item.secureTextEntry}
         placeholder={props.inputModals.item.placeholder}

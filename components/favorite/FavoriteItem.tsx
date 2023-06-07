@@ -38,7 +38,7 @@ export const FavoriteItem = (props) => {
           activeOpacity={0.5}
           onPress={() => handlePress(props.item)}
         >
-          <AnimalCard animal={props.item} />
+          <AnimalCard theme={props.theme} animal={props.item} />
         </TouchableOpacity>
       </Swipeable>
     </View>
