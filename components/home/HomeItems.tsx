@@ -48,7 +48,7 @@ export const HomeItems = (props) => {
     <View style={styles.flatListContainer}>
       <Swipeable ref={swipeableRef} renderLeftActions={renderLeftActions}>
         <TouchableOpacity activeOpacity={0.5} onPress={() => handlePress(item)}>
-          <AnimalCard animal={item} />
+          <AnimalCard animal={item} user={user} />
         </TouchableOpacity>
       </Swipeable>
     </View>

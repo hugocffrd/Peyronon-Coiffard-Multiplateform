@@ -6,6 +6,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAnimals } from "../redux/actions/home.action";
 import { HomeItems } from "../components/home/HomeItems";
+import { Card, Avatar } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
