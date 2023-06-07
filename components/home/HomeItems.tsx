@@ -38,10 +38,8 @@ export const HomeItems = (props) => {
   const renderLeftActions = (progress, dragX) => {
     return (
       <LeftActions
-        progress={progress}
         dragX={dragX}
         handleAddFavoritePress={handleAddFavoritePress}
-        item={props.item}
       />
     );
   };

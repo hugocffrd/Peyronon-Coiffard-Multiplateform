@@ -44,7 +44,9 @@ export default function Navigation() {
         />
         <Tab.Screen
           name="Home"
-          component={() => <HomeStack theme={theme} />}
+          component={() => (
+            <HomeStack windowWidth={windowWidth} theme={theme} />
+          )}
           options={{
             headerShown: false,
           }}

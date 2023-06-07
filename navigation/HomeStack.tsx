@@ -1,13 +1,16 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import AnimalDetails from "../components/animal/AnimalDetails";
-import { Dimensions } from "react-native";
 import Home from "../screens/Home";
 
+interface StackNavigationProps {
+  theme: Record<string, string>;
+  windowWidth: number;
+}
+
 const Stack = createStackNavigator();
-const windowWidth = Dimensions.get("window").width;
-export default function StackNavigation(props) {
-  const { fontSize, theme } = props;
+export default function StackNavigation(props: StackNavigationProps) {
+  const { theme, windowWidth } = props;
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -22,9 +25,8 @@ export default function StackNavigation(props) {
         {(navigation) => (
           <Home
             theme={theme}
-            fontSize={fontSize}
-            navigation={navigation}
             windowWidth={windowWidth}
+            navigation={navigation}
           />
         )}
       </Stack.Screen>

@@ -21,8 +21,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Home(props) {
-  const { windowWidth, theme } = props;
+interface HomeProps {
+  windowWidth: number;
+  theme: Record<string, string>;
+  navigation: any;
+}
+
+export default function Home(props: HomeProps) {
+  const { windowWidth, theme, navigation } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
     const minItemMargin = 100;
@@ -63,11 +69,7 @@ export default function Home(props) {
           key={numColumns}
           numColumns={numColumns}
           renderItem={(item) => (
-            <HomeItems
-              theme={theme}
-              item={item}
-              navigation={props.navigation}
-            />
+            <HomeItems theme={theme} item={item} navigation={navigation} />
           )}
         />
       </GestureHandlerRootView>

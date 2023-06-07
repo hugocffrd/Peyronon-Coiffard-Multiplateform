@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, SafeAreaView } from "react-native";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
@@ -6,13 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { FavoriteItem } from "../components/favorite/FavoriteItem";
 import { updateFavorite } from "../redux/actions/user.action";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+interface FavoriteProps {
+  windowWidth: number;
+  theme: Record<string, string>;
+  navigation: any;
+}
 
-export default function Favorite(props) {
+export default function Favorite(props: FavoriteProps) {
   const { windowWidth, theme } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
@@ -64,3 +64,9 @@ export default function Favorite(props) {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

@@ -5,7 +5,7 @@ import WrapperText from "../wrappers/WrapperText";
 interface OptionsSettingsProps {
   isDarkMode: boolean;
   setIsDarkMode: Function;
-  theme: any;
+  theme: Record<string, string>;
 }
 
 export default function OptionSettings(props: OptionsSettingsProps) {

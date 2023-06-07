@@ -1,5 +1,6 @@
 import { StyleSheet, TouchableOpacity, Animated } from "react-native";
 import React from "react";
+import { GestureResponderEvent } from "react-native";
 
 const styles = StyleSheet.create({
   leftAction: {
@@ -15,7 +16,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 });
-export const LeftActions = (props) => {
+
+interface LeftActionsProps {
+  handleAddFavoritePress(item: GestureResponderEvent): void;
+  dragX: any;
+}
+
+export const LeftActions = (props: LeftActionsProps) => {
   const scale = props.dragX.interpolate({
     inputRange: [0, 100],
     outputRange: [0, 1],

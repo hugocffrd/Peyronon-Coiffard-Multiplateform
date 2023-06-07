@@ -2,7 +2,13 @@ import { Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Paragraph } from "react-native-paper";
 
-export default function WrapperText(props) {
+interface WrapperTextProps {
+  size?: number;
+  customStyle?: Record<string, string>;
+  text: string;
+}
+
+export default function WrapperText(props: WrapperTextProps) {
   const [fontSize, setFontSize] = useState(
     props.size !== undefined
       ? props.size
