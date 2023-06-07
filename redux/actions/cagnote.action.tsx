@@ -29,8 +29,6 @@ export const getCagnotes = () => {
 
 export const updateCagnote = (id, amountToAdd, idUserToAdd) => {
   return async (dispatch) => {
-    console.log(idUserToAdd);
-
     try {
       const cagnotePromise = await fetch(
         ` http://localhost:8080/api/cagnote/${id}`,

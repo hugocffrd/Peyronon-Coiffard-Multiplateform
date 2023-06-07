@@ -19,5 +19,21 @@
         }
       }
     ]
+  },
+  {
+    "_id": {
+      "$oid": "6480b05deea2491928e4957f"
+    },
+    "amount": 125,
+    "animalId": {
+      "_id": { "$oid": "6470801d70abcc6f9fefdfd0" }
+    },
+    "userIds": [
+      {
+        "_id": {
+          "$oid": "6470826ccd3eafd17c12c3fa"
+        }
+      }
+    ]
   }
 ]
