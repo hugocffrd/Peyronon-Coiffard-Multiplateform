@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
-import { Animated, TouchableOpacity, StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity, Animated } from "react-native";
+import React from "react";
+
 const styles = StyleSheet.create({
-  rightAction: {
+  leftAction: {
     borderRadius: 5,
-    backgroundColor: "#e06666",
+    backgroundColor: "#BBA700",
     justifyContent: "center",
     marginBottom: 5,
     marginTop: 5,
@@ -14,22 +15,21 @@ const styles = StyleSheet.create({
     padding: 20,
   },
 });
-
-export const RightActions = (props) => {
+export const LeftActions = (props) => {
   const scale = props.dragX.interpolate({
-    inputRange: [-100, 0],
-    outputRange: [1, 0],
+    inputRange: [0, 100],
+    outputRange: [0, 1],
     extrapolate: "clamp",
   });
 
   return (
     <TouchableOpacity
-      style={styles.rightAction}
+      style={styles.leftAction}
       activeOpacity={0.5}
-      onPress={() => props.handleDeleteFavoritePress(props.item)}
+      onPress={(item) => props.handleAddFavoritePress(item)}
     >
       <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
-        Delete from favorite
+        Add to Favorite
       </Animated.Text>
     </TouchableOpacity>
   );

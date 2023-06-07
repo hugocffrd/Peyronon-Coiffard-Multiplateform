@@ -68,6 +68,9 @@ public class UserService {
         animalList.add(animalMapper.mapDto(animalRepository.get(animalId)));
       }
     }
+    if (animal != null && !animalList.contains(animal)) {
+      animalList.add(animal);
+    }
     newUser.setAnimals(animalList);
   }
 

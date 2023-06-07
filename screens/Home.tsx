@@ -1,29 +1,15 @@
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import {
-  Animated,
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
-import AnimalCard from "./AnimalCard";
+import { Dimensions, StyleSheet } from "react-native";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAnimals } from "../redux/actions/home.action";
-import { AnimalModel } from "../models/animal.model";
+import { HomeItems } from "../components/home/HomeItems";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  flatListContainer: {
-    flex: 1,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-    justifyContent: "space-between",
   },
   item: {
     width: "100%",
@@ -31,18 +17,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     margin: 5,
-  },
-  leftAction: {
-    borderRadius: 5,
-    backgroundColor: "#BBA700",
-    justifyContent: "center",
-    marginBottom: 5,
-    marginTop: 5,
-  },
-  actionText: {
-    color: "#fff",
-    fontWeight: "600",
-    padding: 20,
   },
 });
 
@@ -78,47 +52,6 @@ export default function Home(props) {
     loadAnimal();
   }, [dispatch]);
 
-  const handlePress = (item: AnimalModel) => {
-    props.navigation.navigation.navigate("Details", { animal: item });
-  };
-
-  const handleAddFavoritePress = (item) => {};
-
-  //Action when swiping left the item
-  const LeftActions = (progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0, 100],
-      outputRange: [0, 1],
-      extrapolate: "clamp",
-    });
-    return (
-      <TouchableOpacity
-        style={styles.leftAction}
-        activeOpacity={0.5}
-        onPress={(item) => handleAddFavoritePress(item)}
-      >
-        <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
-          Add to Favorite
-        </Animated.Text>
-      </TouchableOpacity>
-    );
-  };
-
-  const Items = ({ item }) => {
-    return (
-      <View style={styles.flatListContainer}>
-        <Swipeable renderLeftActions={LeftActions}>
-          <TouchableOpacity
-            activeOpacity={0.5}
-            onPress={() => handlePress(item)}
-          >
-            <AnimalCard animal={item} />
-          </TouchableOpacity>
-        </Swipeable>
-      </View>
-    );
-  };
-
   //The parent node of FlatList needs to have flex:1 to enable scroll on web
   return (
     <SafeAreaView style={styles.container}>
@@ -128,7 +61,9 @@ export default function Home(props) {
           data={list}
           key={numColumns}
           numColumns={numColumns}
-          renderItem={Items}
+          renderItem={(item) => (
+            <HomeItems item={item} navigation={props.navigation} />
+          )}
         />
       </GestureHandlerRootView>
     </SafeAreaView>
