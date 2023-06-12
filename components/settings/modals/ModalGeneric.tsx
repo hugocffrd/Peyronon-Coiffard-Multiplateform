@@ -5,6 +5,7 @@ import { Button } from "react-native-paper";
 import { ItemInputModalsModel } from "../../../models/input-modals.model";
 import InputModalSettings from "./InputModalSettings";
 import WrapperText from "../../wrappers/WrapperText";
+import { UserModel } from "../../../models/user.model";
 
 interface ModalGenericProps {
   isVisible: boolean;
@@ -14,10 +15,12 @@ interface ModalGenericProps {
   windowWidth: number;
   btnContent: string;
   theme: Record<string, string>;
+  user: UserModel;
 }
 
 export default function ModalGeneric(props: ModalGenericProps) {
   const {
+    user,
     isVisible,
     setIsVisible,
     submit,
@@ -56,15 +59,25 @@ export default function ModalGeneric(props: ModalGenericProps) {
               data={inputModals}
               renderItem={(item) => (
                 <InputModalSettings
+                  submit={submit}
+                  theme={theme}
                   inputModals={item}
                   windowWidth={windowWidth}
+                  isVisible={isVisible}
+                  setIsVisible={setIsVisible}
                 />
               )}
             />
 
             <View style={styles.modalBtnContainer}>
               <Button
-                style={[styles.modal, { backgroundColor: theme.primary }]}
+                style={[
+                  styles.modal,
+                  {
+                    backgroundColor: theme.buttonBackground,
+                    borderColor: theme.buttonBorderColor,
+                  },
+                ]}
                 mode="contained"
                 onPress={() => setIsVisible(!isVisible)}
               >
@@ -73,12 +86,18 @@ export default function ModalGeneric(props: ModalGenericProps) {
                   size={20}
                   customStyle={[
                     styles.modalBtnText,
-                    { color: theme.textPrimary },
+                    { color: theme.buttonColorText },
                   ]}
                 ></WrapperText>
               </Button>
               <Button
-                style={[styles.modal, { backgroundColor: theme.primary }]}
+                style={[
+                  styles.modal,
+                  {
+                    backgroundColor: theme.buttonBackground,
+                    borderColor: theme.buttonBorderColor,
+                  },
+                ]}
                 mode="contained"
                 onPress={() => {
                   setIsVisible(!isVisible);
@@ -90,7 +109,7 @@ export default function ModalGeneric(props: ModalGenericProps) {
                   size={20}
                   customStyle={[
                     styles.modalBtnText,
-                    { color: theme.textPrimary },
+                    { color: theme.buttonColorText },
                   ]}
                 ></WrapperText>
               </Button>
@@ -99,17 +118,22 @@ export default function ModalGeneric(props: ModalGenericProps) {
         </View>
       </Modal>
       <Button
+        mode="contained"
+        disabled={user?.email === ""}
         style={[
           styles.modal,
-          { backgroundColor: theme.primary },
-          { alignSelf: btnContent === "Connexion" ? "center" : "flex-end" },
+          {
+            alignSelf: btnContent === "Connexion" ? "center" : "flex-end",
+            backgroundColor: theme.buttonBackground,
+            borderColor: theme.buttonBorderColor,
+          },
         ]}
         onPress={() => setIsVisible(true)}
       >
         <WrapperText
           text={btnContent}
-          size={20}
-          customStyle={[styles.modalBtnText, { color: theme.textPrimary }]}
+          size={15}
+          customStyle={[styles.modalBtnText, { color: theme.buttonColorText }]}
         ></WrapperText>
       </Button>
       {isOnPhone}
@@ -146,10 +170,8 @@ const styles = StyleSheet.create({
   },
   modal: {
     width: 150,
-    backgroundColor: "#9fc5e8",
     borderRadius: 20,
     padding: 5,
-    color: "white",
   },
   modalBtnText: {
     color: "black",

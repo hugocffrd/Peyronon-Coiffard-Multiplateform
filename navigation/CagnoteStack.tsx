@@ -22,6 +22,10 @@ export default function CagnoteStack(props: CagnoteStackProps) {
             backgroundColor: theme.navigation,
             borderColor: theme.navigation,
           },
+          headerTintColor: theme.navigationText,
+          headerTitleStyle: {
+            color: theme.navigationText,
+          },
         }}
       >
         {(navigation) => (

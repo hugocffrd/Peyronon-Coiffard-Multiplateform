@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { AnimalModel } from "../../models/animal.model";
 import { UserModel } from "../../models/user.model";
 import { updateCagnote } from "../../redux/actions/cagnote.action";
+import WrapperText from "../wrappers/WrapperText";
 
 interface CagnoteItemProps {
   item: {
@@ -14,11 +15,12 @@ interface CagnoteItemProps {
     users: UserModel[];
   };
   user: UserModel;
+  theme: Record<string, string>;
 }
 
 export const CagnoteItem = (props: CagnoteItemProps) => {
   const { amount, animal, users, id } = props.item;
-  const { user } = props;
+  const { user, theme } = props;
   const [donationAmount, setDonationAmount] = useState("");
   const dispatch = useDispatch();
 
@@ -28,13 +30,26 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
     dispatch(updateCagnote(id, donationAmount, user.id));
   };
   return (
-    <Card style={styles.card}>
+    <Card style={[styles.card, { backgroundColor: theme.itemBlock }]}>
       <Card.Content>
         <View style={styles.row}>
           <View style={styles.leftColumn}>
-            <Title>{animal.name}</Title>
-            <Paragraph>Type: {animal.typeAnimal}</Paragraph>
-            <Paragraph>Dons total : {amount} €</Paragraph>
+            <WrapperText
+              text={animal.name}
+              size={18}
+              customStyle={{ color: theme.textPrimary }}
+            />
+            <WrapperText
+              text={animal.typeAnimal}
+              size={15}
+              customStyle={{ color: theme.textPrimary }}
+            />
+            <WrapperText
+              text={"Dons total : " + amount + "€"}
+              size={15}
+              customStyle={{ color: theme.textPrimary }}
+            />
+
             <View style={styles.donnationContainer}>
               <TextInput
                 style={styles.input}
@@ -42,19 +57,36 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
                 value={donationAmount}
                 onChangeText={setDonationAmount}
                 keyboardType="numeric"
+                editable={user.email !== ""}
               />
               <Button
                 mode="contained"
-                onPress={() => handleDonation()}
-                style={styles.button}
+                onPress={handleDonation}
+                style={[
+                  styles.button,
+                  {
+                    backgroundColor: theme.buttonBackground,
+                    borderColor: theme.buttonBorderColor,
+                  },
+                ]}
+                disabled={user.email === ""}
               >
-                Faire un don
+                <WrapperText
+                  size={15}
+                  customStyle={{ color: theme.buttonColorText }}
+                  text="Faire un don"
+                />
               </Button>
             </View>
           </View>
           <View style={styles.rightColumn}>
             {users?.map((user, index) => (
-              <Paragraph key={index}>{user.surname}</Paragraph>
+              <WrapperText
+                key={index}
+                text={user.surname}
+                size={15}
+                customStyle={{ color: theme.textPrimary }}
+              />
             ))}
           </View>
         </View>
@@ -65,16 +97,20 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
 
 const styles = StyleSheet.create({
   card: {
+    width: "49%",
     marginBottom: 10,
+    marginHorizontal: 10,
   },
   row: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   leftColumn: {
+    width: "80%",
     marginRight: 5,
   },
   rightColumn: {
+    width: "20%",
     marginLeft: 5,
   },
   input: {

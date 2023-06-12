@@ -1,5 +1,5 @@
 import { AnimalModel } from "../../models/animal.model";
-import { UserModel } from "../../models/user.model";
+import { UserModel, UserParam } from "../../models/user.model";
 import { SUBMIT_CONNEXION, UPDATE_FAVORIS } from "../constants";
 
 export const submitForm = (user: UserModel) => {
@@ -69,7 +69,7 @@ export const updateFavorite = (
   animalSelected: AnimalModel
 ) => {
   return async (dispatch) => {
-    const updatedUser = {
+    const updatedUser: UserParam = {
       ...user,
       animal: animalSelected,
       animalIds: user.animals.map((animal) => animal.id),

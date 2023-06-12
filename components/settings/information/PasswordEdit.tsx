@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { ItemInputModalsModel } from "../../../models/input-modals.model";
 import { UserModel } from "../../../models/user.model";
 import React from "react";
+import { changePassword } from "../../../redux/actions/user.action";
 
 interface PasswordEditProps {
   theme: Record<string, string>;
@@ -41,7 +42,7 @@ export const PasswordEdit = (props: PasswordEditProps) => {
     <View style={styles.informations}>
       <WrapperText
         customStyle={[styles.informationsText, { color: theme.textPrimary }]}
-        text={"Password: "}
+        text={user?.email === "" ? "" : "Password: "}
         size={18}
       />
       <WrapperText
@@ -50,6 +51,7 @@ export const PasswordEdit = (props: PasswordEditProps) => {
         customStyle={{ color: theme.textPrimary }}
       />
       <ModalGeneric
+        user={user}
         theme={theme}
         isVisible={modalChangePasswordVisible}
         setIsVisible={setModalChangePasswordVisible}

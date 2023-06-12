@@ -25,17 +25,47 @@ export default function Navigation() {
         screenOptions={({ route }) => ({
           tabBarStyle: {
             backgroundColor: theme.navigation,
-            color: theme.textPrimary,
           },
+          tabBarActiveTintColor: theme.navigationTextSelected,
+          tabBarInactiveTintColor: theme.navigationText,
+          tabBarLabelStyle: {
+            fontSize: 12,
+            fontWeight: "bold",
+          },
+
           tabBarIcon: ({ color, size }) => {
             if (route.name === "Home") {
-              return <Ionicons name={"home"} size={size} color={color} />;
+              return (
+                <Ionicons
+                  name={"home"}
+                  size={size}
+                  color={theme.navigationText}
+                />
+              );
             } else if (route.name === "Favorites") {
-              return <Ionicons name={"star"} size={size} color={color} />;
+              return (
+                <Ionicons
+                  name={"star"}
+                  size={size}
+                  color={theme.navigationText}
+                />
+              );
             } else if (route.name === "Settings") {
-              return <Ionicons name={"settings"} size={size} color={color} />;
+              return (
+                <Ionicons
+                  name={"settings"}
+                  size={size}
+                  color={theme.navigationText}
+                />
+              );
             } else if (route.name === "Kitty") {
-              return <Ionicons name={"cash"} size={size} color={color} />;
+              return (
+                <Ionicons
+                  name={"cash"}
+                  size={size}
+                  color={theme.navigationText}
+                />
+              );
             }
           },
         })}
@@ -67,6 +97,10 @@ export default function Navigation() {
             headerStyle: {
               backgroundColor: theme.navigation,
               borderColor: theme.navigation,
+            },
+            headerTintColor: theme.navigationText,
+            headerTitleStyle: {
+              color: theme.navigationText,
             },
           }}
         >

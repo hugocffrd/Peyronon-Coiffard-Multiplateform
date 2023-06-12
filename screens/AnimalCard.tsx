@@ -24,7 +24,7 @@ export default function AnimalCard(props: AnimalCardProps) {
   });
 
   return (
-    <Card style={{ backgroundColor: theme.primary }}>
+    <Card style={{ backgroundColor: theme.itemBlock }}>
       <View style={styles.boxContainer}>
         <View style={styles.leftContainer}>
           <Card.Cover
@@ -40,7 +40,7 @@ export default function AnimalCard(props: AnimalCardProps) {
               size={35}
             />
             <WrapperText
-              customStyle={[styles.textPadding, { color: theme.textPrimary }]}
+              customStyle={[styles.textPadding, { color: theme.textSecondary }]}
               text={animal?.typeAnimal}
               size={25}
             />

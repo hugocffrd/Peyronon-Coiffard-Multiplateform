@@ -1,7 +1,6 @@
 import { StyleSheet, TouchableOpacity, Animated } from "react-native";
 import React from "react";
 import { GestureResponderEvent } from "react-native";
-import { UserModel } from "../../models/user.model";
 
 const styles = StyleSheet.create({
   leftAction: {

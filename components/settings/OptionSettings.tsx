@@ -18,14 +18,17 @@ export default function OptionSettings(props: OptionsSettingsProps) {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.navigation }]}>
+    <View style={[styles.container, { backgroundColor: theme.contentBlock }]}>
       <View
-        style={[styles.optionContainer, { backgroundColor: theme.navigation }]}
+        style={[
+          styles.optionContainer,
+          { backgroundColor: theme.contentBlock },
+        ]}
       >
-        <View style={[styles.option, { backgroundColor: theme.navigation }]}>
+        <View style={[styles.option, { backgroundColor: theme.contentBlock }]}>
           <WrapperText
             customStyle={[styles.optionText, { color: theme.textPrimary }]}
-            text={"Theme: " + (isDarkMode ? "Dark" : "Light")}
+            text={"Theme : " + (isDarkMode ? "dark" : "light")}
             size={18}
           />
 
@@ -49,10 +52,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     marginTop: 10,
     borderRadius: 10,
-  },
-  heading: {
-    textAlign: "center",
-    marginBottom: 10,
   },
   optionContainer: {
     backgroundColor: "#FFFFFF",

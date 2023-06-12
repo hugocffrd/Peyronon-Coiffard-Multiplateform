@@ -16,7 +16,6 @@ export default function Settings(props: SettingsProps) {
 
   //@ts-ignore
   const user = useSelector((state) => state.userReducer.user);
-
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={styles.spacing} />

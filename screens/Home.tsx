@@ -6,7 +6,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAnimals } from "../redux/actions/home.action";
 import { HomeItems } from "../components/home/HomeItems";
-import { Card, Avatar } from "react-native-paper";
+import { Search } from "../components/wrappers/Search";
+import { AnimalModel } from "../models/animal.model";
 
 const styles = StyleSheet.create({
   container: {
@@ -41,17 +42,16 @@ export default function Home(props: HomeProps) {
 
   const [numColumns, setNumColumns] = useState(getNumberOfColumns());
 
+  const list: AnimalModel[] = useSelector(
+    //@ts-ignore
+    (state) => state.homeReducer.animalList
+  );
+
+  const dispatch = useDispatch();
   useEffect(() => {
     Dimensions.addEventListener("change", () => {
       setNumColumns(getNumberOfColumns());
     });
-  }, []);
-
-  //@ts-ignore
-  const list = useSelector((state) => state.homeReducer.animalList);
-
-  const dispatch = useDispatch();
-  useEffect(() => {
     const loadAnimal = async () => {
       //@ts-ignore
       await dispatch(getAnimals());
@@ -62,6 +62,7 @@ export default function Home(props: HomeProps) {
   //The parent node of FlatList needs to have flex:1 to enable scroll on web
   return (
     <SafeAreaView style={[styles.container]}>
+      <Search animals={list} />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <FlatList
           showsVerticalScrollIndicator={false}

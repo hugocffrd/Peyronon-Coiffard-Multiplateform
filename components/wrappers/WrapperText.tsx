@@ -4,7 +4,7 @@ import { Paragraph } from "react-native-paper";
 
 interface WrapperTextProps {
   size?: number;
-  customStyle?: Record<string, string>;
+  customStyle?: unknown;
   text: string;
 }
 

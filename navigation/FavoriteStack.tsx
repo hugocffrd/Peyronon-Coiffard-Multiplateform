@@ -22,6 +22,10 @@ export default function StackNavigation(props: StackNavigationProps) {
             backgroundColor: theme.navigation,
             borderColor: theme.navigation,
           },
+          headerTintColor: theme.navigationText,
+          headerTitleStyle: {
+            color: theme.navigationText,
+          },
         }}
       >
         {(navigation) => (

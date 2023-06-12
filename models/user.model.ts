@@ -7,6 +7,10 @@ export interface UserModel {
   password: string;
   email: string;
   animals: AnimalModel[];
+}
+
+export interface UserParam extends UserModel {
+  animals: AnimalModel[];
   animal?: AnimalModel;
   animalIds?: string[];
   newPassword?: string;
