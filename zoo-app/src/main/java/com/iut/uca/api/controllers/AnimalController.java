@@ -54,9 +54,9 @@ public class AnimalController {
   }
 
   @GET
-  @Path("/getByName")
-  public List<Animal> getAnimalsByName(AnimalParam animalParam) {
-    return animalService.getAnimalsByName(animalParam.getName());
+  @Path("/getByName/{name}")
+  public List<Animal> getAnimalsByName(@PathParam("name")String name) {
+    return animalService.getAnimalsByName(name);
   }
 
   @GET

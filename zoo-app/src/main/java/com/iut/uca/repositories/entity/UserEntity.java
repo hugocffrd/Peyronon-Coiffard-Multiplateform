@@ -1,5 +1,6 @@
 package com.iut.uca.repositories.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.bson.codecs.pojo.annotations.BsonId;
 import org.bson.types.ObjectId;
@@ -15,6 +16,15 @@ public class UserEntity  {
     private List<AnimalId> animalIds;
 
     public UserEntity() {}
+
+    public UserEntity(ObjectId id, String name, String surname, String email, String password) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.animalIds = new ArrayList<>();
+    }
 
     public ObjectId getId() {
         return id;

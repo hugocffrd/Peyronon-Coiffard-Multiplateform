@@ -9,6 +9,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Indexes;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ import org.bson.types.ObjectId;
 public class UserRepository implements IRepository<UserEntity>{
   @Inject
   MongoClient mongoClient;
-  public UserRepository() {}
+  public UserRepository() {
+    getCollection().createIndex(Indexes.ascending(ConfigurationUser.ANIMALIDS));
+  }
   @Override
   public MongoCollection<UserEntity> getCollection() {
     return mongoClient.getDatabase(Configuration.DATABASE_NAME).getCollection(Configuration.USER_COLLECTION, UserEntity.class);

@@ -42,7 +42,7 @@ public class UserService {
     return userList;
   }
 
-  public void addUser(
+  public User addUser(
       String id,
       String name,
       String surname,
@@ -50,7 +50,8 @@ public class UserService {
       String password) {
 
     User u = createUser(id, name, surname, email, password);
-    userRepository.insert(userMapper.mapEntity(u));
+    UserEntity userAdded =  userRepository.insert(userMapper.mapEntity(u));
+    return userMapper.mapDto(userAdded);
   }
 
   public User updateUser(String id, String name, String surname, String email, String password, List<String> animalIds, Animal animal) {

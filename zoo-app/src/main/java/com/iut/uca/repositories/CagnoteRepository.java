@@ -6,6 +6,7 @@ import com.iut.uca.repositories.entity.CagnoteEntity;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Indexes;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import java.util.ArrayList;
@@ -17,6 +18,10 @@ import org.bson.types.ObjectId;
 public class CagnoteRepository implements IRepository<CagnoteEntity> {
   @Inject
   MongoClient mongoClient;
+
+  public CagnoteRepository() {
+    getCollection().createIndex(Indexes.ascending(ConfigurationCagnote.USER_IDS));
+  }
   @Override
   public MongoCollection<CagnoteEntity> getCollection() {
     return mongoClient.getDatabase(Configuration.DATABASE_NAME).getCollection(Configuration.CAGNOTE_COLLECTION, CagnoteEntity.class);

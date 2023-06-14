@@ -14,5 +14,11 @@ public class Configuration {
   public static final String $OPTION = "$options";
   public static final String REGEX_OPERATOR = ".*";
   public static final String REGEX_INSENSITIVE = "i";
+  public static final String $MATCH = "$match";
+  public static final String $GROUP = "$group";
+  public static final String $PROJECT = "$project";
+  public static final String $PUSH = "$push";
+  public static final String $$ROOT = "$$ROOT";
+  public static final String ANIMALS = "animals";
 
 }
