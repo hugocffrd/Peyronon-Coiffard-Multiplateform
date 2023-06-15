@@ -90,6 +90,7 @@ export default function Navigation() {
           options={{
             headerShown: false,
           }}
+          
         />
         <Tab.Screen
           name="Settings"

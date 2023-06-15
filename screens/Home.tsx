@@ -8,6 +8,7 @@ import { getAnimals } from "../redux/actions/home.action";
 import { HomeItems } from "../components/home/HomeItems";
 import { Search } from "../components/wrappers/Search";
 import { AnimalModel } from "../models/animal.model";
+import AnimalCard from "./AnimalCard";
 
 const styles = StyleSheet.create({
   container: {
@@ -29,6 +30,13 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
+
+  const STUBDATA = [
+    AnimalCard,
+    AnimalCard,
+    AnimalCard,
+  ];
+
   const { windowWidth, theme, navigation } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
