@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import WrapperText from "../components/wrappers/WrapperText";
-import { Card, IconButton } from "react-native-paper";
+import { Card } from "react-native-paper";
 import { UserModel } from "../models/user.model";
 import { AnimalModel } from "../models/animal.model";
 
@@ -21,8 +21,8 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   leftContainer: {
-    margin : 5,
-    verticalAlign : "middle",
+    margin: 5,
+    verticalAlign: "middle",
   },
   rightContainer: {
     display: "flex",
@@ -59,20 +59,22 @@ export default function AnimalCard(props: AnimalCardProps) {
   });
 
   return (
-  <Card style={{ backgroundColor: theme.itemBlock }}>
+    <Card style={{ backgroundColor: theme.itemBlock }}>
       <View style={styles.boxContainer}>
         <View style={styles.leftContainer}>
-        {animal.images[0] ? (
-              <Card.Cover
-                source={require("../assets/Animals/".concat(String(animal.images[0])))}
-                style={styles.image}
-              />
-              ) : (
-              <Card.Cover
-                source={require("../assets/Animals/GenericFaceLogo.jpg")} //Image when no image is available
-                style={styles.image}
-              />
-            )}
+          {animal.images[0] ? (
+            <Card.Cover
+              source={require("../assets/Animals/".concat(
+                String(animal.images[0])
+              ))}
+              style={styles.image}
+            />
+          ) : (
+            <Card.Cover
+              source={require("../assets/Animals/GenericFaceLogo.jpg")} //Image when no image is available
+              style={styles.image}
+            />
+          )}
         </View>
         <View style={styles.rightContainer}>
           <View style={styles.textContainer}>
@@ -101,7 +103,4 @@ export default function AnimalCard(props: AnimalCardProps) {
       </View>
     </Card>
   );
-
-  
 }
-  

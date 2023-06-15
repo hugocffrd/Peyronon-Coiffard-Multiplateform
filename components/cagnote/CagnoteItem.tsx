@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Card, Title, Paragraph, TextInput, Button } from "react-native-paper";
+import { Card, TextInput, Button } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { AnimalModel } from "../../models/animal.model";
 import { UserModel } from "../../models/user.model";

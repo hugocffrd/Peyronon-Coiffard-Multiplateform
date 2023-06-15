@@ -1,45 +1,25 @@
 import React from "react";
-import { Image, StyleSheet, Dimensions, View } from "react-native";
+import { Dimensions } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
+import { AnimalModel } from "../../../models/animal.model";
+import { CarouselItem } from "./CarouselItem";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
+interface AnimalCarouselProps {
+  animal: AnimalModel;
+}
 
-
-export const AnimalCarousel = (props) => {
+export const AnimalCarousel = (props: AnimalCarouselProps) => {
   const { animal } = props;
 
-  const renderItem = ({item}) => {
-    return (
-      <View
-        style={{
-          padding: 10,
-          alignItems: 'center',
-          backgroundColor: 'transparent',
-          
-        }}>
-          <Image source={require("../../../assets/Animals/".concat(String(item)))} style={styles.itemImage} />
-      </View>
-    );
-  }
-
   return (
-      <Carousel<{ img: string }>
-        width={width}
-        height={width/1.2}
-        data={animal?.images}
-        renderItem={renderItem}
-        autoPlay={true}
-        autoPlayInterval={4000}
-      />
+    <Carousel<string>
+      width={width}
+      height={width / 1.2}
+      data={animal?.images}
+      renderItem={(item) => <CarouselItem item={item} />}
+      autoPlay={true}
+      autoPlayInterval={4000}
+    />
   );
 };
-
-const styles = StyleSheet.create({
-  itemImage:{
-    width: width/1.3,
-    height: width/1.3,
-    borderRadius: 10,
-  },
-});
-
-
