@@ -117,7 +117,7 @@
     "status": "VIVANT",
     "gestation": 3,
     "nbKid": 2,
-    "images": ["panther1.jpg","panther2.jpg"]
+    "images": ["panther1.jpg", "panther2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfcc" },
@@ -132,4 +132,3 @@
     "images": ["Panda1.webp", "Panda2.jpg"]
   }
 ]
-  

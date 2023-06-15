@@ -11,123 +11,164 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 30,
-    marginHorizontal:5,
+    marginHorizontal: 5,
   },
-  infos:{
+  infos: {
     width: "90%",
-    backgroundColor: "#FFFFFF",
     alignItems: "center",
     paddingHorizontal: 15,
     borderRadius: 10,
+    margin: 20,
     padding: 20,
   },
-  lineStyle:{
+  lineStyle: {
     width: "100%",
     borderWidth: 0.5,
-    borderColor:'#eeeeee',
-    margin:10,
+    borderColor: "#eeeeee",
+    margin: 10,
   },
-  titleBlock:{
+  titleBlock: {
     width: "90%",
     backgroundColor: "transparents",
     alignItems: "center",
     marginBottom: 3,
     paddingHorizontal: 10,
   },
-  titleText:{
+  titleText: {
     fontWeight: "bold",
     fontSize: 24,
   },
-  subtitleText:{
+  subtitleText: {
     fontWeight: "300",
     fontSize: 18,
   },
-  grid:{
+  grid: {
     flex: 2,
     marginHorizontal: "auto",
     width: "100%",
   },
   row: {
-    flexDirection: "row"
+    flexDirection: "row",
   },
-  "col1":  {
+  col1: {
     width: "auto",
-    flex:  1
+    flex: 1,
   },
-  "2col":  {
+  "2col": {
     width: "auto",
-    flex:  2
+    flex: 2,
   },
 });
 
 export default function AnimalDetails(props) {
   const animal = props.navigation.route.params.animal as AnimalModel;
+  const { theme } = props;
+
   const Col = ({ numRows, children }) => {
-    return  (
-      <View style={styles[`${numRows}col`]}>{children}</View>
-    )
-  }
-  const Row = ({ children }) => (
-    <View style={styles.row}>{children}</View>
-  )
+    return <View style={styles[`${numRows}col`]}>{children}</View>;
+  };
+
+  const Row = ({ children }) => <View style={styles.row}>{children}</View>;
+
   return (
-    
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: theme.background }}>
       <View style={styles.detailsView}>
-        <AnimalCarousel animal={animal}/>
-        <View style={styles.infos}>
+        <AnimalCarousel animal={animal} />
+        <View style={[styles.infos, { backgroundColor: theme.contentBlock }]}>
           <View style={styles.titleBlock}>
-            <WrapperText customStyle={styles.titleText} text={animal?.name} />
-            <WrapperText customStyle={styles.subtitleText} text={animal?.typeAnimal} />
+            <WrapperText
+              customStyle={[styles.titleText, { color: theme.textPrimary }]}
+              text={animal?.name}
+            />
+            <WrapperText
+              customStyle={[styles.subtitleText, { color: theme.textPrimary }]}
+              text={animal?.typeAnimal}
+            />
           </View>
-          <View style = {styles.lineStyle} />
+          <View style={styles.lineStyle} />
           <View style={styles.grid}>
             <Row>
               <Col numRows={2}>
-                <WrapperText text={"Longévité : "} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={"Longévité : "}
+                />
               </Col>
               <Col numRows={2}>
-                <WrapperText text={animal?.longevity + " ans"} />
-              </Col>
-            </Row>
-            <Row>
-              <Col numRows={2}>
-                <WrapperText text={"Habitat : "} />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText text={String(animal?.geoLocation)} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={animal?.longevity + " ans"}
+                />
               </Col>
             </Row>
             <Row>
               <Col numRows={2}>
-              <WrapperText text={"Alimentation : "} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={"Habitat : "}
+                />
               </Col>
               <Col numRows={2}>
-                <WrapperText text={String(animal?.diet)} />
-              </Col>
-            </Row>
-            <Row>
-              <Col numRows={2}>
-              <WrapperText text={"Status : "} />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText text={String(animal?.status)} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={String(animal?.geoLocation)}
+                />
               </Col>
             </Row>
             <Row>
               <Col numRows={2}>
-              <WrapperText text={"Gestation : "} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={"Alimentation : "}
+                />
               </Col>
               <Col numRows={2}>
-                <WrapperText text={animal?.gestation + " mois"} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={String(animal?.diet)}
+                />
               </Col>
             </Row>
             <Row>
               <Col numRows={2}>
-              <WrapperText text={"Progéniture : "} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={"Status : "}
+                />
               </Col>
               <Col numRows={2}>
-                <WrapperText text={String(animal?.nbKid)} />
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={String(animal?.status)}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col numRows={2}>
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={"Gestation : "}
+                />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={animal?.gestation + " mois"}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col numRows={2}>
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={"Progéniture : "}
+                />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText
+                  customStyle={{ color: theme.textPrimary }}
+                  text={String(animal?.nbKid)}
+                />
               </Col>
             </Row>
           </View>

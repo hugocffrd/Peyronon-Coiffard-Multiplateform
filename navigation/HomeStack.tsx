@@ -38,9 +38,19 @@ export default function StackNavigation(props: StackNavigationProps) {
         name="Details"
         options={{
           title: "Details",
+          headerStyle: {
+            backgroundColor: theme.navigation,
+            borderColor: theme.navigation,
+          },
+          headerTintColor: theme.navigationText,
+          headerTitleStyle: {
+            color: theme.navigationText,
+          },
         }}
       >
-        {(navigation) => <AnimalDetails navigation={navigation} />}
+        {(navigation) => (
+          <AnimalDetails theme={theme} navigation={navigation} />
+        )}
       </Stack.Screen>
     </Stack.Navigator>
   );
