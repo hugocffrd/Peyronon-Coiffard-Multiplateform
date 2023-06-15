@@ -20,9 +20,6 @@ import org.bson.types.ObjectId;
 public class UserRepository implements IRepository<UserEntity>{
   @Inject
   MongoClient mongoClient;
-  public UserRepository() {
-    getCollection().createIndex(Indexes.ascending(ConfigurationUser.ANIMALIDS));
-  }
   @Override
   public MongoCollection<UserEntity> getCollection() {
     return mongoClient.getDatabase(Configuration.DATABASE_NAME).getCollection(Configuration.USER_COLLECTION, UserEntity.class);
@@ -50,6 +47,7 @@ public class UserRepository implements IRepository<UserEntity>{
 
   @Override
   public List<UserEntity> list() {
+    getCollection().createIndex(Indexes.ascending(ConfigurationUser.ANIMALIDS));
     FindIterable<UserEntity> results = getCollection().find();
     List<UserEntity> userList = new ArrayList<>();
     for (UserEntity userEntity : results) {

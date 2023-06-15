@@ -42,7 +42,7 @@ public class AnimalService {
     return mapAnimals(animalEntities);
   }
 
-  public void addAnimal(
+  public Animal addAnimal(
        String id,
        String name,
        String typeAnimal,
@@ -56,10 +56,11 @@ public class AnimalService {
   ) {
     Animal animal = createAnimal(id, name, typeAnimal, longevity, diet, status,
         gestation, nbKid, geoLocation, images);
-    animalRepository.insert(animalMapper.mapEntity(animal));
+    AnimalEntity animalEntity = animalRepository.insert(animalMapper.mapEntity(animal));
+    return animalMapper.mapDto(animalEntity);
   }
 
-  public void updateAnimal( String id,
+  public Animal updateAnimal( String id,
       String name,
       String typeAnimal,
       int longevity,
@@ -74,7 +75,8 @@ public class AnimalService {
 
     AnimalEntity animalEntity = animalRepository.get(id);
     AnimalEntity updateAnimal = animalMapper.updateEntity(animalEntity, newAnimal);
-    animalRepository.update(id,updateAnimal);
+    AnimalEntity animalEntityUpdated = animalRepository.update(id,updateAnimal);
+    return animalMapper.mapDto(animalEntityUpdated);
 
   }
 

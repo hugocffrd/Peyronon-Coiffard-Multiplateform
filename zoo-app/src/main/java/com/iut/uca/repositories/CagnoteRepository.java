@@ -18,10 +18,6 @@ import org.bson.types.ObjectId;
 public class CagnoteRepository implements IRepository<CagnoteEntity> {
   @Inject
   MongoClient mongoClient;
-
-  public CagnoteRepository() {
-    getCollection().createIndex(Indexes.ascending(ConfigurationCagnote.USER_IDS));
-  }
   @Override
   public MongoCollection<CagnoteEntity> getCollection() {
     return mongoClient.getDatabase(Configuration.DATABASE_NAME).getCollection(Configuration.CAGNOTE_COLLECTION, CagnoteEntity.class);
@@ -40,11 +36,13 @@ public class CagnoteRepository implements IRepository<CagnoteEntity> {
   }
   @Override
   public CagnoteEntity get(String id) {
+    getCollection().createIndex(Indexes.ascending(ConfigurationCagnote.USER_IDS));
     Document query = new Document(ConfigurationCagnote.ID, new ObjectId(id));
     return getCollection().find(query).first();  }
 
   @Override
   public List<CagnoteEntity> list() {
+    getCollection().createIndex(Indexes.ascending(ConfigurationCagnote.USER_IDS));
     FindIterable<CagnoteEntity> results = getCollection().find();
     List<CagnoteEntity> cagnoteEntityList = new ArrayList<>();
     for (CagnoteEntity cagnoteEntity : results) {

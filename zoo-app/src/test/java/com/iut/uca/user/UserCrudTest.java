@@ -1,14 +1,13 @@
 package com.iut.uca.user;
 
+import com.iut.uca.ICrudTest;
 import com.iut.uca.api.dto.Animal;
 import com.iut.uca.api.dto.User;
 import com.iut.uca.enums.Diet;
 import com.iut.uca.enums.GeoLocation;
 import com.iut.uca.enums.Status;
 import com.iut.uca.mapper.UserMapper;
-import com.iut.uca.repositories.UserRepository;
 import com.iut.uca.services.UserService;
-import io.restassured.RestAssured;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,45 +17,42 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 
-public class UserCrudTest {
+public class UserCrudTest implements ICrudTest {
 
     static UserService userService;
-    static UserRepository userRepository;
     static UserMapper userMapper;
 
+    String userId;
+
+    @Override
     @BeforeEach
     public void setup() {
-        RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080;
         userService = Mockito.mock(UserService.class);
-        userRepository = Mockito.mock(UserRepository.class);
         userMapper = Mockito.mock(UserMapper.class);
+        userId = "6470826ccd3eafd17c12c3fb";
     }
 
     private User createUser() {
-        String userId = "6470826ccd3eafd17c12c3fb";
         String name = "Alice";
         String surname = "Dupont";
         String email = "alice.dupont@example.com";
         String password = "password123";
         return new User(userId, name, surname, email, password);
     }
+    @Override
     @Test
-    public void testGetUserById() {
+    public void testGetOne() {
         User expectedUser = createUser();
         Mockito.when(userService.getOneUser(expectedUser.getId())).thenReturn(expectedUser);
         User userGet = userService.getOneUser(expectedUser.getId());
 
         Mockito.verify(userService, Mockito.times(1)).getOneUser(expectedUser.getId());
-        Assertions.assertEquals(expectedUser.getId(), userGet.getId());
-        Assertions.assertEquals(expectedUser.getName(), userGet.getName());
-        Assertions.assertEquals(expectedUser.getSurname(), userGet.getSurname());
-        Assertions.assertEquals(expectedUser.getEmail(), userGet.getEmail());
-        Assertions.assertEquals(expectedUser.getPassword(), userGet.getPassword());
+        Assertions.assertEquals(expectedUser, userGet);
     }
 
+    @Override
     @Test
-    public void testGetAllUsers() {
+    public void testGetAll() {
         List<User> expectedUsers = new ArrayList<>();
         expectedUsers.add(createUser());
         expectedUsers.add(new User("2", "Bob", "Smith", "bob.smith@example.com", "password456"));
@@ -66,17 +62,12 @@ public class UserCrudTest {
 
         Mockito.verify(userService, Mockito.times(1)).getAllUsers();
         Assertions.assertEquals(2, users.size());
-        for(int i =0; i< users.size(); i++) {
-            Assertions.assertEquals(users.get(i).getId(), expectedUsers.get(i).getId());
-            Assertions.assertEquals(users.get(i).getName(), expectedUsers.get(i).getName());
-            Assertions.assertEquals(users.get(i).getSurname(), expectedUsers.get(i).getSurname());
-            Assertions.assertEquals(users.get(i).getEmail(), expectedUsers.get(i).getEmail());
-            Assertions.assertEquals(users.get(i).getPassword(), expectedUsers.get(i).getPassword());
-        }
+        Assertions.assertEquals(users, expectedUsers);
     }
 
+    @Override
     @Test
-    public void testAddUser() {
+    public void testAdd() {
         User newUser = createUser();
 
         Mockito.when(userService.addUser( Mockito.eq(newUser.getId()),
@@ -96,13 +87,12 @@ public class UserCrudTest {
     }
 
 
+    @Override
     @Test
-    public void testUpdateUser() {
-
+    public void testUpdate() {
         Animal animal = createAnimal();
         User userGet = createUser();
         User updatedUser = createUpdatedUser();
-        String userId = "6470826ccd3eafd17c12c3fb";
 
         String updatedName = "Alice Updated";
         String updatedSurname = "Dupont Updated";
@@ -124,7 +114,6 @@ public class UserCrudTest {
     }
 
     private User createUpdatedUser() {
-        String userId = "6470826ccd3eafd17c12c3fb";
         String updatedName = "Alice Updated";
         String updatedSurname = "Dupont Updated";
         String updatedEmail = "alice.updated@example.com";
@@ -135,12 +124,13 @@ public class UserCrudTest {
         );
         return new User(userId, updatedName,updatedSurname, updatedEmail,updatedPassword, updatedAnimals);
     }
-    private  Animal createAnimal() {
+    private Animal createAnimal() {
         return new Animal("animalId1", "Lion", "Mammal", 10, GeoLocation.AFRICA, Diet.CARNIVORE, Status.ETEINT, 3, 2, new ArrayList<>());
     }
 
+    @Override
     @Test
-    public void testDeleteUser() {
+    public void testDelete() {
         User deleteUser = createUser();
 
         Mockito.when(userService.getOneUser(deleteUser.getId())).thenReturn(deleteUser);

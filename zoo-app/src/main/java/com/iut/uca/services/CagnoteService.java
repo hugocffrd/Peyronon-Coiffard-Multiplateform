@@ -45,7 +45,7 @@ public class CagnoteService {
     return cagnotes;
   }
 
-  public void addCagnote(
+  public Cagnote addCagnote(
       String id,
       long amount,
       String animalId,
@@ -54,7 +54,8 @@ public class CagnoteService {
     Animal animal = getAnimalById(animalId);
     List<User> users = getUsersByIds(usersIds);
     Cagnote cagnote = createCagnote(id, amount, animal, users);
-    cagnoteRepository.insert(cagnoteMapper.mapEntity(cagnote));
+    CagnoteEntity entity = cagnoteRepository.insert(cagnoteMapper.mapEntity(cagnote));
+    return  cagnoteMapper.mapDto(entity);
   }
 
   public List<Cagnote> updateCagnote(String id, long amountToAdd, String idUserToAdd) {

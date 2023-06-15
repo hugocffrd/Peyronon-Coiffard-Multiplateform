@@ -70,7 +70,7 @@ export default function Home(props: HomeProps) {
   //The parent node of FlatList needs to have flex:1 to enable scroll on web
   return (
     <SafeAreaView style={[styles.container]}>
-      <Search animals={list} />
+      <Search animals={list} navigation={navigation} />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <FlatList
           showsVerticalScrollIndicator={false}

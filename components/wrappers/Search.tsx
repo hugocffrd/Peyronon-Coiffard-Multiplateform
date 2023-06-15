@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Card, Paragraph, Searchbar } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { AnimalModel } from "../../models/animal.model";
 
 interface SearchProps {
   animals: AnimalModel[];
+  navigation: any;
 }
 
 export const Search = (props: SearchProps) => {
-  const { animals } = props;
+  const { animals, navigation } = props;
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [filteredAnimals, setFilteredAnimals] = useState<AnimalModel[]>([]);
@@ -23,7 +24,7 @@ export const Search = (props: SearchProps) => {
     return () => clearTimeout(delay);
   }, [searchText, dispatch]);
 
-  const onChangeValue = (text: string): void => {
+  const handleInputChange = (text) => {
     setSearchText(text);
     setFilteredAnimals(
       animals.filter((animal) =>
@@ -32,21 +33,33 @@ export const Search = (props: SearchProps) => {
     );
   };
 
+  const goToAnimalDetail = (animal: AnimalModel) => {
+    navigation.navigation.navigate("Details", { animal });
+    setSearchText("");
+  };
+
   return (
     <View>
       <Searchbar
         placeholder="Rechercher..."
-        onChangeText={(text) => onChangeValue(text)}
+        onChangeText={handleInputChange}
+        value={searchText}
       />
 
       {searchText !== "" && filteredAnimals.length > 0 ? (
         filteredAnimals.map((animal) => (
-          <Card key={animal.id} style={{ margin: 10 }}>
-            <Card.Title title={animal.name} />
-            <Card.Content>
-              <Paragraph>{animal.typeAnimal} </Paragraph>
-            </Card.Content>
-          </Card>
+          <TouchableOpacity
+            key={animal.id}
+            style={styles.cardClick}
+            onPress={() => goToAnimalDetail(animal)}
+          >
+            <Card>
+              <Card.Title title={animal.name} />
+              <Card.Content>
+                <Paragraph>{animal.typeAnimal}</Paragraph>
+              </Card.Content>
+            </Card>
+          </TouchableOpacity>
         ))
       ) : (
         <View></View>
@@ -54,3 +67,9 @@ export const Search = (props: SearchProps) => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  cardClick: {
+    margin: 10,
+  },
+});

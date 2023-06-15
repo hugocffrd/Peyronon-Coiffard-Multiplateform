@@ -63,18 +63,36 @@ public class UserService {
   }
 
   protected void setUserAnimalList(List<String> animalIds, Animal animal, User newUser) {
-    List<Animal> animalList= new ArrayList<>();
+    List<Animal> animalList = new ArrayList<>();
+
     for (String animalId : animalIds) {
-      if(!Objects.equals(animalId, animal.getId())) {
-        animalList.add(animalMapper.mapDto(animalRepository.get(animalId)));
+      Animal existingAnimal = animalMapper.mapDto(animalRepository.get(animalId));
+      if (existingAnimal != null) {
+        animalList.add(existingAnimal);
       }
     }
-    if (animal != null && !animalList.contains(animal)) {
-      animalList.add(animal);
+
+    boolean isAnimalPresent = false;
+    if (animal != null) {
+      for (Animal existingAnimal : animalList) {
+        if (existingAnimal.getId().equals(animal.getId())) {
+          isAnimalPresent = true;
+          break;
+        }
+      }
     }
+
+    if (animal != null) {
+      if (isAnimalPresent) {
+        animalList.removeIf(existingAnimal -> existingAnimal.getId().equals(animal.getId()));
+      } else {
+        animalList.add(animal);
+      }
+    }
+
+    // Set the updated animal list in the user object
     newUser.setAnimals(animalList);
   }
-
   protected User createUser(String id, String name, String surname, String email,
       String password) {
     return  new User(id, name, surname, email, password);
