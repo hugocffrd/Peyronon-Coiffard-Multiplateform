@@ -41,6 +41,7 @@ export default function Navigation() {
           name="Home"
           component={HomeStack}
           options={{ headerShown: false }}
+          
         />
         <Tab.Screen name="Settings">
           {() => (

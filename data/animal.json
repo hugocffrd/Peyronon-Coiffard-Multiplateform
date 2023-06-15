@@ -9,11 +9,11 @@
     "status": "ETEINT",
     "gestation": 5,
     "nbKid": 0,
-    "images": []
+    "images": ["Elephant1.jpg", "Elephant2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfc3" },
-    "name": "Alice",
+    "name": "Alex",
     "typeAnimal": "Lion",
     "longevity": 10,
     "geoLocation": "AFRICA",
@@ -21,7 +21,7 @@
     "status": "VIVANT",
     "gestation": 3,
     "nbKid": 3,
-    "images": []
+    "images": ["Lion1.jpg", "Lion2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfc4" },
@@ -33,7 +33,7 @@
     "status": "VIVANT",
     "gestation": 4,
     "nbKid": 2,
-    "images": []
+    "images": ["Tiger1.jpg", "Tiger2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfc5" },
@@ -45,7 +45,7 @@
     "status": "VIVANT",
     "gestation": 15,
     "nbKid": 1,
-    "images": []
+    "images": ["Girafe1.jpg", "Girafe2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfc6" },
@@ -57,7 +57,7 @@
     "status": "VIVANT",
     "gestation": 8,
     "nbKid": 2,
-    "images": []
+    "images": ["Hippo1.jpg", "hippo2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfc7" },
@@ -69,7 +69,7 @@
     "status": "VIVANT",
     "gestation": 2,
     "nbKid": 4,
-    "images": []
+    "images": ["Loup1.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfc8" },
@@ -81,7 +81,7 @@
     "status": "VIVANT",
     "gestation": 6,
     "nbKid": 2,
-    "images": []
+    "images": ["Ours1.jpeg", "Ours2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfc9" },
@@ -93,7 +93,7 @@
     "status": "VIVANT",
     "gestation": 8,
     "nbKid": 3,
-    "images": []
+    "images": ["Chimp1.jpg", "Chimp2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfca" },
@@ -105,7 +105,7 @@
     "status": "VIVANT",
     "gestation": 7,
     "nbKid": 1,
-    "images": []
+    "images": ["Koala1.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfcb" },
@@ -117,7 +117,7 @@
     "status": "VIVANT",
     "gestation": 3,
     "nbKid": 2,
-    "images": []
+    "images": ["panther1.jpg","panther2.jpg"]
   },
   {
     "_id": { "$oid": "6470801d70abcc6f9fefdfcc" },
@@ -129,318 +129,7 @@
     "status": "VIVANT",
     "gestation": 5,
     "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfcd" },
-    "name": "Oscar",
-    "typeAnimal": "Renard",
-    "longevity": 8,
-    "geoLocation": "EUROPE",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 2,
-    "nbKid": 4,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfce" },
-    "name": "Ruby",
-    "typeAnimal": "Kangourou",
-    "longevity": 15,
-    "geoLocation": "OCEANIA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 6,
-    "nbKid": 1,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfcf" },
-    "name": "Simba",
-    "typeAnimal": "Léopard",
-    "longevity": 12,
-    "geoLocation": "AFRICA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 3,
-    "nbKid": 3,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd0" },
-    "name": "Mia",
-    "typeAnimal": "Gorille",
-    "longevity": 35,
-    "geoLocation": "AFRICA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 9,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd1" },
-    "name": "Oliver",
-    "typeAnimal": "Otarie",
-    "longevity": 25,
-    "geoLocation": "OCEANIA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 11,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd2" },
-    "name": "Molly",
-    "typeAnimal": "Hérisson",
-    "longevity": 6,
-    "geoLocation": "EUROPE",
-    "diet": "INSECTIVORE",
-    "status": "VIVANT",
-    "gestation": 1,
-    "nbKid": 4,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd3" },
-    "name": "Jack",
-    "typeAnimal": "Koala",
-    "longevity": 15,
-    "geoLocation": "OCEANIA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 7,
-    "nbKid": 1,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd4" },
-    "name": "Mia",
-    "typeAnimal": "Lion",
-    "longevity": 12,
-    "geoLocation": "AFRICA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 3,
-    "nbKid": 3,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd5" },
-    "name": "Max",
-    "typeAnimal": "Panthère",
-    "longevity": 14,
-    "geoLocation": "AFRICA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 3,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd6" },
-    "name": "Lucy",
-    "typeAnimal": "Panda",
-    "longevity": 20,
-    "geoLocation": "ASIA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 5,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd7" },
-    "name": "Oscar",
-    "typeAnimal": "Renard",
-    "longevity": 8,
-    "geoLocation": "EUROPE",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 2,
-    "nbKid": 4,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd8" },
-    "name": "Luna",
-    "typeAnimal": "Loup",
-    "longevity": 8,
-    "geoLocation": "AMERICA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 2,
-    "nbKid": 4,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfd9" },
-    "name": "Leo",
-    "typeAnimal": "Tigre",
-    "longevity": 12,
-    "geoLocation": "ASIA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 4,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfda" },
-    "name": "Bella",
-    "typeAnimal": "Girafe",
-    "longevity": 20,
-    "geoLocation": "AFRICA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 15,
-    "nbKid": 1,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfdb" },
-    "name": "Charlie",
-    "typeAnimal": "Hippopotame",
-    "longevity": 40,
-    "geoLocation": "AFRICA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 8,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfdc" },
-    "name": "Milo",
-    "typeAnimal": "Chimpanzé",
-    "longevity": 50,
-    "geoLocation": "AFRICA",
-    "diet": "OMNIVORE",
-    "status": "VIVANT",
-    "gestation": 8,
-    "nbKid": 3,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfdd" },
-    "name": "Ruby",
-    "typeAnimal": "Kangourou",
-    "longevity": 15,
-    "geoLocation": "OCEANIA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 6,
-    "nbKid": 1,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfde" },
-    "name": "Simba",
-    "typeAnimal": "Léopard",
-    "longevity": 12,
-    "geoLocation": "AFRICA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 3,
-    "nbKid": 3,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfdf" },
-    "name": "Mia",
-    "typeAnimal": "Gorille",
-    "longevity": 35,
-    "geoLocation": "AFRICA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 9,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfe0" },
-    "name": "Oliver",
-    "typeAnimal": "Otarie",
-    "longevity": 25,
-    "geoLocation": "OCEANIA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 11,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfe1" },
-    "name": "Molly",
-    "typeAnimal": "Hérisson",
-    "longevity": 6,
-    "geoLocation": "EUROPE",
-    "diet": "INSECTIVORE",
-    "status": "VIVANT",
-    "gestation": 1,
-    "nbKid": 4,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfe2" },
-    "name": "Jack",
-    "typeAnimal": "Koala",
-    "longevity": 15,
-    "geoLocation": "OCEANIA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 7,
-    "nbKid": 1,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfe3" },
-    "name": "Mia",
-    "typeAnimal": "Lion",
-    "longevity": 12,
-    "geoLocation": "AFRICA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 3,
-    "nbKid": 3,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfe4" },
-    "name": "Max",
-    "typeAnimal": "Panthère",
-    "longevity": 14,
-    "geoLocation": "AFRICA",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 3,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfe5" },
-    "name": "Lucy",
-    "typeAnimal": "Panda",
-    "longevity": 20,
-    "geoLocation": "ASIA",
-    "diet": "HERBIVORE",
-    "status": "VIVANT",
-    "gestation": 5,
-    "nbKid": 2,
-    "images": []
-  },
-  {
-    "_id": { "$oid": "6470801d70abcc6f9fefdfe6" },
-    "name": "Oscar",
-    "typeAnimal": "Renard",
-    "longevity": 8,
-    "geoLocation": "EUROPE",
-    "diet": "CARNIVORE",
-    "status": "VIVANT",
-    "gestation": 2,
-    "nbKid": 4,
-    "images": []
+    "images": ["Panda1.webp", "Panda2.jpg"]
   }
 ]
+  

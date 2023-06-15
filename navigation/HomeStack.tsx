@@ -19,7 +19,6 @@ export default function StackNavigation(props) {
       <Stack.Screen name="Home">
         {(navigation) => (
           <Home
-            fontSize={fontSize}
             navigation={navigation}
             windowWidth={windowWidth}
           />

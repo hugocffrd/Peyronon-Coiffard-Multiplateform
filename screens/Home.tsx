@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAnimals } from "../redux/actions/home.action";
 import { HomeItems } from "../components/home/HomeItems";
 import { Card, Avatar } from "react-native-paper";
+import AnimalCard from "./AnimalCard";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,6 +23,13 @@ const styles = StyleSheet.create({
 });
 
 export default function Home(props) {
+
+  const STUBDATA = [
+    AnimalCard,
+    AnimalCard,
+    AnimalCard,
+  ];
+
   const { windowWidth } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
