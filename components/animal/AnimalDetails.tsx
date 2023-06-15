@@ -71,55 +71,68 @@ export default function AnimalDetails(props) {
     <View style={styles.row}>{children}</View>
   )
   return (
-    <View style={styles.detailsView}>
-      <View>
-        <WrapperText text={animal.name + " " + animal.typeAnimal} />
-      </View>
-      <Slider />
-      <View style={styles.infos}>
-        <WrapperText text={"Infos"} />
-        <View style = {styles.lineStyle} />
-        <View>
-          <WrapperText text={"Longévité : " + animal.longevity + "ans"} />
-          <WrapperText text={"Habitat : " + animal.geoLocation} />
-          <WrapperText text={"Alimentation :" + animal.diet} />
-          <WrapperText text={"Status de conservation : " + animal.status} />
-          <WrapperText text={"Gestation : " + animal.gestation + "mois"} />
-          <WrapperText text={"Nombre de petits : " + animal.nbKid} />
+    
+    <ScrollView>
+      <View style={styles.detailsView}>
+        <AnimalCarousel animal={animal}/>
+        <View style={styles.infos}>
+          <View style={styles.titleBlock}>
+            <WrapperText customStyle={styles.titleText} text={animal?.name} />
+            <WrapperText customStyle={styles.subtitleText} text={animal?.typeAnimal} />
+          </View>
+          <View style = {styles.lineStyle} />
+          <View style={styles.grid}>
+            <Row>
+              <Col numRows={2}>
+                <WrapperText text={"Longévité : "} />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText text={animal?.longevity + " ans"} />
+              </Col>
+            </Row>
+            <Row>
+              <Col numRows={2}>
+                <WrapperText text={"Habitat : "} />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText text={String(animal?.geoLocation)} />
+              </Col>
+            </Row>
+            <Row>
+              <Col numRows={2}>
+              <WrapperText text={"Alimentation : "} />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText text={String(animal?.diet)} />
+              </Col>
+            </Row>
+            <Row>
+              <Col numRows={2}>
+              <WrapperText text={"Status : "} />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText text={String(animal?.status)} />
+              </Col>
+            </Row>
+            <Row>
+              <Col numRows={2}>
+              <WrapperText text={"Gestation : "} />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText text={animal?.gestation + " mois"} />
+              </Col>
+            </Row>
+            <Row>
+              <Col numRows={2}>
+              <WrapperText text={"Progéniture : "} />
+              </Col>
+              <Col numRows={2}>
+                <WrapperText text={String(animal?.nbKid)} />
+              </Col>
+            </Row>
+          </View>
         </View>
       </View>
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  detailsView: {
-    display: "flex",
-    alignItems: "center",
-
-    justifyContent: "center",
-    paddingTop: 30,
-    marginHorizontal: 5,
-  },
-  caroussel: {
-    width: "100%",
-    borderColor: "grey",
-    borderRadius: 10,
-    backgroundColor: "#FFFFFF",
-    alignItems: "center",
-  },
-  infos: {
-    width: "100%",
-    backgroundColor: "#FFFFFF",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    padding: 20,
-  },
-  lineStyle: {
-    width: "100%",
-    borderWidth: 0.5,
-    borderColor: "#eeeeee",
-    margin: 10,
-  },
-});
