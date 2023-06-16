@@ -1,48 +1,39 @@
-import { FlatList } from "react-native";
-import React from "react";
-import { Modal, StyleSheet, View, Platform } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Dimensions, Modal, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
-import { ItemInputModalsModel } from "../../../models/input-modals.model";
-import InputModalSettings from "./InputModalSettings";
-import WrapperText from "../../wrappers/WrapperText";
-import { UserModel } from "../../../models/user.model";
-import { ButtonModal } from "../../wrappers/ButtonModal";
+import WrapperText from "../wrappers/WrapperText";
+import { ButtonModal } from "../wrappers/ButtonModal";
+import { CagnoteModel } from "../../models/cagnote.model";
+import { useDispatch, useSelector } from "react-redux";
+import { getCagnoteById } from "../../redux/actions/cagnote.action";
+import { CagnoteItem } from "../cagnote/CagnoteItem";
+import { UserModel } from "../../models/user.model";
+import { AnimalModel } from "../../models/animal.model";
 
-interface ModalGenericProps {
-  isVisible: boolean;
-  setIsVisible: Function;
-  submit: Function;
-  inputModals: ItemInputModalsModel[];
-  windowWidth: number;
+interface AnimalModalCagnoteProps {
   btnContent: string;
+  animal: AnimalModel;
   theme: Record<string, string>;
-  user: UserModel;
+  cagnote: CagnoteModel;
 }
+const windowWidth = Dimensions.get("window").width;
 
-export default function ModalGeneric(props: ModalGenericProps) {
-  const {
-    user,
-    isVisible,
-    setIsVisible,
-    submit,
-    inputModals,
-    windowWidth,
-    btnContent,
-    theme,
-  } = props;
+export const AnimalModalCagnote = (props: AnimalModalCagnoteProps) => {
+  const { animal, btnContent, theme, cagnote } = props;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const isOnPhone =
-    Platform.OS === "android" ||
-    Platform.OS === "ios" ||
-    Platform.OS === "macos";
+  //@ts-ignore
+  const user: UserModel = useSelector((state) => state.userReducer.user);
+  console.log(user);
+
   return (
     <View style={styles.modalCenteredView}>
       <Modal
         animationType="slide"
         transparent={true}
-        visible={isVisible}
+        visible={isModalOpen}
         onRequestClose={(): void => {
-          setIsVisible(!isVisible);
+          setIsModalOpen(!isModalOpen);
         }}
       >
         <View style={styles.modalCenteredView}>
@@ -55,27 +46,18 @@ export default function ModalGeneric(props: ModalGenericProps) {
               },
             ]}
           >
-            <FlatList
-              keyExtractor={(item) => item.headerInput}
-              data={inputModals}
-              renderItem={(item) => (
-                <InputModalSettings
-                  submit={submit}
-                  theme={theme}
-                  inputModals={item}
-                  windowWidth={windowWidth}
-                  isVisible={isVisible}
-                  setIsVisible={setIsVisible}
-                />
-              )}
+            <CagnoteItem
+              theme={theme}
+              item={{ ...cagnote }}
+              fromScreen={false}
+              user={user}
             />
-
             <View style={styles.modalBtnContainer}>
               <ButtonModal
+                showValidate={false}
                 theme={theme}
-                setIsVisible={setIsVisible}
-                isVisible={isVisible}
-                submit={submit}
+                isVisible={isModalOpen}
+                setIsVisible={setIsModalOpen}
               />
             </View>
           </View>
@@ -83,16 +65,14 @@ export default function ModalGeneric(props: ModalGenericProps) {
       </Modal>
       <Button
         mode="contained"
-        disabled={user?.id === ""}
         style={[
           styles.modal,
           {
-            alignSelf: btnContent === "Connexion" ? "center" : "flex-end",
             backgroundColor: theme.buttonBackground,
             borderColor: theme.buttonBorderColor,
           },
         ]}
-        onPress={() => setIsVisible(true)}
+        onPress={() => setIsModalOpen(true)}
       >
         <WrapperText
           text={btnContent}
@@ -100,13 +80,13 @@ export default function ModalGeneric(props: ModalGenericProps) {
           customStyle={[styles.modalBtnText, { color: theme.buttonColorText }]}
         ></WrapperText>
       </Button>
-      {isOnPhone}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   modalCenteredView: {
+    width: "100%",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -133,7 +113,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   modal: {
-    width: 150,
+    width: "50%",
     borderRadius: 20,
     padding: 5,
   },

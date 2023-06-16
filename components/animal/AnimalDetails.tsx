@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimalModel } from "../../models/animal.model";
 import { View, StyleSheet } from "react-native";
 import WrapperText from "../wrappers/WrapperText";
 import { AnimalCarousel } from "./slider/AnimalCarousel";
 import { ScrollView } from "react-native-gesture-handler";
+import { AnimalModalCagnote } from "./AnimalModalCagnote";
+import { CagnoteModel } from "../../models/cagnote.model";
+import { useDispatch, useSelector } from "react-redux";
+import { getCagnoteById } from "../../redux/actions/cagnote.action";
 
 const styles = StyleSheet.create({
   detailsView: {
@@ -69,6 +73,22 @@ export default function AnimalDetails(props) {
   };
 
   const Row = ({ children }) => <View style={styles.row}>{children}</View>;
+
+  const cagnote: CagnoteModel = useSelector(
+    //@ts-ignore
+    (state) => state.cagnoteReducer.cagnote
+  );
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const loadAnimalCagnote = async () => {
+      //@ts-ignore
+      await dispatch(getCagnoteById(animal.id));
+    };
+    loadAnimalCagnote();
+  }, [dispatch]);
+
+  console.log(cagnote);
 
   return (
     <ScrollView style={{ backgroundColor: theme.background }}>
@@ -172,6 +192,17 @@ export default function AnimalDetails(props) {
               </Col>
             </Row>
           </View>
+
+          {cagnote !== null && cagnote?.id !== null ? (
+            <AnimalModalCagnote
+              cagnote={cagnote}
+              animal={animal}
+              theme={theme}
+              btnContent="Participate to the kitty"
+            />
+          ) : (
+            <View></View>
+          )}
         </View>
       </View>
     </ScrollView>

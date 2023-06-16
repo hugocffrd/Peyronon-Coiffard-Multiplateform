@@ -103,4 +103,13 @@ public class CagnoteService {
     return new Cagnote(id, animal, users, amount);
   }
 
+  public Cagnote getCagnoteByAnimalId(String id) {
+    CagnoteEntity cagnoteByAnimalId = cagnoteRepository.getCagnoteByAnimalId(id);
+    if (cagnoteByAnimalId != null) {
+      return cagnoteMapper.mapDto(cagnoteByAnimalId);
+    } else {
+      return new Cagnote();
+    }
+  }
+
 }

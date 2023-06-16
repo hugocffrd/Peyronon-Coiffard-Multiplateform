@@ -2,25 +2,21 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Card, TextInput, Button } from "react-native-paper";
 import { useDispatch } from "react-redux";
-import { AnimalModel } from "../../models/animal.model";
+import { CagnoteModel } from "../../models/cagnote.model";
 import { UserModel } from "../../models/user.model";
 import { updateCagnote } from "../../redux/actions/cagnote.action";
 import WrapperText from "../wrappers/WrapperText";
 
 interface CagnoteItemProps {
-  item: {
-    id: string;
-    amount: number;
-    animal: AnimalModel;
-    users: UserModel[];
-  };
+  item: CagnoteModel;
   user: UserModel;
   theme: Record<string, string>;
+  fromScreen: boolean;
 }
 
 export const CagnoteItem = (props: CagnoteItemProps) => {
   const { amount, animal, users, id } = props.item;
-  const { user, theme } = props;
+  const { user, theme, fromScreen } = props;
   const [donationAmount, setDonationAmount] = useState("");
   const dispatch = useDispatch();
 
@@ -30,7 +26,15 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
     dispatch(updateCagnote(id, donationAmount, user.id));
   };
   return (
-    <Card style={[styles.card, { backgroundColor: theme.itemBlock }]}>
+    <Card
+      style={[
+        styles.card,
+        {
+          backgroundColor: theme.itemBlock,
+          width: fromScreen ? "49%" : "100%",
+        },
+      ]}
+    >
       <Card.Content>
         <View style={styles.row}>
           <View style={styles.leftColumn}>
@@ -57,7 +61,7 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
                 value={donationAmount}
                 onChangeText={setDonationAmount}
                 keyboardType="numeric"
-                editable={user.email !== ""}
+                editable={user.id !== ""}
               />
               <Button
                 mode="contained"
@@ -69,7 +73,7 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
                     borderColor: theme.buttonBorderColor,
                   },
                 ]}
-                disabled={user.email === ""}
+                disabled={user.id === ""}
               >
                 <WrapperText
                   size={15}
@@ -97,7 +101,6 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: "49%",
     marginBottom: 10,
     marginHorizontal: 10,
   },

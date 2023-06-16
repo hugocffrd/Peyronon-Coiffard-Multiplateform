@@ -10,7 +10,6 @@ export interface UserModel {
 }
 
 export interface UserParam extends UserModel {
-  animals: AnimalModel[];
   animal?: AnimalModel;
   animalIds?: string[];
   newPassword?: string;

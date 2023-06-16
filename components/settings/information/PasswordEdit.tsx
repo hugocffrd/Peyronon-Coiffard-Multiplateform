@@ -42,7 +42,7 @@ export const PasswordEdit = (props: PasswordEditProps) => {
     <View style={styles.informations}>
       <WrapperText
         customStyle={[styles.informationsText, { color: theme.textPrimary }]}
-        text={user?.email === "" ? "" : "Password: "}
+        text={user?.id === "" ? "" : "Password: "}
         size={18}
       />
       <WrapperText

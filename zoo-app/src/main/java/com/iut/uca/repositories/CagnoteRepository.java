@@ -2,10 +2,14 @@ package com.iut.uca.repositories;
 
 import com.iut.uca.configuration.Configuration;
 import com.iut.uca.configuration.ConfigurationCagnote;
+import com.iut.uca.configuration.ConfigurationUser;
+import com.iut.uca.repositories.entity.AnimalId;
 import com.iut.uca.repositories.entity.CagnoteEntity;
+import com.iut.uca.repositories.entity.UserId;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Indexes;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
@@ -66,5 +70,10 @@ public class CagnoteRepository implements IRepository<CagnoteEntity> {
   public void delete(String id) {
     Document document = new Document(ConfigurationCagnote.ID, new ObjectId(id));
     getCollection().deleteOne(document);
+  }
+
+  public CagnoteEntity getCagnoteByAnimalId(String id) {
+    Document filter = new Document(ConfigurationCagnote.ANIMAL_ID +"._id", new ObjectId(id));
+    return getCollection().find(filter).first();
   }
 }

@@ -1,4 +1,4 @@
-import { FETCH_CAGNOTES, UPDATE_CAGNOTE } from "../constants";
+import { FETCH_CAGNOTE, FETCH_CAGNOTES, UPDATE_CAGNOTE } from "../constants";
 
 const initialState = [];
 
@@ -10,10 +10,22 @@ export const cagnoteReducer = (state = initialState, action) => {
         cagnotes: action.payload,
       };
     case UPDATE_CAGNOTE:
+      const updatedCagnotes = action.payload;
+      const updatedCagnote = updatedCagnotes.find(
+        //@ts-ignore
+        (cagnote) => cagnote.id === state.cagnote.id
+      );
       return {
         ...state,
-        cagnotes: action.payload,
+        cagnotes: updatedCagnotes,
+        cagnote: updatedCagnote,
       };
+    case FETCH_CAGNOTE: {
+      return {
+        ...state,
+        cagnote: action.payload,
+      };
+    }
     default:
       return state;
   }

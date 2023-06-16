@@ -13,7 +13,7 @@ export const connectUser = (email: string, password: string) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        ` http://localhost:8080/api/user/getUserForConnexion`,
+        `http://localhost:8080/api/user/getUserForConnexion`,
         {
           method: "POST",
           headers: {
@@ -22,10 +22,15 @@ export const connectUser = (email: string, password: string) => {
           body: JSON.stringify({ email, password }),
         }
       );
-      const userJson = await response.json();
-      dispatch(submitForm(userJson));
+
+      if (response.ok) {
+        const userJson = await response.json();
+        dispatch(submitForm(userJson));
+      } else {
+        throw new Error("Fetch request failed");
+      }
     } catch (error) {
-      console.log("Error call API : " + error);
+      console.log("Error call API: " + error);
       alert("Error while connection");
     }
   };
@@ -35,7 +40,7 @@ export const changePassword = (user: UserModel, newPassword: string) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        ` http://localhost:8080/api/user/changePassword`,
+        `http://localhost:8080/api/user/changePassword`,
         {
           method: "PUT",
           headers: {
@@ -48,10 +53,15 @@ export const changePassword = (user: UserModel, newPassword: string) => {
           }),
         }
       );
-      const userJson = await response.json();
-      dispatch(submitForm(userJson));
+
+      if (response.ok) {
+        const userJson = await response.json();
+        dispatch(submitForm(userJson));
+      } else {
+        throw new Error("Fetch request failed");
+      }
     } catch (error) {
-      console.log("Error call API : " + error);
+      console.log("Error call API: " + error);
       alert("Error while changing password");
     }
   };
@@ -87,10 +97,15 @@ export const updateFavorite = (
         }
       );
 
-      const newFavorite = await response.json();
-      dispatch(updateNewFavorite(newFavorite));
+      if (response.ok) {
+        const newFavorite = await response.json();
+        dispatch(updateNewFavorite(newFavorite));
+      } else {
+        throw new Error("Fetch request failed");
+      }
     } catch (error) {
       console.log("Error calling API: " + error);
+      alert("Error while updating favorite");
     }
   };
 };

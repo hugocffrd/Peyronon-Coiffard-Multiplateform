@@ -5,6 +5,7 @@ import { userReducer } from "./reducers/user.reducer";
 
 export const initialState = {
   user: {
+    id: "",
     name: "",
     surname: "",
     password: "",

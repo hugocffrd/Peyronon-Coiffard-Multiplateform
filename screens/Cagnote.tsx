@@ -46,7 +46,12 @@ export const Cagnote = (props) => {
       <FlatList
         data={cagnotes}
         renderItem={(item) => (
-          <CagnoteItem theme={theme} user={user} item={item.item} />
+          <CagnoteItem
+            theme={theme}
+            user={user}
+            item={item.item}
+            fromScreen={true}
+          />
         )}
         keyExtractor={(item, index) => index.toString()}
         numColumns={numColumns}

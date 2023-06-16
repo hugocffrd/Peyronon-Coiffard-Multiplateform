@@ -52,4 +52,10 @@ public class CagnoteController {
     cagnoteService.deleteCagnote(id);
   }
 
+  @GET
+  @Path("/getByAnimalId/{id}")
+  public Cagnote getCagnoteByAnimalId(@PathParam("id") String id) {
+    return cagnoteService.getCagnoteByAnimalId(id);
+  }
+
 }
