@@ -68,10 +68,12 @@ export default function AnimalCard(props: AnimalCardProps) {
                 String(animal.images[0])
               ))}
               style={styles.image}
+              testID="animal-image"
             />
           ) : (
             <Card.Cover
-              source={require("../assets/Animals/GenericFaceLogo.jpg")} //Image when no image is available
+              testID="animal-image"
+              source={require("../assets/Animals/GenericFaceLogo.jpg")}
               style={styles.image}
             />
           )}
@@ -82,23 +84,26 @@ export default function AnimalCard(props: AnimalCardProps) {
               customStyle={[styles.textPadding, { color: theme.textPrimary }]}
               text={animal?.name}
               size={35}
+              testId="animal-name"
             />
             <WrapperText
               customStyle={[styles.textPadding, { color: theme.textSecondary }]}
               text={animal?.typeAnimal}
               size={25}
+              testId="animal-typeAnimal"
             />
           </View>
         </View>
 
         {user && user.email !== "" ? (
           <Ionicons
+            testID="yellow-star"
             name="star"
             size={30}
             color={yellowStar ? "yellow" : "white"}
           />
         ) : (
-          <Ionicons name="" size={0} color="white" />
+          <Ionicons testID="yellow-star" name="" size={0} color="white" />
         )}
       </View>
     </Card>
