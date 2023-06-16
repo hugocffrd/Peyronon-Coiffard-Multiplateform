@@ -30,12 +30,7 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-
-  const STUBDATA = [
-    AnimalCard,
-    AnimalCard,
-    AnimalCard,
-  ];
+  const STUBDATA = [AnimalCard, AnimalCard, AnimalCard];
 
   const { windowWidth, theme, navigation } = props;
   const getNumberOfColumns = () => {
@@ -69,7 +64,9 @@ export default function Home(props: HomeProps) {
 
   //The parent node of FlatList needs to have flex:1 to enable scroll on web
   return (
-    <SafeAreaView style={[styles.container]}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.background }]}
+    >
       <Search animals={list} navigation={navigation} />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <FlatList
