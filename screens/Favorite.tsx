@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, SafeAreaView } from "react-native";
+import { Dimensions, SafeAreaView, VirtualizedList } from "react-native";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { FavoriteItem } from "../components/favorite/FavoriteItem";
 import { updateFavorite } from "../redux/actions/user.action";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface FavoriteProps {
   windowWidth: number;
@@ -14,27 +15,36 @@ interface FavoriteProps {
 
 export default function Favorite(props: FavoriteProps) {
   const { windowWidth, theme } = props;
-  const getNumberOfColumns = () => {
-    const itemWidth = 200;
-    const minItemMargin = 100;
-    const availableWidth = windowWidth - minItemMargin;
-    const maxColumns = 2;
-    const minColumns = 1;
-    const numColumns = Math.floor(availableWidth / itemWidth);
-    numColumns;
-    return Math.max(minColumns, Math.min(numColumns, maxColumns));
-  };
 
-  const [numColumns, setNumColumns] = useState(getNumberOfColumns());
+   //Store favorites in local storage
+   const storeFavoriteAnimals = async (fav) => {
+    try {
+      const jsonFavorites = JSON.stringify(fav)
+      await AsyncStorage.setItem('favorite_animals', jsonFavorites);
+    } catch (e) {
+      console.log("An error occurred", e);
+    }
+  }
+
+  //Get favorites from local storage
+  const getFavoriteAnimals = async () => {
+    try {
+      const jsonFavorites = await AsyncStorage.getItem('favorite_animals')
+      return jsonFavorites != null ? JSON.parse(jsonFavorites) : null;
+    } catch(e) {
+      console.log("An error occurred", e);
+    }
+  }
+
+  const [localFavorites, setLocalFavorites] = useState(getFavoriteAnimals());
 
   //@ts-ignore
   const user = useSelector((state) => state.userReducer.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    Dimensions.addEventListener("change", () => {
-      setNumColumns(getNumberOfColumns());
-    });
+    storeFavoriteAnimals(user.animals);
+    setLocalFavorites(getFavoriteAnimals());
   }, []);
 
   const handleDeleteFavoritePress = (item): void => {
@@ -47,10 +57,11 @@ export default function Favorite(props: FavoriteProps) {
       style={[styles.container, { backgroundColor: theme.background }]}
     >
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <FlatList
+        <VirtualizedList
           showsVerticalScrollIndicator={false}
-          data={user.animals}
-          numColumns={numColumns}
+          data={user?.animals}
+          getItem={(data, index) => data[index]}
+          getItemCount={data => data.length}
           renderItem={({ item }) => (
             <FavoriteItem
               theme={theme}
