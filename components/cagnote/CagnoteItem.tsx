@@ -11,12 +11,11 @@ interface CagnoteItemProps {
   item: CagnoteModel;
   user: UserModel;
   theme: Record<string, string>;
-  fromScreen: boolean;
 }
 
 export const CagnoteItem = (props: CagnoteItemProps) => {
   const { amount, animal, users, id } = props.item;
-  const { user, theme, fromScreen } = props;
+  const { user, theme } = props;
   const [donationAmount, setDonationAmount] = useState("");
   const dispatch = useDispatch();
 
@@ -31,7 +30,7 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
         styles.card,
         {
           backgroundColor: theme.itemBlock,
-          width: fromScreen ? "49%" : "100%",
+          width: "95%",
         },
       ]}
     >

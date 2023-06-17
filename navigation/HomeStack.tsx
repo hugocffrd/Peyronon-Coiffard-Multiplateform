@@ -11,10 +11,11 @@ interface StackNavigationProps {
 const Stack = createStackNavigator();
 export default function StackNavigation(props: StackNavigationProps) {
   const { theme, windowWidth } = props;
+
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name="Animal home"
         options={{
           headerStyle: {
             backgroundColor: theme.navigation,
@@ -25,17 +26,22 @@ export default function StackNavigation(props: StackNavigationProps) {
             color: theme.navigationText,
           },
         }}
+        initialParams={{
+          theme: theme,
+          windowWidth: windowWidth,
+        }}
       >
         {(navigation) => (
           <Home
-            theme={theme}
-            windowWidth={windowWidth}
             navigation={navigation}
+            windowWidth={windowWidth}
+            theme={theme}
           />
         )}
       </Stack.Screen>
       <Stack.Screen
         name="Details"
+        component={AnimalDetails}
         options={{
           title: "Details",
           headerStyle: {
@@ -47,11 +53,11 @@ export default function StackNavigation(props: StackNavigationProps) {
             color: theme.navigationText,
           },
         }}
-      >
-        {(navigation) => (
-          <AnimalDetails theme={theme} navigation={navigation} />
-        )}
-      </Stack.Screen>
+        initialParams={{
+          theme: theme,
+          windowWidth: windowWidth,
+        }}
+      ></Stack.Screen>
     </Stack.Navigator>
   );
 }

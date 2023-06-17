@@ -8,7 +8,10 @@ interface CarouselItemProps {
 }
 
 export const CarouselItem = (props: CarouselItemProps) => {
+  console.log(props);
+  
   const { item } = props;
+  let image = item.item;
   return (
     <View
       style={{
@@ -18,7 +21,7 @@ export const CarouselItem = (props: CarouselItemProps) => {
       }}
     >
       <Image
-        source={require("../../../assets/Animals/".concat(String(item.item)))}
+        source={{uri: image}}
         style={styles.itemImage}
       />
     </View>

@@ -1,5 +1,15 @@
 import { SUBMIT_CONNEXION, UPDATE_FAVORIS } from "../constants";
-import { initialState } from "../store";
+
+export const initialState = {
+  user: {
+    id: "",
+    name: "",
+    surname: "",
+    password: "",
+    email: "",
+    animals: [],
+  },
+};
 
 export const userReducer = (state = initialState, action) => {
   switch (action.type) {

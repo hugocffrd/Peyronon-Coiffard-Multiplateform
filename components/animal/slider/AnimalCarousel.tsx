@@ -18,8 +18,6 @@ export const AnimalCarousel = (props: AnimalCarouselProps) => {
       height={width / 1.2}
       data={animal?.images}
       renderItem={(item) => <CarouselItem item={item} />}
-      autoPlay={true}
-      autoPlayInterval={4000}
     />
   );
 };

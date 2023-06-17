@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Card, Paragraph, Searchbar } from "react-native-paper";
-import { useDispatch } from "react-redux";
 import { AnimalModel } from "../../models/animal.model";
 
 interface SearchProps {
@@ -11,20 +10,10 @@ interface SearchProps {
 
 export const Search = (props: SearchProps) => {
   const { animals, navigation } = props;
-  const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [filteredAnimals, setFilteredAnimals] = useState<AnimalModel[]>([]);
 
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      //@ts-ignore
-      dispatch(search(searchText));
-    }, 1000);
-
-    return () => clearTimeout(delay);
-  }, [searchText, dispatch]);
-
-  const handleInputChange = (text) => {
+  const handleInputChange = (text): void => {
     setSearchText(text);
     setFilteredAnimals(
       animals.filter((animal) =>
@@ -33,7 +22,7 @@ export const Search = (props: SearchProps) => {
     );
   };
 
-  const goToAnimalDetail = (animal: AnimalModel) => {
+  const goToAnimalDetail = (animal: AnimalModel): void => {
     navigation.navigation.navigate("Details", { animal });
     setSearchText("");
   };

@@ -25,10 +25,10 @@ export default function InputModalSettings(props: InputModalProps) {
       <WrapperText
         customStyle={[styles.modalLabelText, { color: theme.modalText }]}
         text={props.inputModals.item.headerInput}
-        size={props.windowWidth * 0.01}
+        size={20}
       />
       <TextInput
-        style={[styles.modalTextInput, { width: props.windowWidth * 0.4 }]}
+        style={[styles.modalTextInput, { width: props.windowWidth * 0.5 }]}
         value={props.inputModals.item.value}
         secureTextEntry={props.inputModals.item.secureTextEntry}
         placeholder={props.inputModals.item.placeholder}

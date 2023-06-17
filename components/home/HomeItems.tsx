@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 5,
     paddingVertical: 5,
-    justifyContent: "space-between",
   },
 });
 
@@ -56,7 +55,7 @@ export const HomeItems = (props: HomeItemsProps) => {
     <View
       style={[styles.flatListContainer, { backgroundColor: theme.background }]}
     >
-      {user.email !== "" ? (
+      {user.id !== "" ? (
         <Swipeable ref={swipeableRef} renderLeftActions={renderLeftActions}>
           <TouchableOpacity
             activeOpacity={0.5}

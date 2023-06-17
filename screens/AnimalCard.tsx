@@ -17,18 +17,13 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
-    width: "100%",
   },
   leftContainer: {
+    flex: 1,
     margin: 5,
-    verticalAlign: "middle",
   },
   rightContainer: {
-    display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
   },
   image: {
     width: 100,
@@ -36,14 +31,18 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   textContainer: {
-    flex: 1,
-    alignItems: "center",
-    display: "flex",
+    flex: 0.7,
     flexDirection: "column",
+    margin: 3,
   },
   textPadding: {
-    paddingVertical: 10,
+    paddingVertical: 3,
     textAlign: "center",
+    flexWrap: "wrap",
+  },
+  icons: {
+    display: "flex",
+    flex: 0.4,
   },
 });
 
@@ -60,20 +59,18 @@ export default function AnimalCard(props: AnimalCardProps) {
 
   return (
     <Card style={{ backgroundColor: theme.itemBlock }}>
-      <View style={styles.boxContainer}>
+      <View style={[styles.boxContainer]}>
         <View style={styles.leftContainer}>
           {animal.images[0] ? (
             <Card.Cover
-              source={require("../assets/Animals/".concat(
-                String(animal.images[0])
-              ))}
-              style={styles.image}
               testID="animal-image"
+              source={{ uri: animal.images[0] }}
+              style={styles.image}
             />
           ) : (
             <Card.Cover
               testID="animal-image"
-              source={require("../assets/Animals/GenericFaceLogo.jpg")}
+              source={{ uri: "GenericFaceLogo.jpg" }}
               style={styles.image}
             />
           )}
@@ -83,13 +80,13 @@ export default function AnimalCard(props: AnimalCardProps) {
             <WrapperText
               customStyle={[styles.textPadding, { color: theme.textPrimary }]}
               text={animal?.name}
-              size={35}
+              size={25}
               testId="animal-name"
             />
             <WrapperText
               customStyle={[styles.textPadding, { color: theme.textSecondary }]}
               text={animal?.typeAnimal}
-              size={25}
+              size={18}
               testId="animal-typeAnimal"
             />
           </View>
@@ -97,13 +94,20 @@ export default function AnimalCard(props: AnimalCardProps) {
 
         {user && user.email !== "" ? (
           <Ionicons
+            style={styles.icons}
             testID="yellow-star"
             name="star"
             size={30}
             color={yellowStar ? "yellow" : "white"}
           />
         ) : (
-          <Ionicons testID="yellow-star" name="" size={0} color="white" />
+          <Ionicons
+            style={styles.icons}
+            testID="yellow-star"
+            name=""
+            size={0}
+            color="white"
+          />
         )}
       </View>
     </Card>

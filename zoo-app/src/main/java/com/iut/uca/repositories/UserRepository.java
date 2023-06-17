@@ -5,6 +5,7 @@ import static com.mongodb.client.model.Filters.in;
 import com.iut.uca.configuration.Configuration;
 import com.iut.uca.configuration.ConfigurationUser;
 import com.iut.uca.repositories.entity.UserEntity;
+import com.mongodb.client.ClientSession;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -35,6 +36,18 @@ public class UserRepository implements IRepository<UserEntity>{
         .append(ConfigurationUser.EMAIL, entity.getEmail())
         .append(ConfigurationUser.PASSWORD, entity.getPassword())
         .append(ConfigurationUser.ANIMALIDS, entity.getAnimalIds());
+    ClientSession session = mongoClient.startSession();
+    try {
+      session.startTransaction();
+      collection.insertOne(session, document);
+      session.commitTransaction();
+    } catch (Exception e) {
+      session.abortTransaction();
+      throw e;
+    } finally {
+      session.close();
+    }
+
     collection.insertOne(document);
     return entity;
   }

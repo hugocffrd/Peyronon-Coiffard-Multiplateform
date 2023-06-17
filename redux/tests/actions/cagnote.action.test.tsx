@@ -44,14 +44,12 @@ const users: UserModel[] = [
     animals: [],
   },
 ];
-const cagnoteList: CagnoteModel[] = [
-  {
-    users: users,
-    animal: animalSelected,
-    amount: 100,
-  },
-];
-
+const cagnoteList: CagnoteModel = {
+  users: users,
+  animal: animalSelected,
+  amount: 100,
+  id: "1",
+};
 describe("Cagnote Actions", () => {
   it("should create an action to fetch cagnote", () => {
     const expectedAction = {
@@ -101,7 +99,7 @@ describe("Cagnote Actions", () => {
     const amountToAdd = 50;
     const idUserToAdd = "2";
 
-    const updatedCagnoteList: CagnoteModel[] = cagnoteList;
+    const updatedCagnoteList: CagnoteModel[] = [cagnoteList];
 
     const expectedActions = [
       {

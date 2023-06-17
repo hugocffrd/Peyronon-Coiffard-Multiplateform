@@ -8,18 +8,10 @@ import { getAnimals } from "../redux/actions/home.action";
 import { HomeItems } from "../components/home/HomeItems";
 import { Search } from "../components/wrappers/Search";
 import { AnimalModel } from "../models/animal.model";
-import AnimalCard from "./AnimalCard";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  item: {
-    width: "100%",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 5,
   },
 });
 
@@ -30,8 +22,6 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-  const STUBDATA = [AnimalCard, AnimalCard, AnimalCard];
-
   const { windowWidth, theme, navigation } = props;
   const getNumberOfColumns = () => {
     const itemWidth = 200;
@@ -68,7 +58,7 @@ export default function Home(props: HomeProps) {
       style={[styles.container, { backgroundColor: theme.background }]}
     >
       <Search animals={list} navigation={navigation} />
-      <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={styles.container}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={list}

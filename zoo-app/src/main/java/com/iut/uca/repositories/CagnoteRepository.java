@@ -6,6 +6,7 @@ import com.iut.uca.configuration.ConfigurationUser;
 import com.iut.uca.repositories.entity.AnimalId;
 import com.iut.uca.repositories.entity.CagnoteEntity;
 import com.iut.uca.repositories.entity.UserId;
+import com.mongodb.client.ClientSession;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -35,7 +36,18 @@ public class CagnoteRepository implements IRepository<CagnoteEntity> {
         .append(ConfigurationCagnote.AMOUNT, entity.getAmount())
         .append(ConfigurationCagnote.ANIMAL_ID, entity.getAnimalId())
         .append(ConfigurationCagnote.USER_IDS, entity.getUserIds());
-    collection.insertOne(document);
+
+    ClientSession session = mongoClient.startSession();
+    try {
+      session.startTransaction();
+      collection.insertOne(session, document);
+      session.commitTransaction();
+    } catch (Exception e) {
+      session.abortTransaction();
+      throw e;
+    } finally {
+      session.close();
+    }
     return entity;
   }
   @Override

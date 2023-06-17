@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Dimensions, Modal, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import WrapperText from "../wrappers/WrapperText";
 import { ButtonModal } from "../wrappers/ButtonModal";
 import { CagnoteModel } from "../../models/cagnote.model";
-import { useDispatch, useSelector } from "react-redux";
-import { getCagnoteById } from "../../redux/actions/cagnote.action";
+import { useSelector } from "react-redux";
 import { CagnoteItem } from "../cagnote/CagnoteItem";
 import { UserModel } from "../../models/user.model";
 import { AnimalModel } from "../../models/animal.model";
@@ -24,7 +23,6 @@ export const AnimalModalCagnote = (props: AnimalModalCagnoteProps) => {
 
   //@ts-ignore
   const user: UserModel = useSelector((state) => state.userReducer.user);
-  console.log(user);
 
   return (
     <View style={styles.modalCenteredView}>
@@ -46,12 +44,7 @@ export const AnimalModalCagnote = (props: AnimalModalCagnoteProps) => {
               },
             ]}
           >
-            <CagnoteItem
-              theme={theme}
-              item={{ ...cagnote }}
-              fromScreen={false}
-              user={user}
-            />
+            <CagnoteItem theme={theme} item={{ ...cagnote }} user={user} />
             <View style={styles.modalBtnContainer}>
               <ButtonModal
                 showValidate={false}
@@ -93,7 +86,6 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalContent: {
-    backgroundColor: "white",
     borderRadius: 20,
     padding: 35,
     alignItems: "center",

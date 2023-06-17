@@ -1,6 +1,8 @@
 import { AnimalModel } from "../../models/animal.model";
 import { UserModel, UserParam } from "../../models/user.model";
+import { config } from "../../settings";
 import { SUBMIT_CONNEXION, UPDATE_FAVORIS } from "../constants";
+const machineIP = config.ipMachine;
 
 export const submitForm = (user: UserModel) => {
   return {
@@ -13,7 +15,7 @@ export const connectUser = (email: string, password: string) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/user/getUserForConnexion`,
+        `http://${machineIP}:8080/api/user/getUserForConnexion`,
         {
           method: "POST",
           headers: {
@@ -40,7 +42,7 @@ export const changePassword = (user: UserModel, newPassword: string) => {
   return async (dispatch) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/user/changePassword`,
+        `http://${machineIP}:8080/api/user/changePassword`,
         {
           method: "PUT",
           headers: {
@@ -87,7 +89,7 @@ export const updateFavorite = (
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/user/${user.id}`,
+        `http://${machineIP}:8080/api/user/${user.id}`,
         {
           method: "PUT",
           headers: {

@@ -7,6 +7,7 @@ import com.iut.uca.enums.GeoLocation;
 import com.iut.uca.enums.Status;
 import com.iut.uca.repositories.entity.AnimalEntity;
 import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.ClientSession;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
@@ -42,7 +43,17 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
         .append(ConfigurationAnimal.GESTATION, entity.getGestation())
         .append(ConfigurationAnimal.NB_KID, entity.getNbKid())
         .append(ConfigurationAnimal.IMAGES, entity.getImages());
-    collection.insertOne(document);
+    ClientSession session = mongoClient.startSession();
+    try {
+      session.startTransaction();
+      collection.insertOne(session, document);
+      session.commitTransaction();
+    } catch (Exception e) {
+      session.abortTransaction();
+      throw e;
+    } finally {
+      session.close();
+    }
     return entity;
   }
 
@@ -64,17 +75,29 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
 
   @Override
   public AnimalEntity update(String id, AnimalEntity updatedAnimal) {
-    final Document query = new Document(ConfigurationAnimal.ID, new ObjectId(String.valueOf(id)));
-    final Document updatedDocument = new Document(Configuration.$SET, new Document()
-        .append(ConfigurationAnimal.NAME, updatedAnimal.getName())
-        .append(ConfigurationAnimal.TYPE_ANIMAL, updatedAnimal.getTypeAnimal())
-        .append(ConfigurationAnimal.LONGEVITY, updatedAnimal.getLongevity())
-        .append(ConfigurationAnimal.GESTATION, updatedAnimal.getGestation())
-        .append(ConfigurationAnimal.STATUS, updatedAnimal.getStatus())
-        .append(ConfigurationAnimal.NB_KID, updatedAnimal.getNbKid())
-        .append(ConfigurationAnimal.IMAGES, updatedAnimal.getImages()));
-    getCollection().updateOne(query, updatedDocument);
-    return getCollection().find(query).first();
+    ClientSession session = mongoClient.startSession();
+    try {
+      session.startTransaction();
+
+      final Document query = new Document(ConfigurationAnimal.ID, new ObjectId(String.valueOf(id)));
+      final Document updatedDocument = new Document(Configuration.$SET, new Document()
+          .append(ConfigurationAnimal.NAME, updatedAnimal.getName())
+          .append(ConfigurationAnimal.TYPE_ANIMAL, updatedAnimal.getTypeAnimal())
+          .append(ConfigurationAnimal.LONGEVITY, updatedAnimal.getLongevity())
+          .append(ConfigurationAnimal.GESTATION, updatedAnimal.getGestation())
+          .append(ConfigurationAnimal.STATUS, updatedAnimal.getStatus())
+          .append(ConfigurationAnimal.NB_KID, updatedAnimal.getNbKid())
+          .append(ConfigurationAnimal.IMAGES, updatedAnimal.getImages()));
+      getCollection().updateOne(session, query, updatedDocument);
+
+      session.commitTransaction();
+      return getCollection().find(query).first();
+    } catch (Exception e) {
+      session.abortTransaction();
+      throw e;
+    } finally {
+      session.close();
+    }
   }
 
   @Override

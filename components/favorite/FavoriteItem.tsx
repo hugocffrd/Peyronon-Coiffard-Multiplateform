@@ -16,8 +16,12 @@ const styles = StyleSheet.create({
 });
 
 export const FavoriteItem = (props) => {
+  const { theme } = props;
   const handlePress = (item: AnimalModel): void => {
-    props.navigation.navigation.navigate("Details", { animal: item });
+    props.navigation.navigation.navigate("Details", {
+      animal: item,
+      theme: theme,
+    });
   };
 
   const renderRightActions = (progress, dragX) => {
@@ -38,7 +42,7 @@ export const FavoriteItem = (props) => {
           activeOpacity={0.5}
           onPress={() => handlePress(props.item)}
         >
-          <AnimalCard theme={props.theme} animal={props.item} />
+          <AnimalCard theme={props.theme} animal={props.item} user={undefined} />
         </TouchableOpacity>
       </Swipeable>
     </View>

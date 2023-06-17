@@ -16,7 +16,7 @@ export default function CagnoteStack(props: CagnoteStackProps) {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Kitty"
+        name="Animals kitty"
         options={{
           headerStyle: {
             backgroundColor: theme.navigation,

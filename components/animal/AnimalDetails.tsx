@@ -36,15 +36,14 @@ const styles = StyleSheet.create({
     backgroundColor: "transparents",
     alignItems: "center",
     marginBottom: 3,
-    paddingHorizontal: 10,
   },
   titleText: {
     fontWeight: "bold",
-    fontSize: 24,
+    fontSize: 20,
   },
   subtitleText: {
     fontWeight: "300",
-    fontSize: 18,
+    fontSize: 16,
   },
   grid: {
     flex: 2,
@@ -65,8 +64,10 @@ const styles = StyleSheet.create({
 });
 
 export default function AnimalDetails(props) {
-  const animal = props.navigation.route.params.animal as AnimalModel;
-  const { theme } = props;
+  const animal =
+    (props?.route?.params?.animal as AnimalModel) ||
+    (props.navigation.route.params.animal as AnimalModel);
+  const { theme } = props?.route?.params || props.navigation.route.params;
 
   const Col = ({ numRows, children }) => {
     return <View style={styles[`${numRows}col`]}>{children}</View>;
@@ -87,8 +88,6 @@ export default function AnimalDetails(props) {
     };
     loadAnimalCagnote();
   }, [dispatch]);
-
-  console.log(cagnote);
 
   return (
     <ScrollView style={{ backgroundColor: theme.background }}>

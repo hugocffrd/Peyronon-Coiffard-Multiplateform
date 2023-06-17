@@ -18,6 +18,29 @@ export default function Navigation() {
 
   const windowWidth = Dimensions.get("window").width;
 
+  const NavigationFavoriteStack = () => {
+    return <FavoriteStack theme={theme} />;
+  };
+
+  const NavigationHomeStack = () => {
+    return <HomeStack windowWidth={windowWidth} theme={theme} />;
+  };
+
+  const NavigationCagnoteStack = () => {
+    return <CagnoteStack theme={theme} />;
+  };
+
+  const NavigationSettings = () => {
+    return (
+      <Settings
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        theme={theme}
+        windowWidth={windowWidth}
+      />
+    );
+  };
+
   return (
     <Provider store={store}>
       <Tab.Navigator
@@ -72,28 +95,26 @@ export default function Navigation() {
       >
         <Tab.Screen
           name="Favorites"
-          component={() => <FavoriteStack theme={theme} />}
+          component={NavigationFavoriteStack}
           options={{ headerShown: false }}
         />
         <Tab.Screen
           name="Home"
-          component={() => (
-            <HomeStack windowWidth={windowWidth} theme={theme} />
-          )}
+          component={NavigationHomeStack}
           options={{
             headerShown: false,
           }}
         />
         <Tab.Screen
           name="Kitty"
-          component={() => <CagnoteStack theme={theme} />}
+          component={NavigationCagnoteStack}
           options={{
             headerShown: false,
           }}
-          
         />
         <Tab.Screen
           name="Settings"
+          component={NavigationSettings}
           options={{
             headerStyle: {
               backgroundColor: theme.navigation,
@@ -104,16 +125,7 @@ export default function Navigation() {
               color: theme.navigationText,
             },
           }}
-        >
-          {() => (
-            <Settings
-              isDarkMode={isDarkMode}
-              setIsDarkMode={setIsDarkMode}
-              theme={theme}
-              windowWidth={windowWidth}
-            />
-          )}
-        </Tab.Screen>
+        ></Tab.Screen>
       </Tab.Navigator>
     </Provider>
   );

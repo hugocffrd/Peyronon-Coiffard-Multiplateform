@@ -1,5 +1,7 @@
 import { CagnoteModel } from "../../models/cagnote.model";
+import { config } from "../../settings";
 import { FETCH_CAGNOTE, FETCH_CAGNOTES, UPDATE_CAGNOTE } from "../constants";
+const machineIP = config.ipMachine;
 
 export const fetchCagnotes = (cagnoteList: CagnoteModel[]) => {
   return {
@@ -25,7 +27,9 @@ export const fetchCagnote = (cagnote: CagnoteModel) => {
 export const getCagnotes = () => {
   return async (dispatch) => {
     try {
-      const cagnotePromise = await fetch("http://localhost:8080/api/cagnote/");
+      const cagnotePromise = await fetch(
+        `http://${machineIP}:8080/api/cagnote/`
+      );
       const cagnoteJson = await cagnotePromise.json();
       dispatch(fetchCagnotes(cagnoteJson));
     } catch (error) {
@@ -40,12 +44,10 @@ export const updateCagnote = (
   amountToAdd: number,
   idUserToAdd: string
 ) => {
-  console.log(id, amountToAdd, idUserToAdd);
-
   return async (dispatch) => {
     try {
       const cagnotePromise = await fetch(
-        ` http://localhost:8080/api/cagnote/${id}`,
+        `http://${machineIP}:8080/api/cagnote/${id}`,
         {
           method: "PUT",
           headers: {
@@ -67,7 +69,7 @@ export const getCagnoteById = (id: string) => {
   return async (dispatch) => {
     try {
       const cagnotePromise = await fetch(
-        `http://localhost:8080/api/cagnote/getByAnimalId/${id}`,
+        `http://${machineIP}:8080/api/cagnote/getByAnimalId/${id}`,
         {
           method: "GET",
           headers: {
@@ -76,16 +78,8 @@ export const getCagnoteById = (id: string) => {
         }
       );
 
-      if (cagnotePromise.ok) {
-        const cagnoteJson = await cagnotePromise.json();
-        if (cagnoteJson && cagnoteJson.error) {
-          console.log("Error response from API: ", cagnoteJson.error);
-        } else {
-          dispatch(fetchCagnote(cagnoteJson));
-        }
-      } else {
-        console.log("Error response from API: ", cagnotePromise.status);
-      }
+      const cagnoteJson = await cagnotePromise.json();
+      dispatch(fetchCagnote(cagnoteJson));
     } catch (error) {
       console.log("Error call API : " + error);
       alert("Error while getting kittys");
