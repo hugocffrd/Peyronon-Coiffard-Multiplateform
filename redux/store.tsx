@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { cagnoteReducer } from "./reducers/Cagnote.reducer";
+import { cagnoteReducer } from "./reducers/cagnote.reducer";
 import { homeReducer } from "./reducers/home.reducer";
 import { userReducer } from "./reducers/user.reducer";
 

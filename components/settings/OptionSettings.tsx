@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Switch } from "react-native";
+import { storeTheme } from "../../storage/asyncStorage";
 import WrapperText from "../wrappers/WrapperText";
 
 interface OptionsSettingsProps {
@@ -13,6 +14,7 @@ export default function OptionSettings(props: OptionsSettingsProps) {
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
 
   const toggleSwitch = (): void => {
+    storeTheme(theme);
     setIsEnabled(!isEnabled);
     setIsDarkMode(!isDarkMode);
   };

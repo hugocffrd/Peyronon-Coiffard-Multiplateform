@@ -1,4 +1,5 @@
 export const lightTheme = {
+  value: "light",
   background: "rgb(255, 251, 254)",
   contentBlock: "rgb(232, 222, 248)",
   textPrimary: "#000000",
@@ -15,6 +16,7 @@ export const lightTheme = {
 };
 
 export const darkTheme = {
+  value: "dark",
   background: "rgb(28, 27, 31)",
   contentBlock: "rgb(74, 68, 88)",
   textPrimary: "#ffffff",

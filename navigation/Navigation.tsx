@@ -10,10 +10,16 @@ import store from "../redux/store";
 import HomeStack from "./HomeStack";
 import FavoriteStack from "./FavoriteStack";
 import CagnoteStack from "./CagnoteStack";
+import { getThemeAsync } from "../storage/asyncStorage";
 
 export default function Navigation() {
   const Tab = createBottomTabNavigator();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const themeFromStorage = getThemeAsync();
+  const storage = themeFromStorage !== null ? themeFromStorage : lightTheme;
+  const [isDarkMode, setIsDarkMode] = useState(
+    //@ts-ignore
+    storage.value === "light" ? false : true
+  );
   const theme = isDarkMode ? darkTheme : lightTheme;
 
   const windowWidth = Dimensions.get("window").width;
@@ -90,7 +96,6 @@ export default function Navigation() {
           options={{
             headerShown: false,
           }}
-          
         />
         <Tab.Screen
           name="Settings"
