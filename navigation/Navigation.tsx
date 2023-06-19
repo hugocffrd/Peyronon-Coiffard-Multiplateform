@@ -15,7 +15,6 @@ export default function Navigation() {
   const Tab = createBottomTabNavigator();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? darkTheme : lightTheme;
-
   const windowWidth = Dimensions.get("window").width;
 
   const NavigationFavoriteStack = () => {

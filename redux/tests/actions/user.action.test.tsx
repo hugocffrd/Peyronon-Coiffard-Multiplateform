@@ -1,18 +1,18 @@
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { SUBMIT_CONNEXION, UPDATE_FAVORIS } from "../../constants";
-import { describe, it, expect } from "@jest/globals";
+import { AnimalModel } from "../../../models/animal.model";
+import { DietModel } from "../../../models/diet.model";
+import { GeolocationModel } from "../../../models/geolocation.model";
+import { StatusModel } from "../../../models/status.model";
 import { UserModel } from "../../../models/user.model";
 import {
-  changePassword,
-  connectUser,
   submitForm,
+  connectUser,
+  changePassword,
   updateFavorite,
+  updateNewFavorite,
 } from "../../actions/user.action";
-import { AnimalModel } from "../../../models/animal.model";
-import { GeolocationModel } from "../../../models/geolocation.model";
-import { DietModel } from "../../../models/diet.model";
-import { StatusModel } from "../../../models/status.model";
+import { SUBMIT_CONNEXION, UPDATE_FAVORIS } from "../../constants";
 
 const mockStore = configureStore([thunk]);
 const user: UserModel = {
@@ -47,16 +47,21 @@ describe("User Actions", () => {
   });
 
   it("should dispatch submitForm action when connectUser is called", async () => {
-    const expectedActions = [expectedAction];
+    const expectedActions = [
+      {
+        type: SUBMIT_CONNEXION,
+        payload: user,
+      },
+    ];
 
-    global.fetch = jest.fn().mockResolvedValue({
+    const mockResponse = {
+      ok: true,
       json: jest.fn().mockResolvedValue(user),
-    });
+    };
 
+    global.fetch = jest.fn().mockResolvedValue(mockResponse);
     const store = mockStore({});
-
     await store.dispatch(connectUser(user.email, user.password));
-
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -64,28 +69,30 @@ describe("User Actions", () => {
     jest.spyOn(console, "log");
     global.fetch = jest.fn().mockRejectedValue(new Error("API Error"));
     global.alert = jest.fn();
-
     const store = mockStore({});
-
     await store.dispatch(connectUser("john@example.com", "password"));
-
     expect(console.log).toHaveBeenCalledWith(
-      "Error call API : Error: API Error"
+      "Error call API: Error: API Error"
     );
     expect(global.alert).toHaveBeenCalledWith("Error while connection");
   });
 
   it("should dispatch submitForm action when changePassword is called", async () => {
-    const expectedActions = [expectedAction];
+    const expectedActions = [
+      {
+        type: SUBMIT_CONNEXION,
+        payload: user,
+      },
+    ];
 
-    global.fetch = jest.fn().mockResolvedValue({
+    const mockResponse = {
+      ok: true,
       json: jest.fn().mockResolvedValue(user),
-    });
+    };
 
+    global.fetch = jest.fn().mockResolvedValue(mockResponse);
     const store = mockStore({});
-
     await store.dispatch(changePassword(user, "newpassword"));
-
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -95,7 +102,6 @@ describe("User Actions", () => {
     global.alert = jest.fn();
 
     const store = mockStore({});
-
     await store.dispatch(
       changePassword(
         { email: "john@example.com", password: "oldpassword" },
@@ -104,9 +110,18 @@ describe("User Actions", () => {
     );
 
     expect(console.log).toHaveBeenCalledWith(
-      "Error call API : Error: API Error"
+      "Error call API: Error: API Error"
     );
     expect(global.alert).toHaveBeenCalledWith("Error while changing password");
+  });
+
+  it("should create an action to update new favorite", () => {
+    const expectedAction = {
+      type: UPDATE_FAVORIS,
+      payload: user,
+    };
+
+    expect(updateNewFavorite(user)).toEqual(expectedAction);
   });
 
   it("should dispatch updateNewFavorite action when updateFavorite is called", async () => {
@@ -117,32 +132,27 @@ describe("User Actions", () => {
       },
     ];
 
-    global.fetch = jest.fn().mockResolvedValue({
+    const mockResponse = {
+      ok: true,
       json: jest.fn().mockResolvedValue(user),
-    });
+    };
 
+    global.fetch = jest.fn().mockResolvedValue(mockResponse);
     const store = mockStore({});
-
     await store.dispatch(updateFavorite(user, animalSelected));
-
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it("should handle error when updateFavorite encounters an error", async () => {
     jest.spyOn(console, "log");
     global.fetch = jest.fn().mockRejectedValue(new Error("API Error"));
+    global.alert = jest.fn();
 
     const store = mockStore({});
-
-    await store.dispatch(
-      updateFavorite(
-        { id: "1", name: "John", email: "john@example.com", animals: [] },
-        animalSelected
-      )
-    );
-
+    await store.dispatch(updateFavorite(user, animalSelected));
     expect(console.log).toHaveBeenCalledWith(
       "Error calling API: Error: API Error"
     );
+    expect(global.alert).toHaveBeenCalledWith("Error while updating favorite");
   });
 });

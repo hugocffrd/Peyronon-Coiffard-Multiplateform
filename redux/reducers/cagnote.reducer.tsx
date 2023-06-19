@@ -13,7 +13,7 @@ export const cagnoteReducer = (state = initialState, action) => {
       const updatedCagnotes = action.payload;
       const updatedCagnote = updatedCagnotes.find(
         //@ts-ignore
-        (cagnote) => cagnote.id === state.cagnote.id
+        (cagnote) => cagnote.id === state.cagnote?.id
       );
       return {
         ...state,

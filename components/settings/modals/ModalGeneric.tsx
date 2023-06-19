@@ -16,7 +16,7 @@ interface ModalGenericProps {
   windowWidth: number;
   btnContent: string;
   theme: Record<string, string>;
-  user: UserModel;
+  user?: UserModel;
 }
 
 export default function ModalGeneric(props: ModalGenericProps) {

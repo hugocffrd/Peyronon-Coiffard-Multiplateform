@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   optionContainer: {
-    backgroundColor: "#FFFFFF",
     alignItems: "center",
     paddingHorizontal: 10,
     borderRadius: 10,

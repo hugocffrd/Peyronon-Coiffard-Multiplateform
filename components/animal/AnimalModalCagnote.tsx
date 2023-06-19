@@ -7,18 +7,16 @@ import { CagnoteModel } from "../../models/cagnote.model";
 import { useSelector } from "react-redux";
 import { CagnoteItem } from "../cagnote/CagnoteItem";
 import { UserModel } from "../../models/user.model";
-import { AnimalModel } from "../../models/animal.model";
 
 interface AnimalModalCagnoteProps {
   btnContent: string;
-  animal: AnimalModel;
   theme: Record<string, string>;
   cagnote: CagnoteModel;
 }
 const windowWidth = Dimensions.get("window").width;
 
 export const AnimalModalCagnote = (props: AnimalModalCagnoteProps) => {
-  const { animal, btnContent, theme, cagnote } = props;
+  const { btnContent, theme, cagnote } = props;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   //@ts-ignore

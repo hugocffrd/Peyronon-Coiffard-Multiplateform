@@ -16,12 +16,8 @@ export const getAnimals = () => {
       const animalsPromise = await fetch(
         `http://${machineIP}:8080/api/animal/`
       );
-      if (animalsPromise.ok) {
-        const animalsJson = await animalsPromise.json();
-        dispatch(fetchAnimals(animalsJson));
-      } else {
-        throw new Error("Fetch request failed");
-      }
+      const animalsJson = await animalsPromise.json();
+      dispatch(fetchAnimals(animalsJson));
     } catch (error) {
       console.log("Error call API : " + error);
       alert("Error while getting animal list");

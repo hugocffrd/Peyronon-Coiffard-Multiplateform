@@ -1,12 +1,4 @@
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  Dimensions,
-  Animated,
-  Easing,
-} from "react-native";
+import { StyleSheet, View, Dimensions, Animated, Easing } from "react-native";
 import React from "react";
 
 const { width, height } = Dimensions.get("screen");
@@ -51,23 +43,5 @@ const styles = StyleSheet.create({
   image: {
     flex: 0.6,
     width: "100%",
-  },
-  content: {
-    flex: 0.4,
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#333",
-  },
-  description: {
-    fontSize: 18,
-    marginVertical: 12,
-    color: "#333",
-  },
-  price: {
-    fontSize: 32,
-    fontWeight: "bold",
   },
 });

@@ -39,22 +39,19 @@ describe("<AnimalCard />", () => {
     expect(screen.getByTestId("animal-name")).toHaveTextContent("Fluffy");
     expect(screen.getByTestId("animal-typeAnimal")).toHaveTextContent("Cat");
   });
-
   test("Displays default image when no image is available", () => {
+    animal.images = [];
     render(<AnimalCard animal={animal} user={user} theme={theme} />);
-    const defaultImage = require("../../../assets/Animals/GenericFaceLogo.jpg");
-    expect(screen.getByTestId("animal-image")).toHaveProp(
-      "source",
-      defaultImage
-    );
+    const defaultImage = "GenericFaceLogo.jpg";
+    expect(screen.getByTestId("animal-image")).toHaveProp("source", {
+      uri: defaultImage,
+    });
   });
-
   test("Displays white star when animal is not in user's animals list", () => {
     render(<AnimalCard animal={animal} user={user} theme={theme} />);
     const yellowStarElement = screen.getByTestId("yellow-star");
     expect(yellowStarElement).toHaveStyle({ color: "white" });
   });
-
   test("Displays yellow star when animal is in user's animals list", () => {
     user.animals = [animal];
     render(<AnimalCard animal={animal} user={user} theme={theme} />);

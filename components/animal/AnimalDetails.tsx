@@ -195,7 +195,6 @@ export default function AnimalDetails(props) {
           {cagnote !== null && cagnote?.id !== null ? (
             <AnimalModalCagnote
               cagnote={cagnote}
-              animal={animal}
               theme={theme}
               btnContent="Participate to the kitty"
             />

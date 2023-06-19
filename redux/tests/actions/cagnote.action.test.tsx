@@ -5,7 +5,7 @@ import {
   getCagnotes,
   updateCagnote,
 } from "../../actions/cagnote.action";
-import { FETCH_CAGNOTES, UPDATE_CAGNOTE } from "../../constants";
+import { FETCH_CAGNOTE, FETCH_CAGNOTES, UPDATE_CAGNOTE } from "../../constants";
 import { describe, it, expect } from "@jest/globals";
 import { AnimalModel } from "../../../models/animal.model";
 import { UserModel } from "../../../models/user.model";
@@ -53,7 +53,7 @@ const cagnoteList: CagnoteModel = {
 describe("Cagnote Actions", () => {
   it("should create an action to fetch cagnote", () => {
     const expectedAction = {
-      type: FETCH_CAGNOTES,
+      type: FETCH_CAGNOTE,
       payload: cagnoteList,
     };
 
@@ -73,9 +73,7 @@ describe("Cagnote Actions", () => {
     });
 
     const store = mockStore({});
-
     await store.dispatch(getCagnotes());
-
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -85,9 +83,7 @@ describe("Cagnote Actions", () => {
     global.alert = jest.fn();
 
     const store = mockStore({});
-
     await store.dispatch(getCagnotes());
-
     expect(console.log).toHaveBeenCalledWith(
       "Error call API : Error: API Error"
     );
@@ -98,7 +94,6 @@ describe("Cagnote Actions", () => {
     const id = "1";
     const amountToAdd = 50;
     const idUserToAdd = "2";
-
     const updatedCagnoteList: CagnoteModel[] = [cagnoteList];
 
     const expectedActions = [
@@ -113,20 +108,15 @@ describe("Cagnote Actions", () => {
     });
 
     const store = mockStore({});
-
     await store.dispatch(updateCagnote(id, amountToAdd, idUserToAdd));
-
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it("should handle error when updateCagnote encounters an error", async () => {
     jest.spyOn(console, "log");
     global.fetch = jest.fn().mockRejectedValue(new Error("API Error"));
-
     const store = mockStore({});
-
     await store.dispatch(updateCagnote("1", 50, "2"));
-
     expect(console.log).toHaveBeenCalledWith(
       "Error call API : Error: API Error"
     );

@@ -42,9 +42,7 @@ describe("Animal Actions", () => {
     });
 
     const store = mockStore({});
-
     await store.dispatch(getAnimals());
-
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -54,9 +52,7 @@ describe("Animal Actions", () => {
     global.alert = jest.fn();
 
     const store = mockStore({});
-
     await store.dispatch(getAnimals());
-
     expect(console.log).toHaveBeenCalledWith(
       "Error call API : Error: API Error"
     );

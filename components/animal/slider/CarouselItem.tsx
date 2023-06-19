@@ -8,8 +8,6 @@ interface CarouselItemProps {
 }
 
 export const CarouselItem = (props: CarouselItemProps) => {
-  console.log(props);
-  
   const { item } = props;
   let image = item.item;
   return (
@@ -20,10 +18,7 @@ export const CarouselItem = (props: CarouselItemProps) => {
         backgroundColor: "transparent",
       }}
     >
-      <Image
-        source={{uri: image}}
-        style={styles.itemImage}
-      />
+      <Image source={{ uri: image }} style={styles.itemImage} />
     </View>
   );
 };
