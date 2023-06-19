@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Card, Paragraph, Searchbar } from "react-native-paper";
 import { AnimalModel } from "../../models/animal.model";
+import { SearchStyle } from "../../styles/wrappers/Search.style";
+const styles = SearchStyle;
 
 interface SearchProps {
   animals: AnimalModel[];
@@ -56,9 +58,3 @@ export const Search = (props: SearchProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  cardClick: {
-    margin: 10,
-  },
-});

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Switch } from "react-native";
+import { View, Switch } from "react-native";
+import { OptionSettingsStyle } from "../../styles/settings/OptionsSettings.style";
 import WrapperText from "../wrappers/WrapperText";
+const styles = OptionSettingsStyle;
 
 interface OptionsSettingsProps {
   isDarkMode: boolean;
@@ -45,36 +47,3 @@ export default function OptionSettings(props: OptionsSettingsProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    marginHorizontal: 5,
-    marginTop: 10,
-    borderRadius: 10,
-  },
-  optionContainer: {
-    alignItems: "center",
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    width: "100%",
-  },
-  option: {
-    justifyContent: "space-between",
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "center",
-    borderRadius: 20,
-    margin: 10,
-    height: 50,
-  },
-  optionText: {
-    width: "auto",
-    alignItems: "center",
-    paddingHorizontal: 10,
-  },
-  switch: {
-    marginRight: 15,
-    transform: [{ scaleX: 1.2 }, { scaleY: 1.2 }],
-  },
-});

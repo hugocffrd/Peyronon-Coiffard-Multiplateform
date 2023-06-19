@@ -8,6 +8,7 @@ import { getAnimals } from "../redux/actions/home.action";
 import { HomeItems } from "../components/home/HomeItems";
 import { Search } from "../components/wrappers/Search";
 import { AnimalModel } from "../models/animal.model";
+import { CalculatorOfColumns } from "./CalculatorOfColumn";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,24 +17,13 @@ const styles = StyleSheet.create({
 });
 
 interface HomeProps {
-  windowWidth: number;
   theme: Record<string, string>;
   navigation: any;
 }
 
 export default function Home(props: HomeProps) {
-  const { windowWidth, theme, navigation } = props;
-  const getNumberOfColumns = () => {
-    const itemWidth = 200;
-    const minItemMargin = 100;
-    const availableWidth = windowWidth - minItemMargin;
-    const maxColumns = 2;
-    const minColumns = 1;
-    const numColumns = Math.floor(availableWidth / itemWidth);
-    return Math.max(minColumns, Math.min(numColumns, maxColumns));
-  };
-
-  const [numColumns, setNumColumns] = useState(getNumberOfColumns());
+  const { theme, navigation } = props;
+  const [numColumns, setNumColumns] = useState(CalculatorOfColumns);
 
   const list: AnimalModel[] = useSelector(
     //@ts-ignore
@@ -43,7 +33,7 @@ export default function Home(props: HomeProps) {
   const dispatch = useDispatch();
   useEffect(() => {
     Dimensions.addEventListener("change", () => {
-      setNumColumns(getNumberOfColumns());
+      setNumColumns(CalculatorOfColumns);
     });
     const loadAnimal = async () => {
       //@ts-ignore

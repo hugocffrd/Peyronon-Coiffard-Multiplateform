@@ -1,21 +1,9 @@
-import { StyleSheet, TouchableOpacity, Animated } from "react-native";
+import { TouchableOpacity, Animated } from "react-native";
 import React from "react";
 import { GestureResponderEvent } from "react-native";
+import { LeftActionsStyles } from "../../styles/home/LeftActions.style";
 
-const styles = StyleSheet.create({
-  leftAction: {
-    borderRadius: 5,
-    backgroundColor: "#BBA700",
-    justifyContent: "center",
-    marginBottom: 5,
-    marginTop: 5,
-  },
-  actionText: {
-    color: "#fff",
-    fontWeight: "600",
-    padding: 20,
-  },
-});
+const styles = LeftActionsStyles;
 
 interface LeftActionsProps {
   handleAddFavoritePress(item: GestureResponderEvent): void;

@@ -1,12 +1,14 @@
 import WrapperText from "../../wrappers/WrapperText";
 import ModalGeneric from "../modals/ModalGeneric";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ItemInputModalsModel } from "../../../models/input-modals.model";
 import { UserModel } from "../../../models/user.model";
 import React from "react";
 import { changePassword } from "../../../redux/actions/user.action";
+import { PasswordEditStyle } from "../../../styles/settings/informations/PasswordEdit.style";
+const styles = PasswordEditStyle;
 
 interface PasswordEditProps {
   theme: Record<string, string>;
@@ -63,15 +65,3 @@ export const PasswordEdit = (props: PasswordEditProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  informations: {
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "center",
-    marginVertical: 5,
-  },
-  informationsText: {
-    paddingLeft: 10,
-  },
-});

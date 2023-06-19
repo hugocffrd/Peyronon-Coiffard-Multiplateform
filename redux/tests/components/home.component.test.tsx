@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react-native";
-import AnimalCard from "../../../screens/AnimalCard";
+import AnimalCard from "../../../components/animal/AnimalCard";
 import { AnimalModel } from "../../../models/animal.model";
 import { DietModel } from "../../../models/diet.model";
 import { GeolocationModel } from "../../../models/geolocation.model";

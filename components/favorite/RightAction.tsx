@@ -1,21 +1,16 @@
-import React, { useRef } from "react";
-import { Animated, TouchableOpacity, StyleSheet } from "react-native";
-const styles = StyleSheet.create({
-  rightAction: {
-    borderRadius: 5,
-    backgroundColor: "#e06666",
-    justifyContent: "center",
-    marginBottom: 5,
-    marginTop: 5,
-  },
-  actionText: {
-    color: "#fff",
-    fontWeight: "600",
-    padding: 20,
-  },
-});
+import React from "react";
+import { Animated, TouchableOpacity } from "react-native";
+import { AnimalModel } from "../../models/animal.model";
+import { RightActionsStyles } from "../../styles/favorite/RightActions.style";
+const styles = RightActionsStyles;
 
-export const RightActions = (props) => {
+interface RightActionProps {
+  handleDeleteFavoritePress: Function;
+  item: AnimalModel;
+  dragX: any;
+}
+
+export const RightActions = (props: RightActionProps) => {
   const scale = props.dragX.interpolate({
     inputRange: [-100, 0],
     outputRange: [1, 0],

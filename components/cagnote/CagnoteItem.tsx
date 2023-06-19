@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import { Card, TextInput, Button } from "react-native-paper";
 import { useDispatch } from "react-redux";
 import { CagnoteModel } from "../../models/cagnote.model";
 import { UserModel } from "../../models/user.model";
 import { updateCagnote } from "../../redux/actions/cagnote.action";
+import { CagnoteItemStyles } from "../../styles/cagnote/CagnoteItem.style";
 import WrapperText from "../wrappers/WrapperText";
-
+const styles = CagnoteItemStyles;
 interface CagnoteItemProps {
   item: CagnoteModel;
   user: UserModel;
@@ -97,31 +98,3 @@ export const CagnoteItem = (props: CagnoteItemProps) => {
     </Card>
   );
 };
-
-const styles = StyleSheet.create({
-  card: {
-    marginBottom: 10,
-    marginHorizontal: 10,
-  },
-  row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  leftColumn: {
-    width: "80%",
-    marginRight: 5,
-  },
-  rightColumn: {
-    width: "20%",
-    marginLeft: 5,
-  },
-  input: {
-    marginBottom: 10,
-  },
-  button: {
-    marginTop: 10,
-  },
-  donnationContainer: {
-    display: "flex",
-  },
-});

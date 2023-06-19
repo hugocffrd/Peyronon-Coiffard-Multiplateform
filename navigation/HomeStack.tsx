@@ -31,13 +31,7 @@ export default function StackNavigation(props: StackNavigationProps) {
           windowWidth: windowWidth,
         }}
       >
-        {(navigation) => (
-          <Home
-            navigation={navigation}
-            windowWidth={windowWidth}
-            theme={theme}
-          />
-        )}
+        {(navigation) => <Home navigation={navigation} theme={theme} />}
       </Stack.Screen>
       <Stack.Screen
         name="Details"

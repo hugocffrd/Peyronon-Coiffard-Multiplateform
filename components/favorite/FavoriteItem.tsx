@@ -1,21 +1,21 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
-import { StyleSheet } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import { AnimalModel } from "../../models/animal.model";
-import AnimalCard from "../../screens/AnimalCard";
+import AnimalCard from "../animal/AnimalCard";
+import { FavoriteItemStyles } from "../../styles/favorite/FavoriteItem.style";
 import { RightActions } from "./RightAction";
 
-const styles = StyleSheet.create({
-  flatListContainer: {
-    flex: 1,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-    justifyContent: "space-between",
-  },
-});
+const styles = FavoriteItemStyles;
 
-export const FavoriteItem = (props) => {
+interface FavoriteItemProps {
+  theme: Record<string, string>;
+  navigation: any;
+  item: AnimalModel;
+  handleDeleteFavoritePress: Function;
+}
+
+export const FavoriteItem = (props: FavoriteItemProps) => {
   const { theme } = props;
   const handlePress = (item: AnimalModel): void => {
     props.navigation.navigation.navigate("Details", {
@@ -27,7 +27,6 @@ export const FavoriteItem = (props) => {
   const renderRightActions = (progress, dragX) => {
     return (
       <RightActions
-        progress={progress}
         dragX={dragX}
         handleDeleteFavoritePress={props.handleDeleteFavoritePress}
         item={props.item}
@@ -42,7 +41,11 @@ export const FavoriteItem = (props) => {
           activeOpacity={0.5}
           onPress={() => handlePress(props.item)}
         >
-          <AnimalCard theme={props.theme} animal={props.item} user={undefined} />
+          <AnimalCard
+            theme={props.theme}
+            animal={props.item}
+            user={undefined}
+          />
         </TouchableOpacity>
       </Swipeable>
     </View>

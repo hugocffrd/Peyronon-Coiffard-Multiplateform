@@ -1,11 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import { Dimensions } from "react-native";
 import AnimalDetails from "../components/animal/AnimalDetails";
 import { Cagnote } from "../screens/Cagnote";
 
 const Stack = createStackNavigator();
-const windowWidth = Dimensions.get("window").width;
 
 interface CagnoteStackProps {
   theme: Record<string, string>;
@@ -28,13 +26,7 @@ export default function CagnoteStack(props: CagnoteStackProps) {
           },
         }}
       >
-        {(navigation) => (
-          <Cagnote
-            navigation={navigation}
-            windowWidth={windowWidth}
-            theme={theme}
-          />
-        )}
+        {(navigation) => <Cagnote navigation={navigation} theme={theme} />}
       </Stack.Screen>
       <Stack.Screen
         name="Details kitty"

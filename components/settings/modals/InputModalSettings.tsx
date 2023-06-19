@@ -1,8 +1,10 @@
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import WrapperText from "../../wrappers/WrapperText";
 import { InputModalsModel } from "../../../models/input-modals.model";
 import { TextInput } from "react-native-paper";
+import { InputModalSettingsStyle } from "../../../styles/settings/modal/InputModalSettings.style";
+const styles = InputModalSettingsStyle;
 
 interface InputModalProps {
   inputModals: InputModalsModel;
@@ -38,15 +40,3 @@ export default function InputModalSettings(props: InputModalProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  modalTextInput: {
-    marginBottom: 20,
-    paddingHorizontal: 10,
-  },
-
-  modalLabelText: {
-    marginBottom: 5,
-    textAlign: "center",
-  },
-});

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Dimensions, Modal, StyleSheet, View } from "react-native";
+import { Dimensions, Modal, View } from "react-native";
 import { Button } from "react-native-paper";
 import WrapperText from "../wrappers/WrapperText";
 import { ButtonModal } from "../wrappers/ButtonModal";
@@ -7,6 +7,8 @@ import { CagnoteModel } from "../../models/cagnote.model";
 import { useSelector } from "react-redux";
 import { CagnoteItem } from "../cagnote/CagnoteItem";
 import { UserModel } from "../../models/user.model";
+import { AnimalModalCagnoteStyle } from "../../styles/animal/AnimalModalCagnote.style";
+const styles = AnimalModalCagnoteStyle;
 
 interface AnimalModalCagnoteProps {
   btnContent: string;
@@ -74,41 +76,3 @@ export const AnimalModalCagnote = (props: AnimalModalCagnoteProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  modalCenteredView: {
-    width: "100%",
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalContent: {
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 10,
-  },
-
-  modalBtnContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-  },
-  modal: {
-    width: "50%",
-    borderRadius: 20,
-    padding: 5,
-  },
-  modalBtnText: {
-    color: "black",
-    textAlign: "center",
-  },
-});

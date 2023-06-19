@@ -1,19 +1,14 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import React, { useRef } from "react";
-import AnimalCard from "../../screens/AnimalCard";
+import AnimalCard from "../animal/AnimalCard";
 import { AnimalModel } from "../../models/animal.model";
 import { LeftActions } from "./LeftActions";
 import { updateFavorite } from "../../redux/actions/user.action";
 import { useDispatch, useSelector } from "react-redux";
+import { HomeItemStyle } from "../../styles/home/HomeItems.style";
 
-const styles = StyleSheet.create({
-  flatListContainer: {
-    flex: 1,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-  },
-});
+const styles = HomeItemStyle;
 
 interface HomeItemsProps {
   navigation: any;

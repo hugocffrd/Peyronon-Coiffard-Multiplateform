@@ -1,7 +1,9 @@
 import { Button } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
+import { View } from "react-native";
 import React from "react";
 import WrapperText from "./WrapperText";
+import { ButtonModalStyle } from "../../styles/wrappers/ButtonModal.style";
+const styles = ButtonModalStyle;
 
 interface ButtonModalProps {
   theme: Record<string, string>;
@@ -63,19 +65,3 @@ export const ButtonModal = (props: ButtonModalProps) => {
     </View>
   );
 };
-const styles = StyleSheet.create({
-  modalBtnContainer: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  modal: {
-    width: 150,
-    borderRadius: 20,
-    padding: 5,
-    margin: 10,
-  },
-  modalBtnText: {
-    color: "black",
-    textAlign: "center",
-  },
-});

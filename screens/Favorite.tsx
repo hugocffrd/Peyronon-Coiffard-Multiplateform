@@ -5,27 +5,16 @@ import { StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { FavoriteItem } from "../components/favorite/FavoriteItem";
 import { updateFavorite } from "../redux/actions/user.action";
+import { CalculatorOfColumns } from "./CalculatorOfColumn";
 
 interface FavoriteProps {
-  windowWidth: number;
   theme: Record<string, string>;
   navigation: any;
 }
 
 export default function Favorite(props: FavoriteProps) {
-  const { windowWidth, theme } = props;
-  const getNumberOfColumns = () => {
-    const itemWidth = 200;
-    const minItemMargin = 100;
-    const availableWidth = windowWidth - minItemMargin;
-    const maxColumns = 2;
-    const minColumns = 1;
-    const numColumns = Math.floor(availableWidth / itemWidth);
-    numColumns;
-    return Math.max(minColumns, Math.min(numColumns, maxColumns));
-  };
-
-  const [numColumns, setNumColumns] = useState(getNumberOfColumns());
+  const { theme } = props;
+  const [numColumns, setNumColumns] = useState(CalculatorOfColumns);
 
   //@ts-ignore
   const user = useSelector((state) => state.userReducer.user);
@@ -33,7 +22,7 @@ export default function Favorite(props: FavoriteProps) {
 
   useEffect(() => {
     Dimensions.addEventListener("change", () => {
-      setNumColumns(getNumberOfColumns());
+      setNumColumns(CalculatorOfColumns);
     });
   }, []);
 

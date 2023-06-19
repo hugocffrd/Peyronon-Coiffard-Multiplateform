@@ -1,8 +1,10 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import OptionSettings from "../components/settings/OptionSettings";
 import UserInformationBox from "../components/settings/UserInformationBox";
 import { useSelector } from "react-redux";
+import { SettingsStyle } from "../styles/SettingsScreen.style";
+const styles = SettingsStyle;
 
 interface SettingsProps {
   isDarkMode: boolean;
@@ -28,13 +30,3 @@ export default function Settings(props: SettingsProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  spacing: {
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-  },
-});

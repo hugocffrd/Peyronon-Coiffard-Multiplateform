@@ -1,5 +1,7 @@
 import React from "react";
-import { Image, StyleSheet, Dimensions, View } from "react-native";
+import { Image, Dimensions, View } from "react-native";
+import { CarouselItemStyle } from "../../../styles/animal/slider/CarouselItem.style";
+const styles = CarouselItemStyle(Dimensions.get("window").width);
 
 interface CarouselItemProps {
   item: {
@@ -22,13 +24,3 @@ export const CarouselItem = (props: CarouselItemProps) => {
     </View>
   );
 };
-
-const { width } = Dimensions.get("window");
-
-const styles = StyleSheet.create({
-  itemImage: {
-    width: width / 1.3,
-    height: width / 1.3,
-    borderRadius: 10,
-  },
-});

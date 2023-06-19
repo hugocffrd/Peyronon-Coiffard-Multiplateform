@@ -1,12 +1,14 @@
 import { FlatList } from "react-native";
 import React from "react";
-import { Modal, StyleSheet, View, Platform } from "react-native";
+import { Modal, View, Platform } from "react-native";
 import { Button } from "react-native-paper";
 import { ItemInputModalsModel } from "../../../models/input-modals.model";
 import InputModalSettings from "./InputModalSettings";
 import WrapperText from "../../wrappers/WrapperText";
 import { UserModel } from "../../../models/user.model";
 import { ButtonModal } from "../../wrappers/ButtonModal";
+import { ModalGenericStyle } from "../../../styles/settings/modal/ModalGeneric.style";
+const styles = ModalGenericStyle;
 
 interface ModalGenericProps {
   isVisible: boolean;
@@ -104,40 +106,3 @@ export default function ModalGeneric(props: ModalGenericProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  modalCenteredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalContent: {
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 10,
-  },
-
-  modalBtnContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "100%",
-  },
-  modal: {
-    width: 150,
-    borderRadius: 20,
-    padding: 5,
-  },
-  modalBtnText: {
-    color: "black",
-    textAlign: "center",
-  },
-});

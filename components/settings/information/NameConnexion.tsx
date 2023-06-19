@@ -6,18 +6,9 @@ import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import WrapperText from "../../wrappers/WrapperText";
 import { UserModel } from "../../../models/user.model";
+import { NameConnexionStyle } from "../../../styles/settings/informations/NameConnexion.style";
 
-const styles = StyleSheet.create({
-  informations: {
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "center",
-    marginVertical: 5,
-  },
-  informationsText: {
-    paddingLeft: 10,
-  },
-});
+const styles = NameConnexionStyle;
 
 interface NameConnexionProps {
   theme: Record<string, string>;

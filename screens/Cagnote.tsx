@@ -3,25 +3,21 @@ import { View, FlatList, StyleSheet, Dimensions } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { CagnoteItem } from "../components/cagnote/CagnoteItem";
 import { getCagnotes } from "../redux/actions/cagnote.action";
+import { CalculatorOfColumns } from "./CalculatorOfColumn";
 
-export const Cagnote = (props) => {
-  const { theme, windowWidth } = props;
+interface CagnoteProps {
+  theme: Record<string, string>;
+  navigation: any;
+}
+
+export const Cagnote = (props: CagnoteProps) => {
+  const { theme } = props;
   const dispatch = useDispatch();
 
-  const getNumberOfColumns = () => {
-    const itemWidth = 200;
-    const minItemMargin = 100;
-    const availableWidth = windowWidth - minItemMargin;
-    const maxColumns = 2;
-    const minColumns = 1;
-    const numColumns = Math.floor(availableWidth / itemWidth);
-    return Math.max(minColumns, Math.min(numColumns, maxColumns));
-  };
-
-  const [numColumns, setNumColumns] = useState(getNumberOfColumns());
+  const [numColumns, setNumColumns] = useState(CalculatorOfColumns);
   useEffect(() => {
     Dimensions.addEventListener("change", () => {
-      setNumColumns(getNumberOfColumns());
+      setNumColumns(CalculatorOfColumns);
     });
     const loadCagnotes = async () => {
       //@ts-ignore
