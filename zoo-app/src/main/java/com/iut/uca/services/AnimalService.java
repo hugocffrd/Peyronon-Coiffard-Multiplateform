@@ -18,9 +18,9 @@ import java.util.List;
 @ApplicationScoped
 public class AnimalService {
 
-  @Inject
-  AnimalRepository animalRepository;
-
+  /**
+   * Injection of the mappers
+   */
   @Inject
   AnimalMapper animalMapper;
 
@@ -33,15 +33,45 @@ public class AnimalService {
   @Inject
   GeoLocationMapper geoLocationMapper;
 
+  /**
+   * Injection of the repositories
+   */
+  @Inject
+  AnimalRepository animalRepository;
+
+
+  /**
+   * Get one animal
+   * @param id of the animal
+   * @return the animal wanted
+   */
   public Animal getOneAnimal(String id) {
     return animalMapper.mapDto(animalRepository.get(id)) ;
   }
 
+  /**
+   * Get all animals
+   * @return list of animals from database
+   */
   public List<Animal> getAllAnimals() {
     List<AnimalEntity> animalEntities = animalRepository.list();
     return mapAnimals(animalEntities);
   }
 
+  /**
+   * Add animal to database
+   * @param id of animal
+   * @param name of animal
+   * @param typeAnimal of animal
+   * @param longevity of animal
+   * @param diet of animal
+   * @param status of animal
+   * @param gestation of animal
+   * @param nbKid of animal
+   * @param geoLocation of animal
+   * @param images of animal
+   * @return Animal added
+   */
   public Animal addAnimal(
        String id,
        String name,
@@ -60,6 +90,20 @@ public class AnimalService {
     return animalMapper.mapDto(animalEntity);
   }
 
+  /**
+   * Update animal
+   * @param id of the animal to update
+   * @param name updated
+   * @param typeAnimal updated
+   * @param longevity updated
+   * @param diet updated
+   * @param status updated
+   * @param gestation updated
+   * @param nbKid updated
+   * @param geoLocation updated
+   * @param images updated
+   * @return
+   */
   public Animal updateAnimal( String id,
       String name,
       String typeAnimal,
@@ -80,6 +124,32 @@ public class AnimalService {
 
   }
 
+  /**
+   * Delete animal
+   * @param id of animal to delete
+   */
+  public void deleteAnimal(String id) {
+    animalRepository.delete(id);
+  }
+
+  /**
+   * Get animals by search on name
+   * @param name search value
+   * @return list of animals corresponding to the search
+   */
+  public List<Animal> getAnimalsByName(String name) {
+    return mapAnimals(animalRepository.getAnimalsByName(name));
+  }
+
+  /**
+   * Get animals by search on type
+   * @param type search value
+   * @return list of animals corresponding to the search
+   */
+  public List<Animal> getAnimalByType(String type) {
+    return mapAnimals(animalRepository.getAnimalByType(type));
+  }
+
   protected Animal createAnimal(String id, String name, String typeAnimal, int longevity, String diet,
       String status, int gestation, int nbKid, String geoLocation, List<String> images) {
     Diet animalDiet = dietMapper.mapByString(diet);
@@ -87,18 +157,6 @@ public class AnimalService {
     GeoLocation animalGeoLocation = geoLocationMapper.mapByString(geoLocation);
     return new Animal(id, name, typeAnimal, longevity, animalGeoLocation, animalDiet, animalStatus,
         gestation, nbKid, images);
-  }
-
-  public void deleteAnimal(String id) {
-    animalRepository.delete(id);
-  }
-
-  public List<Animal> getAnimalsByName(String name) {
-    return mapAnimals(animalRepository.getAnimalsByName(name));
-  }
-
-  public List<Animal> getAnimalByType(String type) {
-    return mapAnimals(animalRepository.getAnimalByType(type));
   }
 
   protected List<Animal> mapAnimals(List<AnimalEntity> animalEntityList) {

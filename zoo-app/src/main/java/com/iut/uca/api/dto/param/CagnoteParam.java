@@ -4,6 +4,9 @@ package com.iut.uca.api.dto.param;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Cagnote values which could be got by front
+ */
 public class CagnoteParam {
   private String id;
   private long amount;
@@ -11,6 +14,8 @@ public class CagnoteParam {
   private List<String> usersId;
   private long amountToAdd;
   private String idUserToAdd;
+
+  public CagnoteParam() {}
 
   public CagnoteParam(String id, long amount, String animalId, List<String> usersId,
       long amountToAdd, String idUserToAdd) {

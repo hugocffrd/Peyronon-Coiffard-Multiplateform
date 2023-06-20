@@ -1,5 +1,7 @@
 package com.iut.uca.enums;
-
+/**
+ * List of the geolocation for animals
+ */
 public enum GeoLocation {
   OCEANIA("OCEANIA"),
   MIDDLE_EAST("MIDDLE_EAST"),

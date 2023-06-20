@@ -1,5 +1,8 @@
 package com.iut.uca.enums;
 
+/**
+ * List of the diet for animals
+ */
 public enum Diet {
   CARNIVORE("CARNIVORE"),
   HERBIVORE("HERBIVORE"),

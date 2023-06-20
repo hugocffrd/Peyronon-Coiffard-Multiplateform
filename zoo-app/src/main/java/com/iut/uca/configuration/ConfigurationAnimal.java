@@ -1,5 +1,8 @@
 package com.iut.uca.configuration;
 
+/**
+ * Name of the fields for Animal collection
+ */
 public class ConfigurationAnimal {
 
   public static final String ID = "_id";

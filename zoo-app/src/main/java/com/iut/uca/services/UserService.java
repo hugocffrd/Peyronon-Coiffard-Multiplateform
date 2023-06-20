@@ -20,19 +20,35 @@ import java.util.Objects;
 @ApplicationScoped
 public class UserService {
 
+  /**
+   * Injection of the mappers
+   */
   @Inject
   UserMapper userMapper;
   @Inject
-  UserRepository userRepository;
-  @Inject
   AnimalMapper animalMapper;
+
+  /**
+   * Injection of the repositories
+   */
+  @Inject
+  UserRepository userRepository;
   @Inject
   AnimalRepository animalRepository;
 
+  /**
+   * Get the user with id
+   * @param id of user wanted
+   * @return user wanted
+   */
   public User getOneUser(String id) {
     return userMapper.mapDto(userRepository.get(id)) ;
   }
 
+  /**
+   * Get all users
+   * @return list of users from database
+   */
   public List<User> getAllUsers() {
     List<UserEntity> userEntities = userRepository.list();
     List<User> userList = new ArrayList<>();
@@ -42,6 +58,15 @@ public class UserService {
     return userList;
   }
 
+  /**
+   * Add user to database
+   * @param id of the user
+   * @param name of the user
+   * @param surname of the user
+   * @param email of the user
+   * @param password of the user
+   * @return user added
+   */
   public User addUser(
       String id,
       String name,
@@ -54,6 +79,17 @@ public class UserService {
     return userMapper.mapDto(userAdded);
   }
 
+  /**
+   * Update user by his id
+   * @param id of user to update
+   * @param name updated
+   * @param surname updated
+   * @param email updated
+   * @param password updated
+   * @param animalIds favorite list of the user
+   * @param animal animal to add or to remove of the favorite list
+   * @return user updated
+   */
   public User updateUser(String id, String name, String surname, String email, String password, List<String> animalIds, Animal animal) {
     User newUser = createUser(id, name, surname, email, password);
     setUserAnimalList(animalIds, animal, newUser);
@@ -62,6 +98,44 @@ public class UserService {
     return userMapper.mapDto(userRepository.update(id, userUpdated));
   }
 
+  /**
+   * Delete user
+   * @param id of the user tot delete
+   */
+  public void deleteUser(String id) {
+    userRepository.delete(id);
+  }
+
+  /**
+   * Get user from email and password for connection
+   * @param email of user
+   * @param password of user
+   * @return user connected
+   */
+  public User getUserByEmailAndPassword(String email, String password) {
+    UserEntity userEntity = userRepository.getUserByEmailAndPassword(email, password);
+    return userMapper.mapDto(userEntity);
+  }
+
+  /**
+   * Edition of the password
+   * @param email of the user
+   * @param password current of the user
+   * @param newPassword new
+   * @return user password edited
+   */
+  public User changePassword(String email, String password, String newPassword) {
+    UserEntity userEntity = userRepository.getUserByEmailAndPassword(email, password);
+    userEntity.setPassword(newPassword);
+    UserEntity userUpdated = userRepository.update(userEntity.getId().toHexString(), userEntity);
+    return userMapper.mapDto(userUpdated);
+  }
+  /**
+   * Check if animal is already in animalIds, if true, remove, else add
+   * @param animalIds current list of favorite
+   * @param animal to remove or to add
+   * @param newUser user updated
+   */
   protected void setUserAnimalList(List<String> animalIds, Animal animal, User newUser) {
     List<Animal> animalList = new ArrayList<>();
 
@@ -90,26 +164,11 @@ public class UserService {
       }
     }
 
-    // Set the updated animal list in the user object
     newUser.setAnimals(animalList);
   }
   protected User createUser(String id, String name, String surname, String email,
       String password) {
     return  new User(id, name, surname, email, password);
-  }
-  public void deleteUser(String id) {
-    userRepository.delete(id);
-  }
-  public User getUserByEmailAndPassword(String email, String password) {
-    UserEntity userEntity = userRepository.getUserByEmailAndPassword(email, password);
-    return userMapper.mapDto(userEntity);
-  }
-
-  public User changePassword(String email, String password, String newPassword) {
-    UserEntity userEntity = userRepository.getUserByEmailAndPassword(email, password);
-    userEntity.setPassword(newPassword);
-    UserEntity userUpdated = userRepository.update(userEntity.getId().toHexString(), userEntity);
-    return userMapper.mapDto(userUpdated);
   }
 
 }

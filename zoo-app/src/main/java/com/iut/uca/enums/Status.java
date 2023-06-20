@@ -1,5 +1,7 @@
 package com.iut.uca.enums;
-
+/**
+ * List of the status for animals
+ */
 public enum Status {
   ETEINT("ETEINT"),
   MENACE("MENACE"),

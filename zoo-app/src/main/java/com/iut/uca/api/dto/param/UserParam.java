@@ -4,6 +4,9 @@ import com.iut.uca.api.dto.Animal;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * User values which could be got by front
+ */
 public class UserParam {
 
   private String id;

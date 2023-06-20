@@ -3,6 +3,9 @@ package com.iut.uca.api.dto.param;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Animal values which could be got by front
+ */
 public class AnimalParam {
 
   private String id;

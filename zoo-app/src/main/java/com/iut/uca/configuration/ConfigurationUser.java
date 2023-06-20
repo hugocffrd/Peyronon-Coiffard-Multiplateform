@@ -1,5 +1,7 @@
 package com.iut.uca.configuration;
-
+/**
+ * Name of the fields for User collection
+ */
 public class ConfigurationUser {
 
   public static final String ID = "_id";

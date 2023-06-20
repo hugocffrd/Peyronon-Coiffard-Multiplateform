@@ -2,6 +2,9 @@ package com.iut.uca.configuration;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
+/**
+ * Global configuration with database name, collection name, global operator and so on...
+ */
 @ApplicationScoped
 public class Configuration {
 

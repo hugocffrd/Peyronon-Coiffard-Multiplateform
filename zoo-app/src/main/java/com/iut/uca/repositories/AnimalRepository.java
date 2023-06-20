@@ -75,29 +75,19 @@ public class AnimalRepository implements IRepository<AnimalEntity> {
 
   @Override
   public AnimalEntity update(String id, AnimalEntity updatedAnimal) {
-    ClientSession session = mongoClient.startSession();
-    try {
-      session.startTransaction();
 
-      final Document query = new Document(ConfigurationAnimal.ID, new ObjectId(String.valueOf(id)));
-      final Document updatedDocument = new Document(Configuration.$SET, new Document()
-          .append(ConfigurationAnimal.NAME, updatedAnimal.getName())
-          .append(ConfigurationAnimal.TYPE_ANIMAL, updatedAnimal.getTypeAnimal())
-          .append(ConfigurationAnimal.LONGEVITY, updatedAnimal.getLongevity())
-          .append(ConfigurationAnimal.GESTATION, updatedAnimal.getGestation())
-          .append(ConfigurationAnimal.STATUS, updatedAnimal.getStatus())
-          .append(ConfigurationAnimal.NB_KID, updatedAnimal.getNbKid())
-          .append(ConfigurationAnimal.IMAGES, updatedAnimal.getImages()));
-      getCollection().updateOne(session, query, updatedDocument);
+    final Document query = new Document(ConfigurationAnimal.ID, new ObjectId(String.valueOf(id)));
+    final Document updatedDocument = new Document(Configuration.$SET, new Document()
+        .append(ConfigurationAnimal.NAME, updatedAnimal.getName())
+        .append(ConfigurationAnimal.TYPE_ANIMAL, updatedAnimal.getTypeAnimal())
+        .append(ConfigurationAnimal.LONGEVITY, updatedAnimal.getLongevity())
+        .append(ConfigurationAnimal.GESTATION, updatedAnimal.getGestation())
+        .append(ConfigurationAnimal.STATUS, updatedAnimal.getStatus())
+        .append(ConfigurationAnimal.NB_KID, updatedAnimal.getNbKid())
+        .append(ConfigurationAnimal.IMAGES, updatedAnimal.getImages()));
+    getCollection().updateOne(query, updatedDocument);
 
-      session.commitTransaction();
-      return getCollection().find(query).first();
-    } catch (Exception e) {
-      session.abortTransaction();
-      throw e;
-    } finally {
-      session.close();
-    }
+    return getCollection().find(query).first();
   }
 
   @Override

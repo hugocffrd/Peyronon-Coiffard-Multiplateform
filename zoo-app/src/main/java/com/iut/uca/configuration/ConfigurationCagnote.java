@@ -1,5 +1,7 @@
 package com.iut.uca.configuration;
-
+/**
+ * Name of the fields for Cagnote collection
+ */
 public class ConfigurationCagnote {
 
   public static final String ID = "_id";
