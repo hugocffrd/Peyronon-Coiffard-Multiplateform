@@ -102,7 +102,7 @@ public class AnimalService {
    * @param nbKid updated
    * @param geoLocation updated
    * @param images updated
-   * @return
+   * @return animal updated
    */
   public Animal updateAnimal( String id,
       String name,
