@@ -1,9 +1,11 @@
-import { View } from "react-native";
-import React from "react";
+import { View, Text, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
 import WrapperText from "../../wrappers/WrapperText";
 import { InputModalsModel } from "../../../models/input-modals.model";
 import { TextInput } from "react-native-paper";
+import { Ionicons } from "@expo/vector-icons";
 import { InputModalSettingsStyle } from "../../../styles/settings/modal/InputModalSettings.style";
+
 const styles = InputModalSettingsStyle;
 
 interface InputModalProps {
@@ -16,12 +18,22 @@ interface InputModalProps {
 }
 
 export default function InputModalSettings(props: InputModalProps) {
-  const { theme, submit, isVisible, setIsVisible } = props;
+  const { theme, submit, isVisible, setIsVisible, inputModals } = props;
+  const [showPassword, setShowPassword] = useState(
+    inputModals.item.showEyeInput === undefined
+      ? true
+      : inputModals.item.showEyeInput
+  );
 
-  function onSubmit(): void {
+  const onSubmit = (): void => {
     setIsVisible(!isVisible);
     submit();
-  }
+  };
+
+  const togglePasswordVisibility = (): void => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <View>
       <WrapperText
@@ -29,14 +41,31 @@ export default function InputModalSettings(props: InputModalProps) {
         text={props.inputModals.item.headerInput}
         size={20}
       />
-      <TextInput
-        style={[styles.modalTextInput, { width: props.windowWidth * 0.5 }]}
-        value={props.inputModals.item.value}
-        secureTextEntry={props.inputModals.item.secureTextEntry}
-        placeholder={props.inputModals.item.placeholder}
-        onChangeText={props.inputModals.item.changeValue}
-        onSubmitEditing={() => onSubmit()}
-      />
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={[styles.modalTextInput, { width: props.windowWidth * 0.5 }]}
+          value={props.inputModals.item.value}
+          secureTextEntry={showPassword}
+          placeholder={inputModals.item.placeholder}
+          onChangeText={inputModals.item.changeValue}
+          onSubmitEditing={() => onSubmit()}
+        />
+        {inputModals.item.showEyeInput ? (
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={togglePasswordVisibility}
+          >
+            <Ionicons
+              style={styles.iconPassword}
+              name={showPassword ? "eye" : "eye-off"}
+              size={20}
+              color="black"
+            />
+          </TouchableOpacity>
+        ) : (
+          <View></View>
+        )}
+      </View>
     </View>
   );
 }

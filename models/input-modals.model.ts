@@ -4,6 +4,7 @@ export interface ItemInputModalsModel {
   changeValue: (text: string) => void;
   placeholder: string;
   secureTextEntry: boolean;
+  showEyeInput?: boolean;
 }
 export interface InputModalsModel {
   item: ItemInputModalsModel;

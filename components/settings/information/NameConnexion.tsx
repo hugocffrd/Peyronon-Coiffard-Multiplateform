@@ -23,10 +23,12 @@ export const NameConnexion = (props: NameConnexionProps) => {
   const [modalConnexionVisible, setModalConnexionVisible] = useState(false);
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-  const onChangeUsername = (newEmail: string): void => setEmail(newEmail);
-  const onChangePassword = (newPassword: string): void =>
+  const onChangeUsername = (newEmail: string): void => {
+    setEmail(newEmail);
+  };
+  const onChangePassword = (newPassword: string): void => {
     setPassword(newPassword);
-
+  };
   const inputModalsConnexion: ItemInputModalsModel[] = [
     {
       headerInput: "Email : ",
@@ -34,6 +36,7 @@ export const NameConnexion = (props: NameConnexionProps) => {
       changeValue: onChangeUsername,
       placeholder: "Email",
       secureTextEntry: false,
+      showEyeInput: false,
     },
     {
       headerInput: "Password : ",
@@ -41,6 +44,7 @@ export const NameConnexion = (props: NameConnexionProps) => {
       changeValue: onChangePassword,
       placeholder: "Password",
       secureTextEntry: true,
+      showEyeInput: true,
     },
   ];
 

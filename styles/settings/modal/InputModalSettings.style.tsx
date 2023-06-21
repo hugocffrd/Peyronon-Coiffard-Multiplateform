@@ -9,4 +9,18 @@ export const InputModalSettingsStyle = StyleSheet.create({
     marginBottom: 5,
     textAlign: "center",
   },
+  inputContainer: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  iconPassword: {
+    marginRight: 5,
+  },
+
+  iconContainer: {
+    position: "absolute",
+    top: 17,
+    right: 10,
+    zIndex: 1,
+  },
 });

@@ -37,6 +37,7 @@ export const PasswordEdit = (props: PasswordEditProps) => {
       changeValue: setUserPassword,
       placeholder: "Password",
       secureTextEntry: true,
+      showEyeInput: true,
     },
   ];
 
