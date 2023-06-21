@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { AnimalModel } from "../../models/animal.model";
-import { View } from "react-native";
+import { View, FlatList } from "react-native";
 import WrapperText from "../wrappers/WrapperText";
 import { AnimalCarousel } from "./slider/AnimalCarousel";
 import { ScrollView } from "react-native-gesture-handler";
@@ -9,6 +9,7 @@ import { CagnoteModel } from "../../models/cagnote.model";
 import { useDispatch, useSelector } from "react-redux";
 import { getCagnoteById } from "../../redux/actions/cagnote.action";
 import { AnimalDetailsStyle } from "../../styles/animal/AnimalDetail.style";
+import { AnimalDetailItem } from "./AnimalDetailItem";
 
 const styles = AnimalDetailsStyle;
 
@@ -23,17 +24,16 @@ interface AnimalDetailProps {
   route?: RouteProps;
 }
 
+interface GridItemProps {
+  key: string;
+  value: unknown;
+}
+
 export default function AnimalDetails(props: AnimalDetailProps) {
   const animal =
     (props?.route?.params?.animal as AnimalModel) ||
     (props.navigation.route.params.animal as AnimalModel);
   const { theme } = props?.route?.params || props.navigation.route.params;
-
-  const Col = ({ numRows, children }) => {
-    return <View style={styles[`${numRows}col`]}>{children}</View>;
-  };
-
-  const Row = ({ children }) => <View style={styles.row}>{children}</View>;
 
   const cagnote: CagnoteModel = useSelector(
     //@ts-ignore
@@ -48,6 +48,33 @@ export default function AnimalDetails(props: AnimalDetailProps) {
     };
     loadAnimalCagnote();
   }, [dispatch]);
+
+  const gridItem: GridItemProps[] = [
+    {
+      key: "Longévité : ",
+      value: animal?.longevity + "ans",
+    },
+    {
+      key: "Habitat : ",
+      value: animal?.geoLocation,
+    },
+    {
+      key: "Alimentation : ",
+      value: animal?.diet,
+    },
+    {
+      key: "Statut : ",
+      value: animal?.status,
+    },
+    {
+      key: "Gestation : ",
+      value: animal?.gestation + "mois",
+    },
+    {
+      key: "Progéniture : ",
+      value: animal?.nbKid,
+    },
+  ];
 
   return (
     <ScrollView style={{ backgroundColor: theme.background }}>
@@ -66,90 +93,13 @@ export default function AnimalDetails(props: AnimalDetailProps) {
           </View>
           <View style={styles.lineStyle} />
           <View style={styles.grid}>
-            <Row>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={"Longévité : "}
-                />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={animal?.longevity + " ans"}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={"Habitat : "}
-                />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={String(animal?.geoLocation)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={"Alimentation : "}
-                />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={String(animal?.diet)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={"Status : "}
-                />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={String(animal?.status)}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={"Gestation : "}
-                />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={animal?.gestation + " mois"}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={"Progéniture : "}
-                />
-              </Col>
-              <Col numRows={2}>
-                <WrapperText
-                  customStyle={{ color: theme.textPrimary }}
-                  text={String(animal?.nbKid)}
-                />
-              </Col>
-            </Row>
+            <FlatList
+              keyExtractor={(item) => item.key}
+              data={gridItem}
+              renderItem={(item) => (
+                <AnimalDetailItem item={item} theme={theme} />
+              )}
+            />
           </View>
 
           {cagnote !== null && cagnote?.id !== null ? (
