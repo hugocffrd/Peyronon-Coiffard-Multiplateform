@@ -17,11 +17,7 @@ interface AnimalDetailItemProps {
 }
 
 export const AnimalDetailItem = (props: AnimalDetailItemProps) => {
-  console.log(props);
-
   const { theme, item } = props;
-  console.log(item);
-
   const Col = ({ numRows, children }) => {
     return <View style={styles[`${numRows}col`]}>{children}</View>;
   };
